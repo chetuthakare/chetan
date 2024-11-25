@@ -1,0 +1,579 @@
+<?php
+/**
+ * Copyright � 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php if ($detailedInfoGroup = $block->getGroupChildNames('detailed_info', 'getChildHtml')):?>
+    <?php $newOrderTabbing = array('product.attributes','product.feature.tab','product.info.description','product.return.tab','reviews.tab','product.faq.tab','product.size_guide.tab'); //custom added position ?>
+    <div class="product info detailed">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+            <?php foreach ($newOrderTabbing as $name): //custom arrayname?>
+                <?php
+                    $html = $layout->renderElement($name);
+                    if (!trim($html)) {
+                        continue;
+                    }
+                    $alias = $layout->getElementAlias($name);
+                    $label = $block->getChildData($alias, 'title');
+					?>
+                <div class="data item title"
+                     aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title"
+                     data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>">
+                    <a class="data switch"
+                       tabindex="-1"
+                       data-toggle="switch"
+                       href="#<?php /* @escapeNotVerified */ echo $alias; ?>"
+                       id="tab-label-<?php /* @escapeNotVerified */ echo $alias;?>-title">
+                        <?php /* @escapeNotVerified */ echo $label; ?>
+                    </a>
+                </div>
+                <div class="data item content" id="<?php /* @escapeNotVerified */ echo $alias; ?>" data-role="content">
+                    <?php /* @escapeNotVerified */ echo $html; ?>
+                </div>
+            <?php endforeach;?>
+        </div>
+		
+    </div>
+<?php endif; ?>
+
+<div style="position:relative; display:block; width:100%;order:4;">
+
+<?php 
+//transparent_costing 
+
+?>
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $currentProduct = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product information
+	echo $currentProduct->getData('transparent_costing');
+?>
+
+</div>
+
+<?php echo $this->getLayout()->createBlock("Magento\Reports\Block\Product\Widget\Viewed")->setDisplayType("recently.view.products")->setProductsCount("5")->setTemplate("widget/viewed/content/viewed_grid.phtml")->toHtml(); ?>
+
+<div style="margin-top:15px; position:relative; display:block; width:100%;order:10;">
+		<?php //echo $this->helper('Yotpo\Yotpo\Helper\Data')->showWidget($block); ?>
+</div>
+
+<div style="margin-top:15px; position:relative; display:block; width:100%;order:10;">
+</div>
+<style>
+
+
+.monogram #value {
+	/* display: none; */
+}
+.monogram [type="text"] {
+	font-size: 1em;
+	text-align: center;
+	
+}
+/*.monogram{display:none;}*/
+
+.monogram-container {
+	color: #000;
+}
+
+.field.monogramoption span#value {
+	position: absolute;
+	left: 180px;
+}
+
+.product-add-form .monogram-container .preview-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	clear: both;
+	margin-top: 20px;
+	max-width:400px
+}
+
+.product-add-form .monogram-container .preview-image img {
+	max-height: 100px;
+}
+
+.product-add-form .monogram-container .preview-image .monogram-box {
+	top: 55%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	position: absolute;
+	display: table;
+	height:60px;
+	max-height: 100px;
+}
+
+.product-add-form .monogram-container .preview-image .monogram-text.black {
+	color: #000000;
+}
+
+.product-add-form .monogram-container .preview-image .monogram-box .monogram-text {
+	padding-top:20px;
+	text-align: center;
+	font-size: 3em;
+	height:80px;
+	text-transform:uppercase;
+}
+
+.monogram-box .monogram-text.c1{ 
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+	color:#444;
+}
+ 
+.monogram-box .monogram-text.c2{
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+	
+	color:#fff;
+}
+.monogram-box .monogram-text.c3{
+	
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+	color:#594771;
+}
+
+
+.mageworx-swatch-container .mageworx-swatch-option.text {
+	white-space: nowrap;
+	color: transparent !important;
+	width: 35px;
+}
+
+.mageworx-swatch-option.selected {
+	outline: 2px solid #fff;
+	-moz-box-shadow: -1px 3px 10px #000;
+	box-shadow: -1px 3px 10px #000;
+	-webkit-box-shadow: -1px 3px 10px #000;
+}
+.swatch-attribute-options select {
+       margin-top: -30px;
+   
+	opacity: 0;
+    display: block !important;
+    padding: 0;
+}
+
+.mageworx-swatch-option.text.selected {
+	background-color: none !important;
+}
+
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Light Blue"]{
+	background:#add8e6!important;
+	border-color:#add8e6;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Light Grey"]{
+	background:#d3d3d3!important;
+	border-color:#d3d3d3;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Taupe"]{
+	background:#dcd5c2!important;
+	border-color:#dcd5c2;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Navy Blue"]{
+	background:#02065d!important;
+	border-color:#02065d;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Black"]{
+	background:#000000!important;
+	border-color:#000000;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Dark Grey"]{
+	background:#a9a9a9!important;
+	border-color:#a9a9a9;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Yellow"]{
+	background:#fce703!important;
+	border-color:#fce703;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="White"]{
+	background:#fff!important;
+	border-color:#000;
+	color:#2d2d2d;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Burgundy"]{
+	background:#800020!important;
+	border-color:#800020;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Gold"]{
+	background:#e7be42!important;
+	border-color:#e7be42;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Hot Pink"]{
+	background:#ff6ab5!important;
+	border-color:#ff6ab5;
+}
+.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Ivory"]{
+	background:#ffffd0!important;
+	border-color:#ffffd0;
+	color:#444;
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Lilac"]{
+	background:#c593c8!important;
+	border-color:#c593c8;
+	
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Sage"]{
+	background:#77815c!important;
+	border-color:#77815c;
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Chocolate"]{
+	background:#3d0c02!important;
+	border-color:#3d0c02;
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Orange"]{
+	background:#ff5100!important;
+	border-color:#ff5100;
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Parrot Green"]{
+	background:#61b33b!important;
+	border-color:#61b33b;
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Green"]{
+	background:#006400!important;
+	border-color:#006400;
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Light Pink"]{
+	background:#ffb6c1!important;
+	border-color:#ffb6c1;
+}.mageworx-swatch-container .mageworx-swatch-option.text[data-option-label="Red"]{
+	background:#ff0000!important;
+	border-color:#ff0000;
+}
+
+.field.required.shade_card span#value {
+	position: absolute;
+	right: 0;
+	display:none;
+}
+
+.field.required.ThreadNumber label {
+	flex-basis: 100% !important;
+	max-width: 100% !important;
+
+	top: -20px;
+}
+
+.shade_card .mageworx-swatch-info{display:block; font-size:10px; white-space: nowrap;}
+#product-options-wrapper .custom_border_color, #product-options-wrapper .field.aldo-fabric, #product-options-wrapper .field.lorelle-fabric, .field.lorelle-fabric-codes {display:none;}
+
+.monogram.color #value {
+
+	position: absolute;
+	top: -30px;
+	left: 70px; 
+	color:#000;
+}
+
+</style>
+
+<style>
+.monogram-text[data-option-label="Light Blue"]{
+	color:#add8e6!important;
+	
+}
+.monogram-text[data-option-label="Light Grey"]{
+	color:#d3d3d3!important;
+	
+}
+.monogram-text[data-option-label="Taupe"]{
+	color:#dcd5c2!important;
+	
+}
+.monogram-text[data-option-label="Navy Blue"]{
+	color:#02065d!important;
+	
+}
+.monogram-text[data-option-label="Black"]{
+	color:#000000!important;
+	
+}
+.monogram-text[data-option-label="Dark Grey"]{
+	color:#a9a9a9!important;
+	
+}
+.monogram-text[data-option-label="Yellow"]{
+	color:#fce703!important;
+	
+}
+.monogram-text[data-option-label="White"]{
+	color:#fff!important;
+	
+}
+.monogram-text[data-option-label="Burgundy"]{
+	color:#800020!important;
+	
+}
+.monogram-text[data-option-label="Gold"]{
+	color:#e7be42!important;
+	
+}
+.monogram-text[data-option-label="Hot Pink"]{
+	color:#ff6ab5!important;
+	
+}
+.monogram-text[data-option-label="Ivory"]{
+	color:#ffffd0!important;
+	
+}.monogram-text[data-option-label="Lilac"]{
+	color:#c593c8!important;
+	
+	
+}.monogram-text[data-option-label="Sage"]{
+	color:#77815c!important;
+	
+}.monogram-text[data-option-label="Chocolate"]{
+	color:#3d0c02!important;
+	
+}.monogram-text[data-option-label="Orange"]{
+	color:#ff5100!important;
+	
+}.monogram-text[data-option-label="Parrot Green"]{
+	color:#61b33b!important;
+	
+}.monogram-text[data-option-label="Green"]{
+	color:#006400!important;
+	
+}.monogram-text[data-option-label="Light Pink"]{
+	color:#ffb6c1!important;
+	
+}.monogram-text[data-option-label="Red"]{
+	color:#ff0000!important;
+	
+}
+.monogram-text{
+	text-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+	-webkit-text-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+	-o-text-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+	-moz-text-shadow: 2px 2px 2px rgba(0,0,0,0.25);
+}
+
+[class^='option-select-tooltip'],[class^='option-value-tooltip']{
+	display: none!important;
+}
+
+
+
+
+.tdcolor .mageworx-swatch-option.text {
+	background-image: url("/cfont/rainbow.jpg") !important;
+	background-size:cover!important;
+}
+
+.field.monogram.color .swatch-attribute-options.cheight,
+.field.monogram.font .swatch-attribute-options.fheight {
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+#show-more-less2:checked ~ .swatch-attribute-options.cheight, 
+#show-more-less1:checked ~ .swatch-attribute-options.fheight {
+  max-height: 1200px !important;
+}
+
+#show-more-less1:checked ~ .toggle-btn1::after{
+	content: 'Show less font..';
+}
+#show-more-less2:checked ~ .toggle-btn2::after {
+  content: 'Show less color..';
+}
+
+label.toggle-btn2,label.toggle-btn1 {
+    float: right;
+    position: relative;
+    right: 10px;
+}
+
+.toggle-btn1::after {
+  content: 'Show more font..';
+  display: block;
+  cursor: pointer;
+  font-weight: 600;
+  color: #9f327e;
+}
+
+.toggle-btn2::after {
+  content: 'Show more color..';
+  display: block;
+  cursor: pointer;
+  font-weight: 600;
+  color: #9f327e;
+}
+
+
+input#show-more-less2,
+input#show-more-less1 {
+    display: none;
+}
+</style>
+
+<script data-breeze>
+require(['jquery', 'domReady!'], function($){
+	$(document).ready(function() {
+		var tyx2 = setInterval(function(){
+			//$("#afterpay-clearpay-message").find("span.AfterpayMessage-logo").css('display','inline');
+			if($(".swatch-attribute .swatch-attribute-options").length)
+			{
+				let fheight = $('.field.monogram.font .swatch-attribute .swatch-attribute-options').height();
+				//console.log("color2");
+				if(fheight > 200){
+					$('.field.monogram.font .swatch-attribute .swatch-attribute-options').addClass('fheight');
+					$(".field.monogram.font .swatch-attribute").prepend("<input type='checkbox' id='show-more-less1' class='show-more-less-checkbox'/>");
+					$(".field.monogram.font .swatch-attribute").append("<label for='show-more-less1' class='toggle-btn1'></label>");
+					if ($(".field.monogram.font .swatch-attribute").find('#show-more-less1').length) {
+						//$(this).trigger("click");
+						clearTimeout(tyx2);
+					}
+				}
+				
+				
+			}
+		},2000);
+	
+		var tyx3 = setInterval(function(){
+			//$("#afterpay-clearpay-message").find("span.AfterpayMessage-logo").css('display','inline');
+			if($(".swatch-attribute .swatch-attribute-options").length)
+			{
+				let cheight = $('.field.monogram.color .swatch-attribute .swatch-attribute-options').height();
+				//console.log("color2");
+				if(cheight > 200){
+					$('.field.monogram.color .swatch-attribute .swatch-attribute-options').addClass('cheight');
+					$(".field.monogram.color .swatch-attribute").prepend("<input type='checkbox' id='show-more-less2' class='show-more-less-checkbox'/>");
+					$(".field.monogram.color .swatch-attribute").append("<label for='show-more-less2' class='toggle-btn2'></label>");
+					if ($(".field.monogram.color .swatch-attribute").find('#show-more-less2').length) {
+						//$(this).trigger("click");
+						clearTimeout(tyx3);
+					}
+				}
+				
+				
+			}
+		},2000);
+    });
+	$(document).on('click','#product-addtocart-button', function(){
+
+		// if($('#product-options-wrapper .mage-error:first').css("display", "black").offset() !== undefined) {
+			// $('html, body').animate({
+				// scrollTop: $('#product-options-wrapper .mage-error:first').offset().top -250
+			// }, 500);
+		// }
+	});
+
+            $("#faq-accordion .accordion-trigger").off("click").click(function() {
+                var _accTrigger = $(this);
+                var _accBlock = $(_accTrigger).parent(".accordion-block");
+                var _accContent = $(_accBlock).find(".accordion-content");
+
+                if ( $(_accTrigger).hasClass( "close" ) ) {
+                    $(this).removeClass("close").addClass("open");
+                    $(_accBlock).removeClass("close").addClass("open");
+                    $(_accContent).slideDown();
+                }else{
+                    $(this).removeClass("open").addClass("close");
+                    $(_accBlock).removeClass("open").addClass("close");
+                    $(_accContent).slideUp();
+                }
+            });
+			
+
+	setTimeout(function(){
+	$('<div class="gft_xdc" style="width:100%; margin-bottom:25px; margin-top:15px;"><a class="btn btn-action" href="#tab-label-product.size_guide.tab" id="SizeGuide"><i class="fa fa-list-alt"> Size Guide</a></div>').insertAfter( ".field.required.Size" );
+	
+	if($(".field.file.monogram div.control").length && !$(".note.mbsize").length)
+	$(".field.file.monogram div.control").append('<p class="note mbsize">Maximum image size: <strong>5MB</strong></p>');
+	
+	},1000);
+	
+	$(document).on('click',"#SizeGuide",function(event){
+			 
+		 var acnchor;
+		event.preventDefault();
+		acnchor =$("div[aria-labeledby='tab-label-product.size_guide.tab-title']");
+   
+   $(".items .data.item.title").removeClass("active");
+   $(".items .data.item.content").hide();
+
+   $(".items .data.item.title").removeClass("active");
+   setTimeout(function(){
+   $("div[aria-labelledby='tab-label-product.size_guide.tab']").show();
+	acnchor.addClass("active");
+	},30);
+	$('html, body').animate({
+				scrollTop: $(acnchor).offset().top - 170
+			}, 300);
+   
+	
+	});
+			
+	
+	
+	
+	 
+	$(document).on("click",".monogram",function(){
+		var font = ($(this).find("select option:checked").text());
+		$(this).find("select option").each(function(){
+			$(".monogram-box .monogram-text").removeClass($(this).text());
+		});
+		setTimeout(function(){$(".monogram-box .monogram-text").addClass(font).attr("data-option-label",font);},50);
+	});
+	$(document).on("keyup",".monogram.name .input-text",function(){
+		
+		$(".monogram.name .input-text").val($(this).val());
+		$(".monogram-box .monogram-text").text($(this).val());
+		
+	});
+	
+/* 	$( document ).ajaxComplete(function( event, xhr, settings ) {
+		var rspt =JSON.parse(xhr.responseText);
+		if(rspt.backUrl)
+			location.href=rspt.backUrl;
+	}); 
+	
+	$(document).on("click",".swatch-attribute.color_fs div[option-label]",function(){
+		if($(this).attr("option-label")=="Custom Border")
+		{
+			$(".custom_border_color .options-list .choice label:eq(1)").trigger("click");
+		}else{
+			$(".custom_border_color .options-list .choice label:eq(0)").trigger("click");
+			$(".ThreadNumber input").val("");
+		}	
+	});
+	*/
+
+
+	$(document).on("click",".swatch-attribute.color_fs div[data-option-label]",function(){
+		if($(this).attr("data-option-label")=="Custom Border")
+		{
+			$(".custom_border_color .options-list .choice label:eq(1)").trigger("click");
+		}else{
+			$(".custom_border_color .options-list .choice label:eq(0)").trigger("click");
+			$(".ThreadNumber input").val("");
+		}	
+	});
+ 
+	
+	setInterval(function(){
+		
+		if($('.product-custom-option[type="file"]').length>0 && $('.product-custom-option[type="file"]').val()){
+			var errorV="";
+			var fileExtension = ['jpeg', 'jpg','png','gif'];
+			if ($('.product-custom-option[type="file"]').val() && $.inArray($('.product-custom-option[type="file"]').val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+				// alert("Only '.jpeg','.jpg' formats are allowed.");
+				
+				errorV = ("Only '.jpeg','.jpg','.'gif','.png' formats are allowed.");
+			}
+			
+			var size = (($('.product-custom-option[type="file"]')[0].files[0].size)/1024/1024).toFixed(2);
+			if ($('.product-custom-option[type="file"]').val() && size >5) {
+				errorV =errorV + "\n \n"+("Image too big.Select image size less than or equal to 5MB.\n\n Please change the image");
+			} 
+			
+			if(errorV)
+			{	
+				$('.product-custom-option[type="file"]').val("");
+				alert(errorV);
+			}
+	 }
+	},500);
+	
+});	
+</script>

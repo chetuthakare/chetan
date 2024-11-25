@@ -1,0 +1,57 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+?>
+
+<?php 
+$product = $block->getProduct();
+$checkedCustomization = $block->checkedCustomization();
+$getStatus = $block->getStatus();
+
+if($product->getPersonalization() && $checkedCustomization && $getStatus){
+    $helper = $this->helper('SetuBridge\Personalization\Helper\Data');
+    $buttonText = $helper->getButtonText();
+    if($helper->getPopupEnable()){
+        ?>
+        <div id="customize-product">
+            <button type="button" 
+                id="customize-product-button" 
+                class="action primary" 
+                title="<?= __($buttonText); ?>" 
+                data-mage-init='{ "SetuBridge_Personalization/js/popupview": { } }' 
+                data-id="<?php /* @noEscape */ echo $product->getId() ?>" 
+                data-url="<?php echo $block->getUrl('personalization/index/editor',['product'=>$product->getId()]) ?>" 
+                > 
+                <span><?= __($buttonText); ?></span> 
+            </button> 
+        </div>
+        <div id="quickDesignerViewContainer">
+
+        </div> 
+
+        <?php } else{
+        if($product->getTypeId() == "configurable"){
+            ?>
+            <div id="customize-product">
+                <button type="button" 
+                    id="customize-product-button" 
+                    class="action primary" 
+                    title="<?= __($buttonText); ?>" 
+                    data-mage-init='{ "SetuBridge_Personalization/js/redirectCustomizePage": { } }' 
+                    data-id="<?php /* @noEscape */ echo $product->getId() ?>" 
+                    data-url="<?php echo $block->getUrl('personalization/index/editor',['product'=>$product->getId()]) ?>" 
+                    > 
+                    <span><?= __($buttonText); ?></span> 
+                </button> 
+            </div>
+            <?php } else{ ?>
+            <div id="customize-product">
+                <a href="<?php echo $block->getUrl('personalization/index/editor',['product'=>$product->getId()]) ?>" title="<?= __($buttonText); ?>" data-href="<?php echo $block->getUrl('personalization/index/page',['product'=>$product->getId()]) ?>" id="customize-product-button" class="action primary">
+                <span><?= __($buttonText); ?></span> </a>
+            </div>
+            <?php } ?>
+        <?php } ?>
+    <?php } ?>

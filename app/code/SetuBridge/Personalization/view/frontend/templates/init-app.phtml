@@ -1,0 +1,23 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+
+?>
+<div id="personalizationApp" data-bind="scope:'personalizationApp'" style="display: none;">
+    <script>
+        window.personalization = <?php  echo \Laminas\Json\Json::encode($block->getConfig()); ?>;
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "#personalizationApp": {
+                "Magento_Ui/js/core/app": <?php  echo $block->getJsLayout();?>
+            },
+            "*": {
+                "Magento_Ui/js/block-loader": "<?php  echo $block->getViewFileUrl('images/loader-1.gif'); ?>"
+            }
+        }
+    </script>
+</div>

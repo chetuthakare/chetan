@@ -1,0 +1,17 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 4.0.0 --------------------------------------
+	
+	+ Compatible with Magento version 2.4.*
+
+-------------------------------- Version 3.0.0 -------------------------------------
+	
+	+ Compatible with Magento version 2.3.*
+	+ Customer and admin can communicate on order
+	+ Added feature to add attachment while communicating
+
+
+

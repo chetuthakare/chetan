@@ -1,0 +1,225 @@
+<?php
+$ticketid = "";
+$tickets = "";
+$domain = $block->getDataApiDomain();
+$tickets = $block->getallTickets();
+$yourImageFileName  =  $block->getDataApiImage();
+$usrdetails = $block->getuserdatabymail($block->getCustomerEmail());
+
+foreach($usrdetails as $usrdetail){
+	$user_id = $usrdetail['id'];
+}
+
+// $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+if ($tickets != "") {
+    foreach ($tickets as $ticket) {
+        if ($block->getCustomerEmail() == $ticket['custom_fields']['cf_email'] && $ticket['custom_fields']['cf_order_id'] == $block->getOrderIncrementId()) {
+            $ticketid = $ticket['id'];
+            break;
+        }
+    }
+}
+if ($block->getallChatData($ticketid) != "") {
+	$firstdata = $block->getMainData($ticketid);
+	//echo "<pre>";
+	//var_dump($firstdata);
+	//die;
+	
+    echo " <div class='container'>
+    <div class='chatimage'><img src=" . $this->getViewFileUrl('Risecommerce_FreshdeskOrderCommunications::images/chat.jpeg') . " alt='Avatar' style='width:100%;'>
+    </div>
+    <div class='chatmsg'>
+        <h4>" . $block->getCustomerName() . ": </h4><span class='date-time'> ".date('D, d M Y H:i A', strtotime($firstdata['created_at']))  ."</span>
+        <p>" . $firstdata['description_text'] . "</p>
+    </div>";
+	if(!empty($firstdata['attachments'])){
+				$imageurl = $firstdata['attachments'][0]['attachment_url'];
+			echo "<a href='".$imageurl."' target='_blank' rel='noopener noreferrer'>View Attachment</a>";
+		}
+	
+echo "</div>";
+    $data = $block->getallChatData($ticketid);
+    $conversations_datas = json_decode($data, true);
+    $result = "";
+	
+    foreach ($conversations_datas as $conversations_data) {
+         
+		 if(!empty($conversations_data['attachments'])){
+			 
+		}
+
+       // if ($conversations_data['support_email'] != "") {
+            if (($conversations_data['support_email'] != 'support@pushplinen.freshdesk.com') && ($conversations_data['user_id'] != '73022248817')){
+                $result .= " <div class='container'> 
+            <div class='chatimage'><img src=" . $this->getViewFileUrl('Risecommerce_FreshdeskOrderCommunications::images/chat.jpeg') . " alt='Avatar' style='width:100%;'>
+            </div>
+            <div class='chatmsg'>
+                <h4>" . $block->getCustomerName() . ": </h4><span class='date-time'> " . date('D, d M Y H:i A', strtotime($conversations_data['updated_at'])) ."</span>
+                <p>" . $conversations_data['body_text'] . "</p>
+            </div>";
+			if(!empty($conversations_data['attachments'])){
+				$imageurl = $conversations_data['attachments'][0]['attachment_url'];
+			$result .=   "<a href='".$imageurl."' target='_blank' rel='noopener noreferrer'>View Attachment</a>";
+		}
+			
+       $result .=  "</div>";
+            } elseif($conversations_data['support_email'] != "") {
+				
+				
+                $result .= " <div class='container darker '>
+            <div class='chatimage'><img src=" . $yourImageFileName . " alt='Avatar' style='width:100%;'>
+            </div>
+            <div class='chatmsg'>
+                <h4>Pushplinen: </h4> <span class='date-time'> ". date('D, d M Y H:i A', strtotime($conversations_data['updated_at'])) ."</span>
+                <p>" . $conversations_data['body_text'] . "</p>
+            </div>";
+			if(!empty($conversations_data['attachments'])){
+				$imageurl = $conversations_data['attachments'][0]['attachment_url'];
+			$result .=  "<a href='".$imageurl."' target='_blank' rel='noopener noreferrer'>View Attachment</a>";
+			}
+       $result .= " </div>";
+            }
+        }
+    //}
+
+    if ($result != "") {
+        echo $result;
+    } else {
+        echo "<p>Please wait for Admin Reply!</p>";
+ }
+?>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button class="show" aria-haspopup="true">Add Reply</button>
+
+<div class="mask" role="dialog">
+</div>
+<div class="modal" id="freshdesk-modal" role="alert">
+		<form class="form order-contact" enctype="multipart/form-data" action="<?=$block->escapeUrl($block->getUrl("ordercommunications/ordercommunications/note", ['order_id' => $block->getRequest()->getParam('order_id'), "_secure" => $block->getRequest()->isSecure()])) ?>" id="order-contact-form" method="POST" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>" data-mage-init='{"validation":{}}'>
+			<fieldset class="fieldset">
+					<div class="field comment required">
+					  <label class="label" for="comment">
+                        <span><?= __('Add new note') ?></span>
+                    </label>
+					 <input name="user_id" id="user_id" value="<?= $user_id ?>"
+					 type="hidden" />
+					 
+					 <input name="ticket_id" id="ticket_id"  type="hidden" 
+					 value="<?=  $ticketid ?>"  />
+
+                     <div class="control">
+                        <textarea name="comment" id="comment" title="<?= __('What’s on your mind?') ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"></textarea>
+                    </div>
+					<div class="field image">
+                    <label class="label" for="comment">
+                        <span><?= __('Related Image') ?></span>
+                    </label>
+                    <div class="control">
+                        <input  name="image" id="image" title="<?= $block->escapeHtmlAttr(__('Related Image')) ?>" class="input-image" type="file" />
+                    </div>
+                </div>
+                </div>
+
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" name="submit" title="<?= __('Submit') ?>" class="action submit primary">
+                        <span><?= __('Submit') ?></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+  <button class="close" role="button">X</button>
+</div>
+        </div>
+    </div>
+<?php
+ } else { ?>
+    <div class="order-details-items communciation">
+        <form class="form order-contact" enctype="multipart/form-data" action="<?=$block->escapeUrl($block->getUrl("ordercommunications/ordercommunications/save", ['order_id' => $block->getRequest()->getParam('order_id'), "_secure" => $block->getRequest()->isSecure()])) ?>" id="order-contact-form" method="POST" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>" data-mage-init='{"validation":{}}'>
+            <fieldset class="fieldset">
+                <legend class="legend"><span> <?= __('Create ticket for this order') ?></span></legend><br />
+
+                <input  type="hidden" name="orderid" id="orderid" 
+				value="<?= $block->getOrderIncrementId(); ?>" />
+
+                <input name="name" id="name"  type="hidden"
+				value="<?= $block->getCustomerName();?>" />
+
+                <input name="phonenumber" id="phonenumber" type="hidden"
+				value="<?= $block->getMobileNumber(); ?>" />
+				
+                <input  name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" value="<?= $block->getCustomerEmail(); ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}" />
+
+				
+                <div class="field products required">
+                    <label class="label" for="productitems"><span><?= $block->escapeHtml(__('Support for product')) ?></span></label>
+                    <div class="control">
+                        <?php $_items = $block->getOrderData(); ?>
+                        <select required name="productitems[]" id="productitems" multiple data-validate="{required:true}" >
+                            <?php $i = 0;
+                            foreach ($_items as $_item) : ?>
+                                <?php if ($_item->getParentItem()) :
+                                    continue;
+                                else :
+                                    $i++;
+                                endif; ?>
+                                <?php
+                                echo '<option value="' . $_item->getName() . '">' . $_item->getName() . "</option>";  ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field comment required">
+                    <label class="label" for="comment">
+                        <span><?= __('What’s on your mind?') ?></span>
+                    </label>
+                    <div class="control">
+                        <textarea name="comment" id="comment" title="<?= __('What’s on your mind?') ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"></textarea>
+                    </div>
+                </div>
+				<div class="field image">
+                    <label class="label" for="comment">
+                        <span><?= __('Related Image') ?></span>
+                    </label>
+                    <div class="control">
+                        <input  name="image" id="image" title="<?= $block->escapeHtmlAttr(__('Related Image')) ?>" class="input-image" type="file" />
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+
+                    <button type="submit" name="submit" title="<?= __('Submit') ?>" class="action submit primary">
+                        <span><?= __('Submit') ?></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+<?php } ?>
+
+ 
+<script type="lazy" >
+	require(['jquery', 'domReady!'], function($) {
+
+			$(".show").on("click", function(){ 
+			  $(".mask").addClass("active");
+			});
+ 
+			function closeModal(){
+			  $(".mask").removeClass("active");
+			}
+ 
+			$(".close, .mask").on("click", function(){
+			  closeModal();
+			});
+	});
+</script> 
+
+
+
+
+

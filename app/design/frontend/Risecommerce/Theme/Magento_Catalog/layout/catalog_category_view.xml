@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>     
+		<remove src="mage/calendar.css" />   
+	   	<remove src="Magefan_Blog::css/blog-new.css"/>  
+		<remove src="Magefan_Blog::css/blog-custom.css"/> 
+        <remove src="Magefan_Blog::css/blog-m.css"/> 
+		<remove src="Amasty_AdvancedReview::vendor/fancybox/jquery.fancybox.min.css"/>  
+		<remove src="Amasty_Base::vendor/slick/amslick.min.css"/>  
+		<remove src="StripeIntegration_Payments::css/wallets.css"/>    
+		<remove src="SetuBridge_Personalization/css/personalization.css"/>   
+	    <script src="js/custom.js"/>  
+		<script src="Magefan_Blog/js/lib/mfblogunveil.js"/>
+		  
+    </head>    
+    <body>
+	<!-- 	<referenceContainer name="columns.top">
+            <container name="category.view.container" htmlTag="div" htmlClass="category-view" after="-">       
+                <block class="Magento\Catalog\Block\Category\View" name="category.swatch" template="Magento_Catalog::category/customswatch.phtml"/>  
+            </container>  
+        </referenceContainer>    -->   
+		<move element="category.cms" destination="content" before="category.description" />
+		<move element="category.description" destination="content" after="-" />
+
+<!--     <referenceContainer name="before.body.end">
+        <container name="category.view.container.bottom" htmlTag="div" htmlClass="category-view-bottom">
+            <block class="Magento\Catalog\Block\Category\View" name="category.swatch.bottom" template="Magento_Catalog::category/customswatch.phtml"/>
+        </container>
+    </referenceContainer>  -->       
+        
+  	  
+<!--   <referenceBlock name="product_list_toolbar" display="false" />
+      <referenceBlock name="category.products.list">
+            <action method="remove">
+                <argument name="name" xsi:type="string">product_list_toolbar</argument>
+            </action>
+        </referenceBlock>   -->
+	<!-- <referenceContainer name="content.aside">
+           <block class="Magento\Cms\Block\Block" name="recenty.block" after="product.info.upsell">
+            <arguments>
+                <argument name="block_id" xsi:type="string">recently-viewed</argument>
+            </arguments> 
+        </block>
+   </referenceContainer> -->
+      <!--  
+      <referenceContainer name="sidebar.additional">
+    <block class="Magento\Reports\Block\Product\Widget\Viewed" name="recently_viewed_products" template="Magento_Reports::widget/viewed/content/viewed_grid.phtml">
+        <data name="type" value="recently.viewed"/>
+        <data name="page_size" value="5"/> 
+    </block>  
+</referenceContainer> -->
+	<referenceContainer name="sidebar.additional">
+		<block class="Magento\Cms\Block\Block" name="recenty.block" after="-">
+			<arguments>
+				<argument name="block_id" xsi:type="string">recently-viewed</argument>
+			</arguments>  
+		</block>    
+	</referenceContainer>  
+<!--  <referenceContainer name="sidebar.additional">
+    <block class="Magento\Reports\Block\Product\Widget\Viewed" name="recently_viewed_products" template="Magento_Reports::widget/viewed/content/viewed_grid.phtml">
+        <arguments>
+            <argument name="title" xsi:type="string">Recently Viewed Products</argument>
+            <argument name="products_count" xsi:type="number">5</argument>
+        </arguments>
+    </block>
+</referenceContainer> -->
+  <referenceBlock name="wishlist_sidebar" remove="true" />
+    </body> 
+</page>    
+       

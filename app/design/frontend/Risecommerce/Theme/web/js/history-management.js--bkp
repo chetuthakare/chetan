@@ -1,0 +1,12 @@
+require(['jquery', 'mage/template', 'mage/storage'], function ($, mageTemplate, storage) {
+    console.log('Custom JS Loaded');
+    $(document).ready(function() {
+        console.log('Document Ready');
+        window.history.pushState({}, document.title, window.location.href);
+        window.onpopstate = function(event) {
+            console.log('Back Button Pressed');
+            window.location.href = document.referrer;
+        };
+    });
+});
+ 

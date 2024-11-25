@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="checkout_cart_product_add_after">
+        <observer name="addProductOptionPrices" instance="SetuBridge\Personalization\Observer\AddProductOptionPrices" />
+    </event>
+
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="quote_images_directory_replace_order" instance="SetuBridge\Personalization\Observer\OrderObserver"  />
+    </event>
+
+    <event name="sales_quote_merge_before">
+        <observer name="merge_quote_personalization_data_merge" instance="SetuBridge\Personalization\Observer\SalesQuoteMergeData"/>
+    </event>
+    
+    <event name="sales_quote_item_save_after">
+        <observer name="quoteItemsPersonalizationDataSaved" instance="SetuBridge\Personalization\Observer\PersonalizationItemData" />
+    </event>
+    
+</config>

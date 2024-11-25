@@ -1,0 +1,12 @@
+<div class="After-product-info-details">
+<?php
+$_product = $block->getProduct();
+if ($_product) {
+    $afterProductDetails = $_product->getData('after_productdetails');
+    if ($afterProductDetails) {
+        echo html_entity_decode($afterProductDetails);
+    } 
+}      
+?>    
+</div>      
+  

@@ -1,0 +1,24 @@
+{
+    "http-basic": {
+        "repo.magento.com": {
+            "username": "23051ddae7c3c6ce7a8aa2791af6b10f",
+            "password": "0b4a1d68bf8d147774c489def60f88c3"
+        },
+	 "repo.magento.com": {
+            "username": "e83d33cd5b4557dfc010f1e3196dab61",
+            "password": "fc58031a55999b476fa5f50ce14bb86c"
+        },
+        "packages.mageworx.com": {
+            "username": "8sm57v29korax6h0bu1gtlpdnyf4ijzc",
+            "password": "9845sv6ao0rqp7n2gkyhuwmxliceftd1"
+        },
+        "ci.swissuplabs.com": {
+            "username": "support.pushplinen.com",
+            "password": "c3dpc3N1cGxhYnMuY29t:YUzPirDnhlQoIg/R9hvcqzmpmVGJ3aRw:"
+        },
+        "composer.amasty.com": {
+            "username": "e793b76721c469d7483a8cc39e23b4c0",
+            "password": "4d4fc365e79b513482cb859a68880063"
+        }
+    }
+}

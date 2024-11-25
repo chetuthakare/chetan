@@ -1,0 +1,15 @@
+require(['jquery'], function($) {
+    'use strict';
+    $(document).ready(function() {
+			
+            const elements = document.querySelectorAll('.sidebar .filter-options .filter-options-item.inactive');
+            elements.forEach(function(element) {
+                if (element.classList.contains('inactive')) {
+                    element.classList.remove('inactive');
+                    element.classList.add('active');   
+                }  
+            }); 
+			
+    }); 
+});  
+     

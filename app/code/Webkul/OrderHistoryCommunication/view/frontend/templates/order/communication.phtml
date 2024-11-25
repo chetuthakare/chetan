@@ -1,0 +1,103 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_OrderHistoryCommunication
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<div class="order-details-items communciation">
+    <ul class="wk-note-list">
+    <?php foreach ($block->getCommunicationOrder() as $_item): ?>
+        <?php if ($_item->getIsVisibleOnFront() || $_item->getIsCustomer()):?>
+        <li class="wk-note-list-item">
+            <span class="wk-note-list-date">
+                <?= /* @noEscape */ $block->formatDate($_item->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?>
+            </span>
+            <span class="wk-note-list-time">
+                <?= /* @noEscape */ $block->formatTime($_item->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?>
+            </span>
+            <?php if ($_item->getComment()): ?>
+                <div class="wk-note-list-comment">
+                    <?= $block->escapeHtml($_item->getComment(), ['b', 'br', 'strong', 'i', 'u', 'a']) ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($_item->getAttachment()):?>
+                <?php if ($block->isImage($_item->getAttachment(), $_item->getOrderId())): ?>
+                    <?php
+                        $img = "orderhistorycommunication/communication/"
+                            .$_item->getOrderId()."/".$_item->getAttachment();
+                    ?>
+                    <div class="wk-note-list-attachment">
+                        <a href="<?=
+                            $block->escapeUrl($block->getMediaUrl().$img)?>" 
+                            target="_blank">
+                            
+                            <img width="100px" height="100px"
+                            src="<?= $block->escapeUrl($block->getMediaUrl().$img)?>" 
+                            />
+                        </a>
+                    </div>
+                <?php else: ?>
+                    <div class="wk-note-list-attachment">
+                        <a href="<?= $block->escapeUrl($block->getMediaUrl().$_item->getAttachment())?>" download>
+                            <?= $block->escapeHtml(__($_item->getAttachment()))?>
+                        </a>
+                    </div>    
+                <?php endif; ?>
+            <?php endif; ?>    
+        </li>
+        <?php endif; ?>
+    <?php endforeach;?>
+    </ul>
+    <form class="form" method="post" enctype="multipart/form-data" 
+    action="<?=
+    $block->escapeUrl($block->getUrl(
+        "orderhistorycommunication/communication/save",
+        ['order_id'=>$block->getRequest()->getParam('order_id'),"_secure" => $block->getRequest()->isSecure()]
+    ))?>"  id="form-order-communication" data-role="form-order-communication" data-mage-init='{"validation":{}}' >
+    <fieldset class="fieldset info">
+        <div class="field required">
+            <label class="label" for="comment">
+                <span>
+                    <?= $block->escapeHtml(__("Ask you question!!"))?>
+                </span>
+            </label>
+            <div class="control" >
+                <textarea row="3" cols="5" id="comment" name="comment" 
+                class="required-entry validate-no-html-tags input-text" 
+                data-validate="{required:true}" aria-required="true" 
+                value="<?= $block->escapeHtmlAttr($block->getFieldValue()) ?>"></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="attachment">
+                <span>
+                    <?= $block->escapeHtml(__("Attachment"))?>
+                </span>
+            </label>
+            <div class="control">
+                <input id="attachment" type="file" name="attachment" multiple="multiple" class="input-files"/>
+            </div> 
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" title="Save">
+                <span><?= $block->escapeHtml(__("Submit")); ?></span>
+            </button>
+        </div>
+    </div>
+
+    </form>
+</div>
+<script type="text/x-magento-init">
+    {
+        "[data-role=form-order-communication]": {
+            "validation": {}
+        }
+    }
+</script>

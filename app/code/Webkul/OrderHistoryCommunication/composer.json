@@ -1,0 +1,19 @@
+{
+    "name": "webkul/module-orderhistorycommunication",
+    "description": "Webkul Magento2 Order Communication",
+    "type": "magento2-module",
+    "version": "4.0.0",
+    "license": "proprietary",
+    "require": {
+        "magento/framework": "103.0.*",
+        "magento/module-sales":"103.0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\OrderHistoryCommunication\\": ""
+        }
+    }
+}

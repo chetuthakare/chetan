@@ -1,0 +1,65 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/ 
+?>
+<?php if (!$block->customerIsAlreadyLoggedIn()): ?>
+
+    <div id="formContent" class="wrapper product-designer-customer-form-content">
+        <button type="button" id="signup-custom-form-close" class="action close" title="Close">
+            <span data-bind="i18n: 'Close'" class="signup-form-close-span">Close</span>
+        </button>
+        <form class="form form-login animate form-signin designerform"
+            data-url="<?php  echo $block->getPostActionUrl() ?>"
+            method="post"
+            id="customer-login-form"
+            data-mage-init='{"validation":{}}'>
+            <?php echo $block->getBlockHtml('formkey'); ?>
+            <h2 class="form-heading">Login</h2>
+            <input type="hidden" name="redirect_url" value="<?php echo $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]); ?>" />
+            <fieldset class="fieldset login" data-hasrequired="<?php  echo __('* Required Fields') ?>">
+                <div class="message"></div>
+                <div class="field email required">
+                    <div><label>Email ID:</label></div>
+                    <div class="control">
+                        <input name="username" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="email-login" type="email" class="input-text form-control" title="<?php  echo __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
+                    </div>
+                </div>
+                <div class="field password required">
+                    <div><label>Pasword: </label></div>
+                    <div class="control">
+                        <input name="password" type="password"  <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text form-control" id="pass-login" title="<?php  echo __('Password') ?>" data-validate="{required:true}" >
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="primary button-div">
+                        <button type="button" class="action login primary designerbutton" name="sign-in-cutomer" id="sign-in-cutomer"><span><?php  echo __('Sign In') ?></span></button>
+                    </div>
+                    <div class="or-another-selection"><?php echo __('or'); ?></div>
+                    <div class="hidden-button" style="display: none;">
+                        <button type="button" class="hidden-button-primary" name="submit-sign-in-form" id="submit-sign-in-form"></button>
+                    </div>
+                    <div class="primary button-div">
+                        <button type="button" class="action register primary designerbutton" name="register-in-cutomer" id="register-in-cutomer"><span><?php  echo __('Create an Account') ?></span></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>   
+
+    <script  type="lazy">
+
+        require(['jquery','jquery/ui'], function($){
+
+            $('#sign-in-cutomer').click(function(){
+                if($('#customer-login-form').valid()){
+                    $('#submit-sign-in-form').click();
+
+                }
+            });
+
+        });
+    </script> 
+    <?php endif; ?>

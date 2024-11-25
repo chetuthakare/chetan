@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">color_data_form.color_data_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Data Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="SetuBridge\Color\Block\Adminhtml\Data\Edit\Buttons\Back" />
+            <button name="delete" class="SetuBridge\Color\Block\Adminhtml\Data\Edit\Buttons\Delete" />
+            <button name="reset" class="SetuBridge\Color\Block\Adminhtml\Data\Edit\Buttons\Reset" />
+            <button name="save" class="SetuBridge\Color\Block\Adminhtml\Data\Edit\Buttons\Save" />
+            <button name="save_and_continue" class="SetuBridge\Color\Block\Adminhtml\Data\Edit\Buttons\SaveAndContinue" />
+        </buttons>
+        <namespace>color_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>color_data_form.color_data_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="color_data_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="color/data/save"/>
+        </settings>
+        <dataProvider class="SetuBridge\Color\Model\DataProvider" name="color_data_form_data_source">
+            <settings>
+                <requestFieldName>color_id</requestFieldName>
+                <primaryFieldName>color_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="data_details">
+        <settings>
+            <label/>
+        </settings>
+        <field name="color_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>color_id</dataScope>
+            </settings>
+        </field>
+        <field name="color_name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">data</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <dataScope>color_name</dataScope>
+            </settings>
+
+        </field>
+        <field name="color_code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">SetuBridge_Color/js/form/element/color-select</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="elementTmpl" xsi:type="string">SetuBridge_Color/form/element/color-select</item>
+                    <item name="label" xsi:type="string">Color</item>
+                    <item name="labelVisible" xsi:type="boolean">true</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">category_form</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+</form>

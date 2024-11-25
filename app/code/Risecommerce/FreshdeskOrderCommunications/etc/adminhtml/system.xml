@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="risecommerce" translate="label" sortOrder="10">
+             <label>Risecommerce</label>
+        </tab>
+        <section id="ordercommunication" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Freshdesk Communication</label>
+            <tab>risecommerce</tab>
+            <resource>Risecommerce_FreshdeskOrderCommunications::config_ordercommunication</resource>
+            <group id="general_options" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Freshdesk Order Communication</label>
+                <field id="enable" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="freshdeskdomain" translate="label comment" sortOrder="6" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Freshdesk Domain</label>
+                    <comment>Enter Freshdesk Domain here.(like https://risecommerce.freshdesk.com then enter only risecommerce)</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="freshdeskpass" translate="label comment" sortOrder="7" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Freshdesk Password</label>
+                    <comment>Enter Freshdesk Password here.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="freshdeskapikey" translate="label comment" sortOrder="8" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Freshdesk API Key</label>
+                    <comment>Enter Freshdesk API Key here.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="image" translate="label" type="image" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upload Image</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">custom/images</upload_dir>
+                    <base_url type="media" scope_info="1">custom/images</base_url>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+               
+            </group>
+          
+        </section>
+    </system>
+</config>

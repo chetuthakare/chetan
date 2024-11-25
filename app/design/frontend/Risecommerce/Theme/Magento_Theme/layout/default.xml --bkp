@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="logo">
+            <arguments>
+			<argument name="logo_file" xsi:type="string">images/logo-trans.webp</argument>
+                <argument name="logo_width" xsi:type="number">172</argument>
+				<argument name="logo_height" xsi:type="number">52</argument>
+            </arguments>
+        </referenceBlock> 
+		
+	 <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Html\Links" name="header.links" before="minicart">
+                <arguments>
+                    <argument name="css_class" xsi:type="string">header links</argument>
+                </arguments>
+            </block>
+			<block class="Magento\Wishlist\Block\Link" name="top.wishlist" as="topWishlist" template="Magento_Theme::html/wishlist.phtml" after="header.links"  before="minicart" />
+        </referenceContainer>
+	
+		  <move element="navigation.sections" destination="header-wrapper" after="logo" /> 
+		  <move element="minicart" destination="header-wrapper" after="-" /> 
+		  <move element="header.links" destination="header-wrapper" before="minicart" /> 
+		  <move element="top.wishlist" destination="header-wrapper" before="minicart" /> 
+		  <move element="store_switcher" destination="header-wrapper" after="navigation.sections" />
+		  <move element="currency" destination="header-wrapper" after="-" />
+
+		  <referenceContainer name="footer-container">
+	<block class="Magento\Cms\Block\Block" name="footer-block" before="-">
+				<arguments>
+					<argument name="block_id" xsi:type="string">
+						custom-footer
+					</argument>
+				</arguments>
+			</block>
+		 </referenceContainer> 
+		 
+		 <referenceBlock name="form.subscribe" remove="true" />
+		 <referenceBlock name="footer_links" remove="true" />
+		 <referenceBlock name="report.bugs" remove="true" />
+		 <referenceBlock name="copyright" remove="true" /> 
+		 <referenceBlock name="footer" remove="true" /> 
+		 <referenceBlock name="header.panel" remove="true" />
+		 <referenceBlock name="store.links" remove="true" />
+        <move element="store.settings.currency" destination="store.menu" after="-" />
+    </body>
+</page>

@@ -1,0 +1,85 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+?>
+<?php
+
+$_product = $this->getProduct();
+
+if($_product->getTypeId() == "simple"){
+
+    $layout = $this->getLayout();
+
+    $blockOptionData = $layout->createBlock("Magento\Catalog\Block\Product\View\Options")->setProduct($_product)
+    ->setTemplate('Magento_Catalog::product/view/options.phtml');
+
+    $block_links1 = $layout->createBlock('Magento\Catalog\Block\Product\View\Options\Type\DefaultType', 'default')->setTemplate('Magento_Catalog::product/view/options/type/default.phtml');
+    $blockOptionData->setChild('default', $block_links1);
+
+    $block_links2 = $layout->createBlock('Magento\Catalog\Block\Product\View\Options\Type\Text', 'text')->setTemplate('Magento_Catalog::product/view/options/type/text.phtml');
+    $blockOptionData->setChild('text', $block_links2);
+
+    $block_links3 = $layout->createBlock('Magento\Catalog\Block\Product\View\Options\Type\File', 'file')->setTemplate('Magento_Catalog::product/view/options/type/file.phtml');
+    $blockOptionData->setChild('file', $block_links3);
+
+    $block_links4 = $layout->createBlock('Magento\Catalog\Block\Product\View\Options\Type\Select', 'select')->setTemplate('Magento_Catalog::product/view/options/type/select.phtml');
+    $blockOptionData->setChild('select', $block_links4);
+
+    /*$block_links5 = $layout->createBlock('Magento\Catalog\Block\Product\View\Options\Type\Date', 'date')->setTemplate('Magento_Catalog::product/view/options/type/date.phtml');
+    $blockOptionData->setChild('date', $block_links5);*/
+
+    $blockOptionData->setProduct($_product);
+
+    $blockHtml = "<div class='product-designer-page-custom-options'>".$blockOptionData->toHtml()."</div>";
+
+    echo $blockHtml; 
+}
+else if($_product->getTypeId() == "configurable"){
+
+    $priceRender = $this->getLayout()->getBlock('product.price.render.default')
+    ->setData('is_product_list', true);
+
+    $priceHtml = '';
+    if ($priceRender) {
+        $priceHtml = $priceRender->render(
+            \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE,
+            $_product
+
+        );
+    }
+
+    $blockOptionData = $this->getLayout()->createBlock('Magento\ConfigurableProduct\Block\Product\View\Type\Configurable')->setProduct($_product)->setTemplate('Magento_ConfigurableProduct::product/view/type/options/configurable.phtml');
+
+    $blockHtml = '<div class="configuration-product-price-section">'.$priceHtml.'</div><div class="product-designer-page-custom-options configuration-product"><div id="product_addtocart_form">'.$blockOptionData->toHtml()."</div></div>";
+
+    echo $blockHtml; 
+    ?>
+    <script  type="lazy"> 
+
+        window.getJsonConfig = <?php print_r($blockOptionData->getJsonConfig()); ?>;
+
+        require([
+            'jquery',
+            'priceBox'
+            ], function($){
+                var dataPriceBoxSelector = '[data-role=priceBox]',
+                dataProductIdSelector = '[data-product-id=<?= $block->escapeHtml($_product->getId()) ?>]',
+                priceBoxes = $(dataPriceBoxSelector + dataProductIdSelector);
+
+                priceBoxes = priceBoxes.filter(function(index, elem){
+                    return !$(elem).find('.price-from').length;
+                });
+
+                priceBoxes.priceBox({'priceConfig': <?= /* @escapeNotVerified */ $blockOptionData->getJsonConfig() ?>});
+
+                window.configurableOptions = function(id,value) {
+                    jQuery('.product-designer-page-custom-options.configuration-product #product_addtocart_form select#'+id,window.parent.document).val(value).change();
+                };
+        });
+
+    </script>
+
+    <?php } ?>

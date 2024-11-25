@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>    
+		<remove src="mage/calendar.css" />    
+	   	<remove src="Magefan_Blog::css/blog-new.css"/>  
+		<remove src="Magefan_Blog::css/blog-custom.css"/>
+        <remove src="Magefan_Blog::css/blog-m.css"/> 
+		<remove src="Amasty_AdvancedReview::vendor/fancybox/jquery.fancybox.min.css"/>  			
+		<remove src="StripeIntegration_Payments::css/wallets.css"/>    
+		<remove src="Amasty_Base::vendor/slick/amslick.min.css"/>  
+		<remove src="SetuBridge_Personalization/css/personalization.css"/>   
+        <script src="https://js.stripe.com/v3/" src_type="url"></script> 	  
+        <script src="js/custom.js"/>		
+    </head>   
+ <body>   
+		<referenceContainer name="product.info.main">
+	 	<block class="Magento\Catalog\Block\Product\View" name="product.info.delivery" template="Magento_Catalog::product/view/deliverydate.phtml" after="-"/>
+		</referenceContainer>
+		<move element="product.info.delivery" destination="product.info.options.wrapper" after="-"/>
+		 <move element="product.info.review" destination="product.info.details" after="-"/>  
+        <move element="catalog.product.related" destination="content" after="-"/>   
+        <move element="product.info.overview" destination="product.info.main" after="product.info.price"/>
+        <move element="product.info.stock.sku" destination="product.info.main" after="product.info.price"/>
+	<move element="product.info.stock.sku" destination="product.info.price" after="-"/>
+
+       <referenceBlock name="product.info.details">
+            <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributes" as="additional"
+                   template="Magento_Catalog::product/view/attributes.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Product Details</argument>
+                    <argument name="sort_order" xsi:type="string">10</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="product.feature.tab"
+                   template="Magento_Catalog::product/view/product_feature.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Product Feature</argument>
+					 <argument name="sort_order" xsi:type="string">20</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.description"
+                   as="description" template="Magento_Catalog::product/view/attribute.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="at_call" xsi:type="string">getDescription</argument>  
+                    <argument name="at_code" xsi:type="string">description</argument>
+                    <argument name="css_class" xsi:type="string">description</argument>
+                    <argument name="at_label" xsi:type="string">none</argument>
+                    <argument name="title" translate="true" xsi:type="string">More Information</argument>
+                    <argument name="sort_order" xsi:type="string">30</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="product.return.tab"
+                   template="Magento_Catalog::product/view/product_return.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Return Policy</argument>
+					 <argument name="sort_order" xsi:type="string">40</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="product.faq.tab"
+                   template="Magento_Catalog::product/view/product_faq.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">FAQ</argument>
+					 <argument name="sort_order" xsi:type="string">60</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Catalog\Block\Product\View" name="product.size_guide.tab"
+                   template="Magento_Catalog::product/view/size_guide.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Size Guide</argument>
+					 <argument name="sort_order" xsi:type="string">70</argument>
+                </arguments>
+            </block>
+			
+        </referenceBlock>
+		 <referenceContainer name="content.aside">
+           <block class="Magento\Cms\Block\Block" name="recenty.block" after="product.info.upsell">
+            <arguments>
+                <argument name="block_id" xsi:type="string">recently-viewed</argument>
+            </arguments>
+        </block>
+   </referenceContainer>
+   <referenceContainer name="content">
+		<block class="Swissup\Askit\Block\Question\Widget" name="askit_questions" template="Swissup_Askit::template.phtml"/>
+		
+	<!-- 	<block class="Magento\Review\Block\Product\Review"   name="reviews.tab" as="reviews" template="Magento_Review::review.phtml"  after="product.info.details"  />   -->
+		 
+		
+		<!-- <block class="Magento\Review\Block\Product\Review"   name="reviews.tab" as="reviews" template="Magento_Review::review.phtml"  after="product.info.main"  /> 
+		 
+		 -->
+		<container name="product.info.delivery.date" label="Product auxiliary info" htmlTag="div" htmlClass="product-info-delivery-date" after="-">
+		<block class="Magento\Catalog\Block\Product\View\Description" name="product.info.delivery" template="Magento_Catalog::product/view/delivery.phtml" after="-"/>
+		</container>
+
+		<block class="Magento\Catalog\Block\Product\View" name="product.info.supporter" template="Magento_Catalog::product/view/product-support.phtml" after="-"/>
+
+
+		<block class="Magento\Catalog\Block\Product\View" name="product.info.delivery" template="Magento_Catalog::product/view/deliverydate.phtml" after="-"/>
+
+
+		<container name="product.info.wrapper" htmlTag="div" htmlClass="product-info-wrapper" before="-">
+			<container name="product.monogram.preview" htmlTag="div" htmlClass="product monogram-preview" after="product.info.main">
+			 <block class="Magento\Catalog\Block\Product\View" name="product.info.monogram" template="Magento_Catalog::product/view/monogrampreview.phtml" after="-"/>
+			  </container>
+			
+		</container>  
+		<block class="Magento\Catalog\Block\Product\View" name="product-additional-description" template="Magento_Catalog::product/view/product-additional-description.phtml" after="product.info.wrapper"/>
+		  
+		<block class="Magento\Catalog\Block\Product\View" name="below-product-info-details" template="Magento_Catalog::product/view/below-product-info-details.phtml" after="product.info.details"/>
+		
+		<block class="Magento\Catalog\Block\Product\View" name="details-file" template="Magento_Catalog::product/view/details.phtml" after="product.info.details"/>  
+		  
+	
+</referenceContainer> 
+	     
+
+<!-- 	 <referenceBlock name="product.info.addtocart">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Catalog::product/view/customaddtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Catalog::product/view/customaddtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+			<block name = "cartPopup" class="Magento\Framework\View\Element\Template" template="Magento_Catalog::html/cart-popup.phtml" after = "-" />
+        </referenceContainer>   -->  
+
+    <move element="product.info.main" destination="product.info.wrapper"/>
+    <move element="product.info.media" destination="product.info.wrapper"/> 
+	<move element="product.monogram.preview" destination="product.info.wrapper" after="product.info.media"/>
+    <move element="page.main.title" destination="product.info.main" before="-" />
+	<move element="product.info.delivery.date" destination="product.info.price" after="page.main.title"/> 
+	<!-- <move element="product.info.delivery.date" destination="product.info.main" after="product.info.overview"/> -->
+	<move element="product.info.supporter" destination="product.info.main" after="-"/> 
+	<!-- <move element="product.deliverydate" destination="product.info.main" before="product.info.addtocart"/>  -->
+	<move element="product.info.delivery" destination="product.info.options.wrapper" after="-"/>
+		
+			    
+    <move element="product.info.review" destination="page.main.title" before="-" />
+    
+
+
+    </body>  
+</page>
+    

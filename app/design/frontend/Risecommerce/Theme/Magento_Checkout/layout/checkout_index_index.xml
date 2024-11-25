@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- <referenceContainer name="checkout.onepage.payment.method.additional">
+            <move element="checkout.comment" destination="checkout.onepage.payment.method" after="checkout.payment.methods"/>
+        </referenceContainer> -->
+    </body>
+</page>
+         

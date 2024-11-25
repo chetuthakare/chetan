@@ -1,0 +1,224 @@
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+	.footer {
+		width: 100%;
+		position: relative; 
+		height: auto;
+		background-color: #f6f6f6;
+		padding-bottom: 30px;
+		img {
+			max-width: 200px;
+		}
+		
+		.col {
+			h1 {
+				margin: 0;
+				padding: 0;
+				font-family: inherit;
+				font-size: 14px;
+				font-weight: 700;
+				line-height: 17px;
+				padding: 20px 0 5px;
+				color: #000;
+				text-transform: uppercase;
+				margin-bottom: 15px;
+			}
+		}
+		.col {
+			//width: 207px;
+			height: auto;
+			float: left;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			padding: 0 10px;
+			width: 100%;
+			ul.footer-writereview-icons {
+				li {
+					display: inline-block;
+				}		
+			}
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				li {
+					color: #32cfb0;
+					font-size: 12px;
+					margin: 0;
+					font-family: inherit;
+					line-height: 17px;
+					font-weight: 500;
+					padding: 5px 0;
+					cursor: pointer;
+					transition: .2s;
+					-webkit-transition: .2s;
+					-moz-transition: .2s;
+					 display: block;
+					a {
+						color: #9f337f;
+						font-size: 12px;
+						text-decoration: none;
+						&:hover {
+							color: @color-black;
+						}
+					}
+				 
+				}
+			}
+			h2 {
+				font-size: 15px;
+				margin-bottom: 5px;
+				color: #000000;
+				font-weight: 700;
+				margin-top: 5px;
+			}
+			p {
+				font-size: 13px;
+				margin-bottom: 5px;
+				color: #9f337f;
+			}
+		}
+	}
+
+	.contain {
+		display: flex;
+		flex-wrap: wrap;
+
+	}
+	.col.social.firstcol {
+        width: 293px;
+    }
+   
+}
+
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+.col>[data-role=content][aria-hidden=true] {
+        height: auto;
+        visibility: visible !important;
+        opacity: 1;
+        overflow: visible;
+        position: static;
+        display: block !important;
+		
+    }
+
+}
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .footer {
+		.col {
+			width: calc(~'(100% / 5) - 4%');
+		}
+	}
+	.col.social.firstcol {
+  
+		width: 33%;
+		margin-right: 20px;
+	}
+	 
+}
+
+
+@media only screen and (min-width: 1280px) {
+    .contain {
+        .contain {
+            width: auto;
+            margin: 0 auto;  
+        } 
+    }
+}  
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+
+	footer.page-footer {
+		div#accordion {
+			.social.firstcol.footer-col1.content {
+				.collapsible {
+					    display: block !important;
+				}
+			}
+		}
+	}
+    
+	.footer h1#hidden-title:after,
+	.footer .col h1:after {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		font-size: 17px;
+		line-height: 14px;
+		color: inherit;
+		content: '\e90a';
+		font-family: 'Pushplenin-icon';
+		margin: 0;
+		vertical-align: top;
+		display: inline-block;
+		font-weight: normal;
+		overflow: hidden;
+		speak: none;
+		text-align: center;
+		margin: 2px 4px;
+	}
+}
+
+.product-options-bottom.action.primary:hover {
+    background: #111827 !important;
+	}
+
+
+
+.product-item [class^=swatch-opt-] {
+    position: static !important;
+	}
+	
+	.btn-explore {
+    padding-bottom: 34px;
+    padding-top: 10px;
+}
+
+.filter-options-title:after {
+    line-height: 20px;
+	font-size:30px;
+}
+
+
+.filter-current .action.remove {
+    font-size: 12px !important;
+    border: 2px solid gray;
+    border-radius: 6px;
+	margin-left: -14px;
+}
+
+.filter-current .action.remove:hover {
+background-color: @color-black;
+}
+
+.filter-options-content .count {
+    padding-right: 0px !important; 
+}
+
+.abs-remove-button-for-blocks:hover:before, .sidebar .action.delete:hover:before, .table-comparison .cell.remove .action.delete:hover:before, .block-compare .action.delete:hover:before, .filter-current .action.remove:hover:before {
+    color: @color-white;
+}
+
+
+ 

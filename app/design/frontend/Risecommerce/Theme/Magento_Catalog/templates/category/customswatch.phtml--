@@ -1,0 +1,54 @@
+<script>
+
+	require(['jquery'], function ($) {
+		$(document).ready(function () {
+			console.log("Function Run");
+			$(document).on('click', '.swatch-option.color', function (event) {
+				console.log("Swatch Click Detected");
+				event.preventDefault();
+				event.stopPropagation();  
+				var swatch = $(this);
+				console.log(swatch);  
+				var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');         
+				if (productLink) {
+					console.log("Product Link Found: " + productLink);  
+					window.location.href = productLink; 
+				} else {
+					console.log("No Product Link Found");  
+				}    
+			});
+		}); 
+	});   
+
+	document.addEventListener('DOMContentLoaded', function() {
+		function attachTouchAndClickEvents(element) {
+			if (element) {
+				element.addEventListener('touchend', function(event) {
+					event.preventDefault();
+					this.click();
+				});
+				return true;  
+			}
+			return false; 
+		}
+
+		function checkElements() {
+			const moreProductsButton = document.querySelector('.toolbar.toolbar-products .swissup-layered-more-products');
+			const paginationLinks = document.querySelectorAll('.toolbar-products .pages a.page');
+			const nextButton = document.querySelector('.toolbar-products .pages .action.next');
+			const moreProductsButtonFound = attachTouchAndClickEvents(moreProductsButton);
+			let paginationLinksFound = paginationLinks.length > 0;
+			if (paginationLinksFound) {
+				paginationLinks.forEach(function(link) {
+					attachTouchAndClickEvents(link);
+				});  
+			}
+			const nextButtonFound = attachTouchAndClickEvents(nextButton);
+			if (!moreProductsButtonFound || !paginationLinksFound || !nextButtonFound) {
+				setTimeout(checkElements, 500);  
+			}   
+		}
+		checkElements();    
+	}); 
+
+</script>    

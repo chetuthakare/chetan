@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        
+       <!-- <add id="SetuBridge_Color::system_color" title="Colors" translate="title" module="SetuBridge_Color" sortOrder="30" parent="SetuBridge_PersonalizationTemplate::personalization" resource="SetuBridge_PersonalizationTemplate::personalization" />-->
+        
+        <add id="SetuBridge_Color::color" title="Colors" translate="title" module="SetuBridge_Color" sortOrder="5" parent="SetuBridge_PersonalizationTemplate::system_font" action="color/data" resource="SetuBridge_Color::color"/>
+    </menu>
+</config>

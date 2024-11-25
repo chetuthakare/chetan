@@ -1,0 +1,137 @@
+<?php
+/**
+ * Copyright © Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ 
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View
+ */
+
+
+$_product = $block->getProduct();
+
+//echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(38, 38);
+ $image = 'product_page_image_medium';
+
+//echo "<pre>"; print_r($_product->debug());die("dead");
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+ $image_width = 700;
+    $image_height = 700;
+
+
+?>
+
+ <?php
+                           
+    $productImage = $_imagehelper->init($_product, $image)->resize($image_width, $image_height);
+    $productImageUrl = $productImage->getUrl();
+ ?>
+  
+        
+ <script  type="lazy"> 
+
+	var targetElement1 = document.querySelector('.field.required.monogram.name');
+
+	if (targetElement1) {
+ 
+		var newElement = document.createElement('div');
+		newElement.id = 'preview-container';
+		newElement.style.display = 'none';
+
+	
+		newElement.innerHTML = `
+			<h3>See monogram preview here</h3>   
+			<div id="preview-font">ABC</div>
+		`;
+		targetElement1.parentNode.insertBefore(newElement, targetElement1.nextSibling);
+	}
+
+   </script>
+     
+
+<script type="lazy">
+    const wordInput = document.querySelector('.field.monogram.name input');
+    const fontSelect = document.querySelector('.field.monogram.font select');
+    const monogram = document.querySelector('.field.monogramoption select');
+    const monogramBedding = document.querySelector('.field.monogramoption input[type="radio"]');
+    const colorSelect = document.querySelector('.field.monogram.color.tdcolor select');
+    const colorSelectDiv = document.querySelector('.field.monogram.color.tdcolor .mageworx-swatch-option.image');
+    const swatchOptionsFont = document.querySelectorAll('.field.monogram.font .mageworx-swatch-option');
+    const preview = document.getElementById('preview-font');
+    const previewContainer = document.getElementById('preview-container');
+
+    if (swatchOptionsFont.length > 0) swatchOptionsFont[0].style.pointerEvents = 'none';
+
+    function updatePreview() {
+        preview.textContent = wordInput.value;
+    }
+
+    swatchOptionsFont.forEach(option => {
+        option.addEventListener('click', () => {
+            const inputFieldMonogram = document.querySelector('.field.required.monogram.name .input-text.product-custom-option');
+            const optionLabel = option.getAttribute('data-option-label');
+            const fontFamily = `font${optionLabel}`;
+            inputFieldMonogram.value = "ABCD";
+            inputFieldMonogram.maxLength = [2, 5, 8, 19, 21, 22, 23, 32].includes(Number(optionLabel)) ? 1 : 4;
+            swatchOptionsFont.forEach(opt => opt.style.pointerEvents = '');
+            option.style.pointerEvents = 'none';
+            preview.style.fontFamily = fontFamily;
+            updatePreview();
+        });
+    });
+
+    const swatchOptionsColor = document.querySelectorAll('.field.monogram.color.tdcolor .mageworx-swatch-option');
+    const colorMap = {
+        "Light Blue": "#aed8e6", "Light Grey": "#d2d2d2", "Taupe": "#dbd4c2", "Navy Blue": "#01055c",
+        "Dark Grey": "#a9a9a9", "Burgundy": "#80011e", "Hot Pink": "#fc6ab3", "Lilac": "#c593c8",
+        "Sage": "#76805d", "Parrot Green": "#62b33b", "Light Pink": "#feb4c1"
+    };
+
+    swatchOptionsColor.forEach(option => {
+        option.addEventListener('click', () => {
+            const optionLabel = option.getAttribute('data-option-label');
+            preview.style.color = colorMap[optionLabel] || optionLabel;
+            updatePreview();
+        });
+    });
+  
+    if (monogram && previewContainer) {
+        monogram.addEventListener('change', () => {
+            const selectedOption = monogram.options[monogram.selectedIndex].textContent;
+            if (selectedOption !== "No" && selectedOption !== "-- Please Select --") {
+                previewContainer.style.display = "block";
+                const observer = new MutationObserver(mutations => {
+                    mutations.forEach(() => {
+                        const inputField = document.querySelector('.field.required.monogram.name .input-text.product-custom-option');
+                        if (inputField) {
+                            inputField.value = "ABCD";
+                            inputField.maxLength = 4;
+                            observer.disconnect();
+                        }
+                    });
+                });
+                observer.observe(document.body, { childList: true, subtree: true });
+                preview.textContent = "ABCD";
+            } else {
+                previewContainer.style.display = "none";
+            }
+        });
+    }
+    if (monogramBedding) {
+        const inputField = document.querySelector('.field.required.monogram.name .input-text.product-custom-option');
+        if (inputField) {
+            inputField.value = "ABCD";
+            inputField.maxLength = 4;
+            previewContainer.style.display = "block";
+            preview.textContent = "ABCD";
+        }
+    }
+    if (wordInput) wordInput.addEventListener('input', updatePreview);
+
+    </script>     

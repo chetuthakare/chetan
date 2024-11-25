@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+*/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="category.product.addto">
+            <block ifconfig="personalization/button/button_listing" class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="productdesinger.product.design" as="product.design"  template="SetuBridge_Personalization::product/list.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>

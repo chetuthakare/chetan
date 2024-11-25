@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote_item" resource="default" engine="innodb">
+        <column xsi:type="longtext" name="personalization_json" nullable="true" comment="Personalization Json"/>
+        <column xsi:type="longtext" name="canvasarea_svg_data" nullable="true" comment="Canvas Area Svg Data"/>
+        <column xsi:type="longtext" name="full_svg_data" nullable="true" comment="Full Image Svg Data"/>
+        <column xsi:type="longtext" name="font_families" nullable="true" comment="Font Families"/>
+        <column xsi:type="longtext" name="personalization_color" nullable="true" comment="Personalization color"/>
+    </table>
+</schema>

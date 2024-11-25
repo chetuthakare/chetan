@@ -1,0 +1,171 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_OrderHistoryCommunication
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+    $orderItems = $block->getCommunicationOrder()->getItems()['items'];
+?>
+<div id="communication_block" class="edit-order-comments">
+    <div class="order-history-block">
+        <div class="admin__field field-row">
+            <label class="admin__field-label"
+                for="history_comments"><?= $block->escapeHtml(__('Ask Question!!')) ?></label>
+            <div class="admin__field-control">
+                <textarea name="comment[comment]"
+                        class="admin__control-textarea validate-data"
+                        rows="3"
+                        cols="5"
+                        id="history_comments" pattern="^[a-zA-Z0-9]+$"></textarea>
+            </div>
+        </div>
+        <div class="admin__field field-row">
+            <label class="admin__field-label"
+                for="attachment"><?= $block->escapeHtml(__('Attachment!!')) ?></label>
+            <div class="admin__field-control">
+                <input name="comment[attachment]"
+                        type="file"
+                        id="attachment" />
+            </div>
+        </div>
+        <div class="admin__field">
+            <div class="order-history-comments-options">
+                    <div class="admin__field admin__field-option">
+                        <input name="comment[is_customer_notified]"
+                            type="checkbox"
+                            class="admin__control-checkbox"
+                            id="history_notify"
+                            value />
+                        <label class="admin__field-label"
+                            for="history_notify"><?= $block->escapeHtml(__('Notify Customer by Email')) ?></label>
+                    </div>
+                <div class="admin__field admin__field-option">
+                    <input name="comment[is_visible_on_front]"
+                        type="checkbox"
+                        id="history_visible"
+                        class="admin__control-checkbox"
+                        value />
+                    <label class="admin__field-label"
+                        for="history_visible"> <?= $block->escapeHtml(__('Visible on Storefront')) ?></label>
+                </div>
+            </div>
+            <div class="order-history-comments-actions">
+                <?= $block->getChildHtml('submit_button') ?>
+            </div>
+        </div>
+    </div>  
+    <div class="edit-order-comments-block">
+        <div class="edit-order-comments-block-title">
+            <?= $block->escapeHtml(__('Communication History')) ?>
+        </div>
+        <?php foreach ($orderItems as $_item): ?>
+            <?php if ($_item['comment']): ?>
+                <div class="comments-block-item">
+                    <div class="comments-block-item-comment">
+                        <?= /* @noEscape */ $_item['comment'] ?>
+                    </div>
+                    <?php if ($_item['attachment']):?>
+                        <?php if ($block->isImage($_item['attachment'], $_item['order_id'])): ?>
+                            <?php
+                                $img =
+                                "orderhistorycommunication/communication/"
+                                .$_item['order_id']."/"
+                                .$_item['attachment'];
+                            ?>
+                            <div class="wk-note-list-attachment">
+                                <a href="<?=
+                                    $block->escapeUrl($block->getMediaUrl().$img)?>" 
+                                    target="_blank">
+                                    <img width="100px" height="100px"
+                                    src="<?=
+                                    $block->escapeUrl($block->getMediaUrl().$img)?>" 
+                                    />
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="wk-note-list-attachment">
+                            <a href="<?= $block->escapeUrl($block->getMediaUrl().$_item['attachment'])?>" download>
+                                <?= $block->escapeHtml(__($_item['attachment']))?>
+                            </a>
+                        </div>    
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <span class="comments-block-item-date-time">
+                        <?= $block->escapeHtml(__('Comment added')) ?>
+                        <?= /* @noEscape */ $block->getItemCreatedAt($_item['created_at']) ?>
+                        <?= /* @noEscape */ $block->getItemCreatedAt($_item['created_at'], 'time') ?>
+                        <strong><?= /* @noEscape */ ($_item['is_customer']) ? "Customer" : "By Admin" ?></strong>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+<script  type="lazy" >
+require(['prototype'], function(){  
+    submitComment = function() {
+        var formdata =  new FormData();
+        formdata.append('form_key','<?= /* @noEscape */ $block->getFormKey() ?>');
+        formdata.append('comment[comment]', $('history_comments').value);
+        formdata.append('file', $('attachment').files[0]);
+        formdata.append('comment[is_customer_notified]', $('history_notify').value);
+        formdata.append('comment[is_visible_on_front]',$('history_visible').value);
+        formdata.append('comment[order_id]',<?= /* @noEscape */ $block->getOrderId()?>);
+        if(!/[~`!@#$%\^*()+=\-\[\]\\';/{}|\\":<>\?]/g.test($('history_comments').value) == true){
+            jQuery.ajax({
+                    url: "<?= $block->escapeUrl($block->getSubmitUrl()) ?>",
+                    type: "POST",
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    showLoader: true,
+                    success: function (response) {
+                        if(response.message == "success"){
+                            alert("Saved Successfully!!");
+                            window.location.reload();                         
+                        }else if(response.error == true){
+                            alert(response.message);
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.message);
+                    }
+            });
+        }else{
+            alert("Please enter alphanumeric characters!!");
+        }
+    };
+    
+    if ($('submit_communication_button')) {
+        $('submit_communication_button').observe('click', submitComment);
+    }
+});
+</script>
+
+<script  type="lazy" >
+    require([
+        "jquery"
+    ], function($){
+        'use strict';
+    $(document).on("click","#history_notify",function(){
+        if($(this).prop("checked") == true){
+            $(this).val(1);  
+        }else{
+            $(this).val(0); 
+        }
+    })
+    
+    $(document).on("click","#history_visible",function(){
+        if($(this).prop("checked") == true){
+            $(this).val(1);  
+        }else{
+            $(this).val(0); 
+        }
+    })
+    })
+</script>

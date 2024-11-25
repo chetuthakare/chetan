@@ -1,0 +1,135 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+$designs = $block->getCustomerDesigns();
+
+?>
+<style type="text/css">
+    .action-edit:before {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 18px;
+        line-height: 20px;
+        color: #757575;
+        content: '\e601';
+        font-family: luma-icons;
+        vertical-align: middle;
+        display: inline-block;
+        font-weight: 400;
+        overflow: hidden;
+        speak: none;
+        text-align: center;
+    }
+    .action-delete:before {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 18px;
+        line-height: 20px;
+        color: #757575;
+        content: '\e604';
+        font-family: luma-icons;
+        vertical-align: middle;
+        display: inline-block;
+        font-weight: 400;
+        overflow: hidden;
+        speak: none;
+        text-align: center;
+    }
+    .action-edit>span, .action-delete>span {
+        border: 0;
+        clip: rect(0,0,0,0);
+        height: 1px;
+        margin: -1px;
+        
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+</style>
+<?php if ($designs && count($designs)){ ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-design-table">
+            <caption class="table-caption"><?=  __('My Designs') ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?=  __('Design') ?></th>
+                    <th scope="col" class="col date"><?=  __('Name') ?></th>
+                    <th scope="col" class="col date"><?=  __('Created At') ?></th>
+                    <th scope="col" class="col shipping"><?=  __('Image') ?></th>
+                    <th scope="col" class="col shipping"><?=  __('Edit') ?></th>
+                    <th scope="col" class="col shipping"><?=  __('Remove') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($designs as $design): ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtml(__('Design')) ?>" class="col design"><?=  $design->getCustomerSaveId() ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Name')) ?>" class="col name"><?=  $design->getTitle() ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Created At')) ?>" class="col create_at"><?=  $design->getCreatedAt() ?></td>
+                        <td data-th="<?= $block->escapeHtml(__('Images')) ?>" class="col image">
+                            <?php
+                            $previewImages = $design->getCustomerSaveId()? $this->helper('SetuBridge\Personalization\Helper\Data')->getCustomDesignImages($design->getCustomerSaveId()):'';
+                            if(!empty($previewImages)) :
+                                ?>
+                                <span class="item-options personalization-options">
+                                    <?php foreach($previewImages as $img) : ?>
+                                        <?php list($alt,$ext)=explode('.',basename($img)) ?>
+                                        <img class="personalization-preview-img" width="70px"  alt="<?=  __('Preview %1',$alt) ?>" src="<?= $img ?>" >
+                                        <?php endforeach; ?>
+                                </span>
+                                <?php endif; ?>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Edit')) ?>" class="col actions">
+                            <a href="<?php echo $block->getUrl('personalization/index/editor',['designId'=>$design->getCustomerSaveId(),'product'=>$design->getProductId()]) ?>" data-href="<?php echo $block->getUrl('personalization/index/page',['designId'=>$design->getCustomerSaveId(),'product'=>$design->getProductId()]) ?>" class="action action-edit">
+                                <span>View Design</span>
+                            </a>
+                        </td>
+                        <td data-th="<?= $block->escapeHtml(__('Delete')) ?>" class="col actions">
+                            <a href="#" data-href="<?php echo $block->getBaseUrl(); ?>personalization/index/RemoveSaveCustomerProduct?entityID=<?= $design->getCustomerSaveId() ?>" class="action action-delete" data-id="<?= $design->getCustomerSaveId() ?>">
+                                <span>Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()){ ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+        <?php } ?>
+
+    <script  type="lazy" >  
+
+        require(['jquery','jquery/ui'], function($){ 
+
+            require([
+                'Magento_Ui/js/modal/confirm'
+                ], function(confirmation) { 
+
+                    $('.action-delete').click(function(){
+                        var url = $(this).data('href');
+                        
+                        confirmation({
+                            title: 'Delete Design',
+                            content: 'Do you want to delete design?',
+                            actions: {
+                                confirm: function () {
+                                    location.href = url;
+                                },
+                                cancel: function () {
+                                    return false;
+                                }
+                            }
+                        });
+                    });
+            });
+        });
+    </script>        
+
+    <?php } 
+else {  ?>
+    <div class="message info empty"><span><?=  __('You have no any design saved.') ?></span></div>
+    <?php } ?>

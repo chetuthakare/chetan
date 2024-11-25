@@ -1,0 +1,435 @@
+<style>
+
+.loading-mask {
+ 
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;  
+    position: fixed;
+    right: 0;
+	z-index: 100;
+    max-width: 30px;
+    background: transparent !important;
+    height: 30px;
+    border: 4px solid #fff;
+    border-top: 4px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 50%;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }    
+    100% { transform: rotate(360deg); }
+}
+
+</style>  
+ 
+<script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Use setTimeout to allow for dynamic content to load
+    setTimeout(function() {
+        // Select the fifth <li> element (index 4 since it's zero-based)
+        const fifthProductItem = document.querySelector('ol.products.list.items.product-items > li:nth-child(5)');
+
+        // If the fifth <li> exists, find its .product-item-link
+        if (fifthProductItem) {
+            const productLink = fifthProductItem.querySelector('a.product-item-link');
+            
+            // Log the product link element
+            console.log(productLink);
+
+            // Check if the product link exists
+            if (productLink) {
+                // Prevent the default action of the click (navigating to the link)
+                productLink.addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevents navigation
+                    console.log("Clicked the product link of the fifth <li> without navigation.");
+                });
+
+                // Simulate the click event on the link only once
+                const clickEvent = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true
+                });
+                productLink.dispatchEvent(clickEvent);
+            } else {
+                console.log("No product link found in the fifth <li>.");
+            }
+        } else {
+            console.log("Fifth <li> does not exist.");
+        }
+    }, 1000); // Adjust the delay (1000 ms = 1 second) as needed
+});
+
+
+
+
+	require(['jquery'], function ($) {
+			$(document).ready(function () {
+				$(document).on('click', '.swatch-option.color', function (event) {
+					event.preventDefault();
+					event.stopPropagation();  
+					var swatch = $(this);  
+					var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');         
+					if (productLink) {
+						window.location.href = productLink; 
+					}     
+				});
+				$(document).on('click', '.swatch-option.image', function (event) {
+					event.preventDefault();    
+					event.stopPropagation();    
+					var swatch = $(this);  
+					var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');         
+					if (productLink) {
+						window.location.href = productLink; 
+					}     
+				});  
+		});     
+		   
+	});   
+	
+	
+	
+	
+	
+/* 	// Function to create and add the home link
+function addHomeLink() {
+    // Create the anchor tag
+    const homeLink = document.createElement('a');
+    
+    // Set the properties for the link
+    homeLink.href = '/blog'; // Change this to your actual home page URL
+    homeLink.textContent = 'Go Home'; // Text to display in the link
+    homeLink.style.display = 'block'; // Display block for styling (optional)
+    homeLink.style.padding = '10px'; // Padding (optional)
+    homeLink.style.backgroundColor = '#007bff'; // Background color (optional)
+    homeLink.style.color = '#fff'; // Text color (optional)
+    homeLink.style.textDecoration = 'none'; // Remove underline (optional)
+    homeLink.style.borderRadius = '5px'; // Rounded corners (optional)
+      
+    // Append the link to a specific container
+    const container = document.getElementById('html-body'); // Change this to your target container's ID
+    container.appendChild(homeLink);
+}
+
+// Call the function to add the link when the document is loaded
+document.addEventListener('DOMContentLoaded', addHomeLink); */
+
+	
+	  
+	
+	
+	
+	
+	
+	
+	
+	/* 
+	require(['jquery'], function ($) {
+    $(document).ready(function () {
+        // Function to simulate hover over the first 5 product items
+        function simulateHover() {
+            // Select the first 5 items in the catalog category view
+            var items = $('.catalog-category-view li.item.product.product-item').slice(0, 5);
+            
+            items.each(function () {
+                var item = $(this);
+                
+                // Trigger mouseenter event to simulate hover
+                item.trigger('mouseenter');
+console.log("Mouse enter -----");
+                // Optional: Remove hover after a brief moment
+                setTimeout(function () {
+                    // Trigger mouseleave event to remove hover effect
+                    item.trigger('mouseleave');
+					console.log("Mouse out -----");
+                }, 500); // Adjust duration as necessary (500 ms in this case)
+            });
+        }
+
+        // Scroll event handler
+        $(window).on('scroll', function () {
+            // Check if user has scrolled down
+            if ($(window).scrollTop() > 0) {
+                // Call the simulateHover function when the user scrolls
+                simulateHover();
+                // Remove the scroll event listener to prevent multiple triggers
+                $(window).off('scroll');
+            }
+        });
+    });
+});
+
+	require(['jquery'], function ($) {
+		$(document).ready(function () {
+			// Function to simulate hover over the first 5 product items
+			function simulateHover() {
+				// Select the first 5 items in the catalog category view
+				var items = $('.catalog-category-view li.item.product.product-item').slice(0, 5);
+				
+				items.each(function () {
+					var item = $(this);
+					
+					// Trigger mouseenter event to simulate hover
+					item.trigger('mouseenter');
+					console.log("Mouse enter -----");
+					// Optionally, you can add a timeout to simulate the hover for a brief moment
+					setTimeout(function () {
+						// Trigger mouseleave event to remove hover effect
+						item.trigger('mouseleave');
+						console.log("Mouse out -----");
+					}, 500); // Adjust duration as necessary (500 ms in this case)
+				});
+			}
+ 
+			// Call the simulateHover function on page load
+			setTimeout(simulateHover, 1000); // Delay to ensure all elements are fully loaded
+		});
+	});
+  
+
+require(['jquery'], function ($) {
+    $(document).ready(function () {  
+        // Function to simulate hover over the 5th product item
+        function simulateHover() {
+            // Select the 5th item in the catalog category view
+            var item = $('.catalog-category-view li.item.product.product-item').eq(6).find('.product-item-info');
+            
+            // Check if the item exists
+            if (item.length) {  
+                // Trigger mouseenter event to simulate hover
+                item.trigger('mouseenter');
+console.log("Mouse  -----");
+                // Optional: Remove hover after a brief moment
+                setTimeout(function () {
+                    // Trigger mouseleave event to remove hover effect
+                    item.trigger('mouseleave');
+					console.log("Mouse  .....");
+                }, 500); // Adjust duration as necessary (500 ms in this case)
+            }
+        }
+
+        // Scroll event handler
+        $(window).on('scroll', function () {
+            // Check if user has scrolled down
+            if ($(window).scrollTop() > 0) {
+                // Call the simulateHover function when the user scrolls
+                simulateHover();
+                // Remove the scroll event listener to prevent multiple triggers
+                $(window).off('scroll');
+            }
+        });
+    });
+}); */
+	
+	/* document.addEventListener('DOMContentLoaded', function () {
+    // Select the first product list item in the category view
+    var firstProductItem = document.querySelector('.catalog-category-view li.item.product.product-item');
+    
+    // Check if the first product exists
+    if (firstProductItem) {
+        // Within that product, select the first color swatch
+        var firstColorSwatch = firstProductItem.querySelector('.swatch-option.color');
+        
+        // If the color swatch exists, trigger a click on it
+        if (firstColorSwatch) {
+			console.log("click on the li first item");
+            firstColorSwatch.click();
+        }
+    }  
+});  */ 
+/* 
+require(['jquery'], function ($) {
+    function triggerFirstSwatchClick() {
+        var firstSwatch = $('.swatch-option.color, .swatch-option.image').first();
+        if (firstSwatch.length > 0) {
+			console.log("click on the li first item");
+            firstSwatch.trigger('click');
+        }
+    }    
+
+    function initializeSwatchClickHandlers() {
+        // Existing click handler for color swatch
+        $(document).on('click', '.swatch-option.color', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var swatch = $(this);
+            var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');
+            if (productLink) {
+                window.location.href = productLink;
+            }
+        });
+
+        // Existing click handler for image swatch
+        $(document).on('click', '.swatch-option.image', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var swatch = $(this);
+            var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');
+            if (productLink) {
+                window.location.href = productLink;
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        // Ensure click handlers are initialized
+        initializeSwatchClickHandlers();
+
+        // Check if this is the first page load or if the user is coming back via the back button
+        window.onpageshow = function (event) {
+            if (event.persisted || !sessionStorage.getItem('swatchClicked')) {
+                // Automatically click the first swatch option on page load or back navigation
+                triggerFirstSwatchClick();
+                // Set the flag to avoid future automatic clicks on page reloads
+                sessionStorage.setItem('swatchClicked', 'true');
+            }
+        };
+    });
+});
+ */
+/* 
+require(['jquery'], function ($) {
+
+    // Attach event listeners for swatch and image clicks
+    $(document).ready(function () {
+        $(document).on('click', '.swatch-option.color, .swatch-option.image', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var swatch = $(this);
+            var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');
+
+            // If a product link is found, navigate after a short delay
+            if (productLink) {
+                setTimeout(function() {
+                    window.location.href = productLink;  // Navigate to product page
+                }, 100);  // Delay of 100 milliseconds
+            }
+        });  
+
+        // Handle title and image link clicks
+        $(document).on('click', 'a.product-item-photo, a.product-item-link', function (event) {
+            event.preventDefault();
+            var link = $(this);  
+            setTimeout(function() {
+                window.location.href = link.attr('href');  // Navigate to product page
+            }, 100);  // Delay of 100 milliseconds
+        });
+    });
+});
+ */
+
+/* require(['jquery'], function ($) {
+    $(document).ready(function () {
+        var isFirstClick = true; // Flag to check if it's the first click after page load
+
+        // Function to handle swatch option clicks
+        function handleSwatchClick(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var swatch = $(this);
+            var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');
+
+            // If it's the first click, we do nothing (or show a message)
+            if (isFirstClick) {
+                isFirstClick = false; // Set the flag to false after the first click
+                // Optional: Show a message or perform another action
+                return; // Exit the function to prevent navigation
+            }
+
+            // Navigate to the product page if a valid product link is found
+            if (productLink) {
+                window.location.href = productLink;
+            }
+        }
+
+        // Attach event listeners for color and image swatch options
+        $(document).on('click', '.swatch-option.color', handleSwatchClick);
+        $(document).on('click', '.swatch-option.image', handleSwatchClick);
+    });
+});  
+ */
+
+/* 
+require(['jquery'], function ($) {
+    // Function to attach click handlers
+    function attachClickHandlers() {
+        $(document).off('click', '.swatch-option.color, .swatch-option.image, a.product-item-photo, a.product-item-link'); // Remove previous handlers
+        $(document).on('click', '.swatch-option.color, .swatch-option.image', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var swatch = $(this);
+            var productLink = swatch.closest('.product-item-info').find('a.product-item-photo').attr('href');
+
+            // If a product link is found, navigate after a short delay
+            if (productLink) {
+                setTimeout(function() {
+                    window.location.href = productLink;  // Navigate to product page
+                }, 100);  // Delay of 100 milliseconds
+            }
+        });
+
+        // Handle title and image link clicks
+        $(document).on('click', 'a.product-item-photo, a.product-item-link', function (event) {
+            event.preventDefault();
+            var link = $(this);
+            setTimeout(function() {
+                window.location.href = link.attr('href');  // Navigate to product page
+            }, 100);  // Delay of 100 milliseconds
+        });
+    }
+
+    // Attach click handlers when document is ready
+    $(document).ready(function () {
+        attachClickHandlers();
+    });   
+
+    // Reattach click handlers on scroll
+    $(window).on('scroll', function () {
+        attachClickHandlers();  // Reattach click handlers to ensure they are active after scrolling
+    });
+}); */
+
+	/* document.addEventListener('DOMContentLoaded', function() {
+		function attachTouchAndClickEvents(element) {
+			if (element) {
+				element.addEventListener('click', function(event) {
+					event.preventDefault();
+					this.click();
+				});
+				return true;  
+			}
+			return false; 
+		}
+
+		function checkElements() {
+			//const moreProductsButton = document.querySelector('.toolbar.toolbar-products .swissup-layered-more-products');
+			const paginationLinks = document.querySelectorAll('.toolbar-products .pages a.page');
+			const productimg = document.querySelectorAll('.product-item-info .product-image-photo');
+			const nextButton = document.querySelector('.toolbar-products .pages .action.next');
+			//const moreProductsButtonFound = attachTouchAndClickEvents(moreProductsButton);
+			let paginationLinksFound = paginationLinks.length > 0;
+			if (paginationLinksFound) {
+				paginationLinks.forEach(function(link) {
+					attachTouchAndClickEvents(link);  
+				});  
+			}
+			let productimgLinksFound = productimg.length > 0;
+			if (productimgLinksFound) {
+				productimg.forEach(function(link) {
+					attachTouchAndClickEvents(link);
+				});
+			}    
+			const nextButtonFound = attachTouchAndClickEvents(nextButton);
+			if (!paginationLinksFound || !productimgLinksFound || !nextButtonFound) {
+				setTimeout(checkElements, 500);  
+			}        
+		}
+		checkElements();      
+	});  */
+
+</script>           

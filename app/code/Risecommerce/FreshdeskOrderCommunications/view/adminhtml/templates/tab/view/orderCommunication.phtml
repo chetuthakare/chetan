@@ -1,0 +1,223 @@
+<div id="communication_block" class="edit-order-comments">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?php /* @escapeNotVerified */
+                            echo __('Custom Information for new tab') ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+            <?php // echo $block->getChildHtml(); 
+            ?>
+            <tr>
+                <th><?php /* @escapeNotVerified */
+                    echo __('Order ID :') ?></th>
+                <td>#<?= $block->getOrderIncrementId(); ?></td>
+            </tr>
+            <tr>
+                <th><?php /* @escapeNotVerified */
+                    echo __('Customer Email :') ?></th>
+                <td><?= $block->getCustomerEmail(); ?></td>
+            </tr>
+            <?php $_items = $block->getOrderData();
+            $i = 0;
+            foreach ($_items as $_item) : ?>
+                <?php if ($_item->getParentItem()) :
+                    continue;
+                else :
+                    $i++;
+
+                endif; ?>
+
+                <?php echo "<tr><th>Item Id</th><td>" . $_item->getId() . "</td></tr>";
+                echo "<tr><th>Item Sku</th><td>" . $_item->getSku() . "</td></tr>";
+                echo "<tr><th>Item Name</th><td>" . $_item->getName() . "</td></tr>";
+
+                echo "<tr><th>Item qty</th><td>" . $_item->getQtyOrdered() . "</td></tr>";
+                ?>
+
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<div id="communication_block" class="edit-order-comments">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?php /* @escapeNotVerified */
+                            echo __('Communications On FreshDesk') ?></span>
+    </div>
+
+    <?php
+    $ticketid = "";
+    $tickets = "";
+	$api_key = $block->getDataApiKey();
+    $domain = $block->getDataApiDomain();
+    $tickets = $block->getallTickets();
+    $yourImageFileName  =  $block->getDataApiImage();
+$usrdetails = $block->getuserdatabymail($block->getCustomerEmail());
+// echo "<pre>";
+// var_dump($usrdetail['0']['id']);
+// die;
+foreach($usrdetails as $usrdetail){
+	$user_id = $usrdetail['id'];
+}
+    if ($tickets != "") {
+        foreach ($tickets as $ticket) {
+            if ($block->getCustomerEmail() == $ticket['custom_fields']['cf_email'] && $ticket['custom_fields']['cf_order_id'] == $block->getOrderIncrementId()) {
+                $ticketid = $ticket['id'];
+                break;
+            }
+        }
+    }
+    if ($block->getallChatData($ticketid) != "") {
+        echo " <div class='container'>
+    <div class='chatimage'><img src=" . $this->getViewFileUrl('Risecommerce_FreshdeskOrderCommunications::images/chat.jpeg') . " alt='Avatar' style='width:100%;'>
+    </div>
+    <div class='chatmsg'>
+        <h4>" . $block->getCustomerName() . ": </h4>
+        <p>'" . $block->getMainData($ticketid) . "'</p>
+    </div>
+</div>";
+        $data = $block->getallChatData($ticketid);
+        $conversations_datas = json_decode($data, true);
+        $result = "";
+        foreach ($conversations_datas as $conversations_data) {
+			 if (($conversations_data['support_email'] != 'support@pushplinen.freshdesk.com') && ($conversations_data['user_id'] != '73022248817')){
+                $result .= " <div class='container'> 
+            <div class='chatimage'><img src=" . $this->getViewFileUrl('Risecommerce_FreshdeskOrderCommunications::images/chat.jpeg') . " alt='Avatar' style='width:100%;'>
+            </div>
+            <div class='chatmsg'>
+                <h4>" . $block->getCustomerName() . ": </h4>
+                <p>'" . $conversations_data['body_text'] . "'</p>
+            </div>
+        </div>";
+            } elseif($conversations_data['support_email'] != "") {
+                $result .= " <div class='container darker '>
+            <div class='chatimage'><img src=" . $yourImageFileName . " alt='Avatar' style='width:100%;'>
+            </div>
+            <div class='chatmsg'>
+                <h4>Pushplinen: </h4>
+                <p>'" . $conversations_data['body_text'] . "'</p>
+            </div>
+        </div>";
+            }	
+		}
+        if ($result != "") {
+
+            echo $result;
+			?>
+			 <div class="actions-toolbar">
+        <div class="primary">
+				<button class="show" aria-haspopup="true">Add Reply</button>
+				<div class="mask" role="dialog"></div>
+				<div class="modal" id="freshdesk-modal" role="alert"> 
+					<div id="communication_block" class="edit-order-comments">
+						<div class="order-history-block">
+							<div class="admin__field field-row">
+								<label class="admin__field-label"
+									for="history_comments"><?= $block->escapeHtml(__('Ask Question!!')) ?></label>
+								<div class="admin__field-control">
+								
+							 <input name="ticket_id" id="ticket_id" title="<?= $block->escapeHtmlAttr(__('Ticket Id')) ?>" value="<?=  $ticketid ?>" class="input-text" type="hidden" />
+
+									<textarea name="comment"
+											class="admin__control-textarea validate-data"
+											rows="3"
+											cols="5"
+											id="history_comments" pattern="^[a-zA-Z0-9]+$"></textarea>
+								</div>
+							</div>
+						   
+							<div class="admin__field">
+								
+								<div class="order-history-comments-actions">
+									<?= $block->getChildHtml('submit_button') ?>
+								</div>
+							</div>
+						</div> 
+					<button class="close" role="button">X</button>
+				</div>
+			</div>
+		<?php
+        }
+    } else {
+        echo "<p>There is no Communication </p>";
+    }
+    ?>
+</div>
+
+
+<script type="lazy" >
+	require(['jquery', 'domReady!'], function($) {
+
+			// Click function for show the Modal
+
+			$(".show").on("click", function(){
+			  $(".mask").addClass("active");
+			});
+
+			// Function for close the Modal
+
+			function closeModal(){
+			  $(".mask").removeClass("active");
+			}
+
+			// Call the closeModal function on the clicks/keyboard
+ 
+			$(".close, .mask").on("click", function(){
+			  closeModal();
+			});
+	});
+</script> 
+<script  type="lazy">
+require(['jquery','domReady'], function($){
+	
+    submitComment = function(data) {  
+         if(!/[~`!@#$%\^*()+=\-\[\]\\';/{}|\\":<>\?]/g.test($('history_comments').value) == true){
+				const apiKey = '<?= $api_key ?>';
+				const domain = '<?= $domain ?>';
+				const ticketId = <?= $ticketid ?>;
+				//alert(data);
+				const replyData = {
+					body: String(data)
+				};
+
+				const apiUrl = `https://${domain}.freshdesk.com/api/v2/tickets/${ticketId}/reply`;
+
+			jQuery.ajax({
+					url: apiUrl,
+					type: 'POST',
+					dataType: 'json',
+					contentType: 'application/json',
+					beforeSend: function(xhr) {
+						xhr.setRequestHeader('Authorization', 'Basic ' + btoa(apiKey + ':X'));
+					},
+					data: JSON.stringify(replyData),
+					success: function(responseData) {
+						console.log(responseData);
+						console.log('Reply Added');
+						setTimeout(function() {
+							location.reload();
+						}, 100);
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.error('AJAX Error:', errorThrown);
+					}
+		
+                    
+            });
+        
+		}else{
+            alert("Please enter alphanumeric characters!!");
+        }
+    };
+    
+    if ($('#submit_communication_button')) {
+        $('#submit_communication_button').on("click", function(){
+			var data = $('#history_comments').val()
+	//console.log($('#history_comments').val());
+			  submitComment(data);
+    })
+	}
+});
+</script>
+
+
+

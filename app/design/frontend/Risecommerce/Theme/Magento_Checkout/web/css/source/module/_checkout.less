@@ -1,0 +1,68 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Page components
+//  ---------------------------------------------
+
+@import 'checkout/_checkout.less';
+@import 'checkout/_estimated-total.less';
+@import 'checkout/_progress-bar.less';
+@import 'checkout/_fields.less';
+@import 'checkout/_modals.less';
+@import 'checkout/_tooltip.less';
+@import 'checkout/_shipping.less';
+@import 'checkout/_shipping-policy.less';
+
+@import 'checkout/_sidebar.less';
+@import 'checkout/_sidebar-shipping-information.less';
+@import 'checkout/_order-summary.less';
+@import 'checkout/_authentication.less';
+
+@import 'checkout/_payments.less';
+@import 'checkout/_payment-options.less';
+@import 'checkout/_checkout-agreements.less';
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+	/*
+	.checkout-index-index  {
+		#checkout {
+			ol#checkoutSteps {
+				background: rgba(255, 255, 255, .5);
+				border: 2px solid #eff3f6;
+				border-radius: .25rem;
+				padding: 4rem;
+			}
+		}  
+	}  
+	*/
+	.checkout-index-index  {
+		.payment-option.opc-payment-additional.comment {
+			display: none;
+		}  
+		.swissup-checkout-fields .label span {
+			font-weight: 700;
+		}
+	}      
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+	
+	.checkout-index-index {
+		.columns {
+			max-width: 1280px;
+			margin: 0 auto;
+		}
+	}
+}

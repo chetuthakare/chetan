@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_OrderHistoryCommunication
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="order_history_communication" resource="sales" engine="innodb" comment="Sales Flat Invoice Comment">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Order ID"/>
+        <column xsi:type="boolean" name="is_customer" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Is Cutsomer"/>
+        <column xsi:type="boolean" name="is_visible_on_front" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Is Visible On Front"/>
+        <column xsi:type="boolean" name="is_customer_notified" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Is Customer Notified"/>
+        <column xsi:type="text" name="comment" nullable="true" comment="Comment"/>
+        <column xsi:type="text" name="attachment" nullable="true" comment="Attachment"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <!-- <constraint xsi:type="foreign" referenceId="ORDER_HISTORY_COMMUNICATION_ORDER_ID_SALES_ORDER_ENTITY_ID"
+                    table="order_history_communication" column="order_id" referenceTable="sales_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/> -->
+    </table>
+</schema>    

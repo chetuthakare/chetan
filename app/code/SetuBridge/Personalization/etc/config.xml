@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <personalization>
+            <general>
+                <active>1</active>
+                <clipart_active>1</clipart_active>
+                <color_active>1</color_active>
+                <pattern_active>1</pattern_active>
+                <templatedesign_active>1</templatedesign_active>
+                <plainText_active>1</plainText_active>
+                <quote_active>1</quote_active>
+                <font_active>1</font_active>
+                <uploadImage_active>1</uploadImage_active>
+                <ruler_active>1</ruler_active>
+            </general>
+            <button>
+                <popup_enable>0</popup_enable>
+                <button_listing>1</button_listing>
+                <button_text>Customize</button_text>
+            </button>
+            <lock_customization>
+                <lock_customization_text>0</lock_customization_text>
+                <lock_customization_clipart>0</lock_customization_clipart>
+            </lock_customization>
+            <theme>
+                <canvas_objects_center_alignment_color>#f39337</canvas_objects_center_alignment_color>
+            </theme>
+            <studio_feature>
+                <support_multi_addtocart>simple</support_multi_addtocart>
+            </studio_feature>
+            <output_files_setings>
+                <enabled_output_files>configure_svg,full_svg</enabled_output_files>
+            </output_files_setings>
+        </personalization>
+        <general>
+            <file>
+                <protected_extensions>
+                    <svg>false</svg>
+                </protected_extensions>
+            </file>
+        </general>
+    </default>
+</config>

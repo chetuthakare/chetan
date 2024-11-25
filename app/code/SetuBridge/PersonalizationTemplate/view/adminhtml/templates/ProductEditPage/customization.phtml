@@ -1,0 +1,195 @@
+<?php 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+?>
+<?php
+$id = $block->getRequest()->getParam('id');
+
+if($id){
+    $uniqid = null;
+    $product = $block->getProductById($id);
+    $isAlreadySavedDesign = $block->isAlreadySavedDesign($id);
+    ?>
+    <button type="button" id="load-personalization-template">
+        <span data-bind="text: title">Customization</span>
+    </button>
+    <div class="customize-product-content"></div>
+    <?php } else{
+    $id = null;
+    $uniqid = $block->getUniqeId();
+    $isAlreadySavedDesign = false;
+    ?>
+    <button type="button" id="load-personalization-template">
+        <span data-bind="text: title">Customization</span>
+    </button>
+
+    <div class="customize-product-content"></div>
+    <?php } ?>
+
+<div class="select-design-type" style="display: none">
+
+    <select id="personalization_template_grid_design_type" name="design_type" title="Design Type" class="design_type required-entry _required select admin__control-select" data-ui-id="add-row-form-fieldset-element-select-is-active">
+        <option value="0" selected="selected"><?php echo __('Standard') ?></option>
+        <option value="2"><?php echo __('Circle') ?></option>
+        <option value="1"><?php echo __('Mobile Type') ?></option>
+    </select>
+
+</div>
+
+
+<script  type="lazy">
+
+    window.generalConfiguration = <?php print_r(json_encode($block->getGeneralConfiguration())); ?>;
+    window.getMediaCollection = <?php print_r(json_encode($block->getMediaCollection())); ?>;
+
+</script>
+
+
+<script  type="lazy">  
+    var id = "<?php echo $id; ?>";
+    var uniqid = '<?php echo $uniqid; ?>';
+    var isAlreadySavedDesign = '<?php echo $isAlreadySavedDesign; ?>';
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal','jquery/ui'
+        ], function ($,modal) {
+            var SavePersonalizationData = '';
+            var savecustomizationStatus = false;
+            var htmlLoad;
+            $(document).ready(function(){
+                htmlLoad= window.setTimeout(run, 300);
+            });
+
+            function run(){
+                require(['jquery'],function ($) {
+
+                    var selector="#load-personalization-template";
+                    if($(selector).length){
+
+                        $('#load-personalization-template').remove();
+                        var html =  '<button type="button" class="addind-template" id="load-personalization-template"><span data-bind="text: title">Customization</span></button>';
+                        $("[name='product[personalization_template]']").after(html);
+
+                        $("[name='product[personalization_json_data]']").val(uniqid).trigger('change');
+                        jQuery('*[data-index="gallery"] .fieldset-wrapper-title').click();
+                        jQuery('*[data-index="gallery"] .fieldset-wrapper-title').click();
+                        if(!($("[name='product[personalization_colors]']").val())){
+                            jQuery("[name='product[personalization_colors]'] > option").prop('selected', true).trigger('change');
+                            jQuery("[name='product[personalization_colors]'] option[value='0']").prop('selected', false).trigger('change');
+                        }
+                        window.clearTimeout(htmlLoad);
+
+                        $("[name='product[personalization_template]']").change(function(){
+                            if(savecustomizationStatus){
+                                if(SavePersonalizationData  === $(this).val()){
+                                    $("[name='product[save_personalization_data]']").val(true);
+                                } else{
+                                    $("[name='product[save_personalization_data]']").val(0);
+                                }
+                                $("[name='product[save_personalization_data]']").trigger('change');
+                                $("[name='product[save_personalization_data]']").trigger('click');
+                            }
+                        });
+                    }
+                    else{
+                        htmlLoad= window.setTimeout(run, 300);
+                    }
+
+                });
+            }
+
+
+            $(document).on('click',"#load-personalization-template", function() {
+
+                if(jQuery.isEmptyObject(jQuery("[name='product[personalization_colors]").val())){
+
+                    $('#color-validation').remove();
+                    var html = '<span id="color-validation">Please select any colors. </span>';
+                    $('#load-personalization-template').after(html);
+                    return;
+                }
+                $('#color-validation').remove();
+
+                var templateid = $("[name='product[personalization_template]']").val();
+
+                if(isAlreadySavedDesign || templateid != 0){
+                    openPopupIframe();
+                }
+                else{
+
+                    var options = {
+                        type: 'popup',
+                        responsive: true,
+                        innerScroll: false,
+                        title: 'Your Personalised Template Type',
+                        buttons: [
+                            {
+                                text: $.mage.__('Confirm'),
+                                class: '',
+                                click: function () {
+                                    openPopupIframe();
+                                    this.closeModal();
+                                }
+                            },
+                            {
+                                text: $.mage.__('Cancel'),
+                                class: '',
+                                click: function () {
+                                    this.closeModal();
+                                }
+                            }
+                        ]
+                    };
+
+                    var popup = modal(options, $('.select-design-type'));
+                    popup.openModal();
+                }
+
+
+
+            });
+
+
+            function openPopupIframe(){
+
+                var options = {
+                    type: 'slide',
+                    responsive: true,
+                    innerScroll: true,
+                    title: 'Customization Product',
+                    buttons: [{
+                        text: $.mage.__('Save changes'),
+                        class: 'save-customization',
+                        click: function () {
+                            $("[name='product[save_personalization_data]']").val(true);
+                            SavePersonalizationData = $("[name='product[personalization_template]']").val();
+                            savecustomizationStatus = true;
+                            $("[name='product[save_personalization_data]']").trigger('change');
+                            $("[name='product[save_personalization_data]']").trigger('click');
+                        }
+                    }]
+                };
+
+
+                var templateid = $("[name='product[personalization_template]']").val();
+
+                var src = '<?php echo $block->getBaseUrl() ?>/personlisation/index.php?productID='+id+'&templateID='+templateid+'&display=productEditpage';
+
+                var wizard_steps_html = '<div class="steps-wizard"><div class="product-designer steps-wizard-navigation"><ul class="product-designer-nav-bar nav-bar"><li class="active add-slide" data-step="add-slide"><a>Slides</a></li><li class="set-configure-area" data-step="set-configure-area"><a>Set Area</a></li><li class="custom-design" data-step="custom-design"><a>Design your own</a></li><li class="save-design" data-step="save-design"><a>Preview</a></li></ul><div class="product-designer-nav-bar-outer-actions nav-bar-outer-actions"><div class="action-wrap"><div class="action-wrap action-wrap-prev"><button type="button" class="action-default action-back-step disabled">Back</button></div><div class="action-wrap action-wrap-next"><button type="button" class="action-default action-primary action-next-step">Next</button><button type="button" class="action-default action-primary action-save-step" style="display: none;">Save</button></div></div></div></div></div>';
+
+
+                var iframe = wizard_steps_html + '<iframe id="customize-product" width="100%" height="900" frameborder="0" src="'+src+'" allowfullscreen></iframe>';
+
+
+                $(".customize-product-content").html(iframe); 
+                var popup = modal(options, $('.customize-product-content'));
+
+
+                $('.customize-product-content').modal('openModal');
+            }
+
+    })
+</script>

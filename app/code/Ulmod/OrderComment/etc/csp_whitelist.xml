@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="fontawesome" type="host">*.fontawesome.com</value>
+                <value id="trustpilot" type="host">*.trustpilot.com/tp.min.js</value>
+                <value id="trustpilot-bootstrap" type="host">*.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js</value>
+                <value id="cloudflare" type="host">cdnjs.cloudflare.com</value>
+                <value id="google-analytics" type="host">*.google-analytics.com</value>
+                <value id="gstatic" type="host">*.gstatic.com</value>
+                <value id="twitter.com" type="host">*.twitter.com</value>
+				<value id="adobe" type="host">*.adobe.com</value>
+				<value id="freshbots" type="host">cdn.freshbots.ai</value>
+				<value id="bootstrapcdn" type="host">maxcdn.bootstrapcdn.com</value>
+				<value id="freshchat" type="host">pushplinen.freshchat.com</value>
+            </values>
+        </policy>
+		<policy id="style-src">
+            <values>
+                <value id="fontawesome" type="host">*.fontawesome.com</value>
+				<value id="cloudflare" type="host">*.cloudflare.com</value>
+				<value id="freshbots" type="host">cdn.freshbots.ai</value>
+				<value id="freshchat" type="host">pushplinen.freshchat.com</value>
+                <value id="adobe" type="host">*.adobe.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="klarna-base" type="host">*.klarna.com</value>
+                <value id="vimeocdn" type="host">*.vimeocdn.com</value>
+                <value id="youtube-img" type="host">*.ytimg.com</value>
+                <value id="data" type="host">'self' data:</value>
+                <value id="doubleclick" type="host">*.doubleclick.net</value>
+                <value id="mastercard" type="host">*.mastercard.com</value>
+                <value id="sandbox.paypal" type="host">*.sandbox.paypal.com</value>
+                <value id="paypal" type="host">*.paypal.com</value>
+                <value id="paypalojects" type="host">*.paypalobjects.com</value>
+                <value id="google" type="host">*.google.com</value>
+                <value id="googletagmanager" type="host">*.googletagmanager.com</value>
+                <value id="cloudfront" type="host">*.cloudfront.net</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="cloudfront" type="host">*.cloudfront.net</value>
+                <value id="twitter.com" type="host">*.twitter.com</value>
+                <value id="google-analytics" type="host">*.google-analytics.com</value>
+                <value id="google" type="host">*.google.com</value>
+                <value id="googletagmanager" type="host">*.googletagmanager.com</value>
+                <value id="googleadservices" type="host">*.googleadservices.com </value>
+                <value id="paypalobjects" type="host">*.paypalobjects.com </value>
+                <value id="paypal" type="host">*.paypal.com </value>
+                <value id="sandbox-paypal" type="host">*.sandbox.paypal.com </value>
+                <value id="amazon" type="host">*.amazon.com</value>
+                <value id="amazonpay" type="host">*.amazonpay.com</value>
+                <value id="meetanshi" type="host">*.meetanshi.com</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="googleapis" type="host">*.googleapis.com</value>
+                <value id="twitter.com" type="host">*.twitter.com</value>
+                <value id="gstatic" type="host">*.gstatic.com</value>
+                <value id="cloudflare" type="host">*.cloudflare.com</value>
+                <value id="cloudfront" type="host">*.cloudfront.net</value>
+                <value id="fontawesome" type="host">*.fontawesome.com</value>
+                <value id="stripe" type="host">*.stripe.com klarna.com</value>
+                <value id="klarna" type="host">*.klarna.com</value>
+                <value id="klarnacdn" type="host">*.klarnacdn.net</value>
+                <value id="klarnaevt" type="host">*.klarnaevt.com</value>
+                <value id="yotpo" type="host">*.yotpo.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="youtube.com" type="host">*.youtube.com</value>
+                <value id="twitter.com" type="host">*.twitter.com</value>
+                <value id="vimeo.com" type="host">*.vimeo.com</value>
+                <value id="freshchat" type="host">*.freshchat.com</value>
+                <value id="trustpilot" type="host">*.trustpilot.com/</value>
+            </values>
+        </policy>
+        
+        <policy id="media-src">
+            <values>
+                <value id="zopim" type="host">*.zopim.com</value>
+                <value id="zopimio" type="host">*.zopim.io</value>
+            </values>
+        </policy>
+        <policy id="form-action">
+            <values>
+                <value id="twitter.com" type="host">*.twitter.com</value>
+            </values>
+        </policy>
+		
+		<!-- <policy id="script-src-elem">
+            <values>
+                <value id="trustpilot" type="host">*.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js</value>
+            </values>
+        </policy> -->
+    </policies>
+</csp_whitelist>

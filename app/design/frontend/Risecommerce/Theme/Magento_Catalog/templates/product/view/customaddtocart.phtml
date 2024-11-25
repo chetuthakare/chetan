@@ -1,0 +1,185 @@
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()) :?>
+	<div class="box-tocart">
+		<div class="fieldset">
+			<?php if ($block->shouldRenderQuantity()) :?>
+			<div class="field qty">
+				<label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+				<div class="control">
+					<input type="number"
+						   name="qty"
+						   id="qty"
+						   min="0"
+						   value="<?= $block->getProductDefaultQty() * 1 ?>"
+						   title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+						   class="input-text qty"
+						   data-validate="<?= $block->escapeHtmlAttr(json_encode($block->getQuantityValidators())) ?>"
+						   />
+				</div>
+			</div>  
+			<?php endif; ?>
+			<div class="actions">
+				<a class="action primary tocart ajaxCartButton" onclick = "cartAdd('<?php echo str_replace('"','',$_product->getName()) ?>')"><span><?= $block->escapeHtml($buttonTitle) ?></span></a>
+				<button type="submit"
+						title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+						class="action primary tocart"
+						id="product-addtocart-button" disabled style = "display: none;">
+					<span><?= $block->escapeHtml($buttonTitle) ?></span>
+				</button>
+				<?= $block->getChildHtml('', true) ?>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
+
+<style>
+
+.loader {
+    display: inline-block;
+    margin-left: 10px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top: 2px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }    
+    100% { transform: rotate(360deg); }
+}
+
+</style>
+<script type="text/x-magento-init" data-breeze>
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }  
+    }
+</script> 
+<script>  
+	function cartAdd(name) {	
+		var addButton = document.querySelector("#product-addtocart-button");
+		var itemName = document.querySelector("#itemName");
+		addButton.click();
+		var qty = document.querySelector("#qty");
+		itemName.innerHTML = qty.value+' x '+name;
+		setTimeout(function(){
+			spanCheck();
+		},100);  
+	} 
+	/* function spanCheck() {		  
+		var addButtonSpan = document.querySelector("#product-addtocart-button span");
+		var cartPopup = document.querySelector("#cartPopup");
+			cartPopup.classList.add("active");
+		if(addButtonSpan.innerHTML === "Added") {
+			var cartPopup = document.querySelector("#cartPopup");
+			cartPopup.classList.add("active");
+		} else {
+			setTimeout(function(){
+				spanCheck(); 
+			},1000);
+
+		}
+	} */
+	let initialCounterValue = null;
+
+	function spanCheck() {
+		
+		var counterElement = document.querySelector('.minicart-wrapper .counter.qty .counter-number');
+		if (counterElement) {
+			var currentValue = parseInt(counterElement.textContent.trim(), 10);
+			if (initialCounterValue === null) {
+				initialCounterValue = currentValue;
+			} else { 
+				if (currentValue > initialCounterValue) {
+					var cartPopup = document.querySelector("#cartPopup");
+					if (cartPopup) {
+						cartPopup.classList.add("active");
+					}
+					initialCounterValue = currentValue;
+				}
+			}
+		} 
+		setTimeout(spanCheck, 100);
+	}
+	function cartPopupCont() {		
+		var cartPopup = document.querySelector("#cartPopup");
+		cartPopup.classList.remove("active");
+	}
+	function startUpGroups() {
+		var resetBtn = document.querySelector(".resetBtn");
+		var hasOptions = <?php echo $_product->hasOptions() ?>;
+		var attributeGroups = document.querySelectorAll(".swatch-attribute");
+		var attributeGroupsOptions = document.querySelectorAll(".swatch-attribute .swatch-option");
+		resetBtn.style.display='none';
+		resetBtn.classList.remove('active');
+		if(hasOptions === 1) {
+			if(attributeGroups.length === 0) {
+				setTimeout(function() {
+					startUpGroups();
+				},100);
+			} else {
+				for(i=0;i<attributeGroupsOptions.length;i++) {
+					attributeGroupsOptions[i].addEventListener("click",function(){
+						setTimeout(function() {
+							var attributeGroupsSel = document.querySelectorAll(".swatch-attribute .swatch-option.selected");
+							if(attributeGroups.length === attributeGroupsSel.length) {
+								resetBtn.style.display='inline-block';
+								resetBtn.classList.add('active');
+							}
+						},1);
+					});
+				}
+			}
+		}
+	}
+	startUpGroups();
+	
+	function resetSelections() {
+		var attributeGroupsSel = document.querySelectorAll(".swatch-attribute .swatch-option.selected");
+		var resetBtn = document.querySelector(".resetBtn");
+		for(i=0;i<attributeGroupsSel.length;i++) {
+			attributeGroupsSel[i].click();
+			resetBtn.style.display='none';
+			resetBtn.classList.remove('active');
+		}  
+	}
+	 
+	
+/* 	
+	require(['jquery'], function($) {
+		$(document).ready(function () { 
+			$(document).on('click', '.action.primary.tocart', function (e) {
+				e.preventDefault();
+				var $button = $(this);
+				var originalText = $button.find('span').text();
+				$button.find('span').text('Adding...');    
+				$button.addClass('_block-content-loading');  
+				$button.find('span').css('opacity', '1');    
+				$button.append('<span class="loader"></span>');    
+				$.ajax({ 
+					type: 'POST', 
+					url: $button.closest('form').attr('action'),
+					data: $button.closest('form').serialize(),
+					success: function (response) {
+						$button.find('span').text(originalText);
+						$button.removeClass('_block-content-loading');
+						$button.find('.loader').remove();
+						$button.find('span').css('opacity', '');
+					},
+					error: function () {
+						$button.find('span').text(originalText);
+						$button.removeClass('_block-content-loading');
+						$button.find('.loader').remove();
+						$button.find('span').css('opacity', '');
+					}
+				});
+			});
+		});
+	});  */   
+  
+  
+</script>  

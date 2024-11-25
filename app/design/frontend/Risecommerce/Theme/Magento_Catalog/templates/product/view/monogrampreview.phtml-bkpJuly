@@ -1,0 +1,522 @@
+<?php
+/**
+ * Copyright © Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ 
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View
+ */
+
+
+$_product = $block->getProduct();
+
+//echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(38, 38);
+ $image = 'product_page_image_medium';
+
+//echo "<pre>"; print_r($_product->debug());die("dead");
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+ $image_width = 700;
+    $image_height = 700;
+
+
+?>
+
+ <?php
+                           
+                                $productImage = $_imagehelper->init($_product, $image)->resize($image_width, $image_height);
+                            $productImageUrl = $productImage->getUrl();
+                        ?>
+  
+       
+ <script>
+
+	var targetElement1 = document.querySelector('.field.required.monogram.name');
+
+	if (targetElement1) {
+
+		var newElement = document.createElement('div');
+		newElement.id = 'preview-container';
+		newElement.style.display = 'none';
+
+	
+		newElement.innerHTML = `
+			<h3>See monogram preview here</h3>
+			<div id="preview-font"></div>
+		`;
+
+		// Insert the new element after the target element
+		targetElement1.parentNode.insertBefore(newElement, targetElement1.nextSibling);
+	}
+  
+   </script>
+<style>
+
+
+@font-face {
+  font-family: 'font1';
+  src: url(/cfont/1.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'font2';
+  src: url(/cfont/2.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font3';
+  src: url(/cfont/3.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+  @font-face {
+  font-family: 'font4';
+  src: url(/cfont/4.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+} 
+@font-face {
+  font-family: 'font5';
+  src: url(/cfont/5.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+  @font-face {
+  font-family: 'font6';
+  src: url(/cfont/6.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+} 
+@font-face {
+  font-family: 'font7';
+  src: url(/cfont/7.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+  @font-face {
+  font-family: 'font8';
+  src: url(/cfont/8.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font9';
+  src: url(/cfont/9.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+  @font-face {
+  font-family: 'font10';
+  src: url(/cfont/10.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font11';
+  src: url(/cfont/11.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font12';
+  src: url(/cfont/12.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font16';
+  src: url(/cfont/16.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+    @font-face {
+  font-family: 'font19';
+  src: url(/cfont/19.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'font21';
+  src: url(/cfont/21.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+} 
+@font-face {
+  font-family: 'font22';
+  src: url(/cfont/22.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font23';
+  src: url(/cfont/23.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font24';
+  src: url(/cfont/24.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font25';
+  src: url(/cfont/25.woff2) format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font26';
+  src: url(/cfont/26.woff2) format('woff2'),
+	   url(/cfont/26.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font27';
+  src: url(/cfont/27.woff2) format('woff2'),
+	   url(/cfont/27.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+} 
+  @font-face {
+  font-family: 'font30';
+  src: url(/cfont/30.woff2) format('woff2'),
+	   url(/cfont/30.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font31';
+  src: url(/cfont/31.woff2) format('woff2'),
+	   url(/cfont/31.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font32';
+  src: url(/cfont/32.woff2) format('woff2'),
+	   url(/cfont/32.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font33';
+  src: url(/cfont/33.woff2) format('woff2'),
+	   url(/cfont/33.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font34';
+  src: url(/cfont/34.woff2) format('woff2'),
+	   url(/cfont/34.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font35';
+  src: url(/cfont/35.woff2) format('woff2'),
+	   url(/cfont/35.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+   @font-face {
+  font-family: 'font37';
+  src: url(/cfont/37.woff2) format('woff2'),
+	   url(/cfont/37.woff) format('woff');
+  font-style: normal;
+  font-weight: 400; 
+} 
+   @font-face {
+  font-family: 'font38';
+  src: url(/cfont/38.woff2) format('woff2'),
+	   url(/cfont/38.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+ @font-face {
+  font-family: 'font39';
+  src: url(/cfont/39.woff2) format('woff2'),
+	   url(/cfont/39.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+} 
+
+
+ 
+ 
+ 
+div#preview-container {
+    position: relative;
+} 
+div#preview-container h3 {
+    text-align: center;
+    border-bottom: 1px dashed;
+    border-top: 1px dashed;
+    padding: 10px 0px;
+    text-transform: uppercase;
+    color: #000; 
+	font-size: 1.5rem;
+}
+#preview-font {
+    font-size: 40px;
+    text-shadow: -1px 1px 2px #30302f;
+	text-align:center;
+	text-align: center;
+    
+    left: 0;
+    right: 0;
+ 
+    font-size: -webkit-xxx-large;
+}
+
+@media only screen and (min-width:769px) {
+	
+		.product.monogram-preview {
+			
+			position: relative;
+			float: left;
+        }
+		.product.monogram-preview {
+			position: sticky;
+			float: left;
+			top: 0;
+			margin-bottom: 179px;
+		}
+}
+</style>
+
+     
+ <script>
+
+ 
+ 
+            const wordInput = document.querySelector('.field.monogram.name input');
+            const fontSelect = document.querySelector('.field.monogram.font select');
+			const monogram = document.querySelector('.field.monogramoption select');
+            const colorSelect = document.querySelector('.field.monogram.color.tdcolor select');
+			const colorSelectDiv = document.querySelector('.field.monogram.color.tdcolor .mageworx-swatch-option.image');
+			
+			
+			const swatchOptionsFont = document.querySelectorAll('.field.monogram.font .mageworx-swatch-option');
+			const preview = document.getElementById('preview-font');
+			const previewConatiner = document.getElementById('preview-container');
+
+				function updatePreview() {
+                const word = wordInput.value;
+				//preview.style.background = "#ededed"; 
+				preview.style.padding = "20px 0px"; 
+				  
+			
+                preview.textContent = word;
+             
+            }
+    
+			swatchOptionsFont.forEach(option => {
+				option.addEventListener('click', function() {
+        
+				const optionLabel = option.getAttribute('data-option-label');
+				console.log('data-option-label value:', optionLabel);
+					let fontfamily;
+				switch (optionLabel) {
+					
+			case "1": 
+				fontfamily = 'font1';
+			break;
+			case "2": 
+				fontfamily = 'font2';
+			break;
+			case "3": 
+				fontfamily = 'font3';
+			break;
+			case "4": 
+				fontfamily = 'font4';
+			break;
+			case "5": 
+				fontfamily = 'font5';
+			break;
+			case "6": 
+				fontfamily = 'font6';
+			break;
+			case "7": 
+				fontfamily = 'font7';
+			break;
+			case "8": 
+				fontfamily = 'font8';
+			break;
+			case "9": 
+				fontfamily = 'font9';
+			break;
+			case "10": 
+				fontfamily = 'font10';
+			break;
+			case "11": 
+				fontfamily = 'font11';
+			break;
+			case "12": 
+				fontfamily = 'font12';
+			break;
+			case "16": 
+				fontfamily = 'font16';
+			break;
+			case "19": 
+				fontfamily = 'font19';
+			break;			
+			case "21": 
+				fontfamily = 'font21';
+			break;
+			case "22": 
+				fontfamily = 'font22';
+			break;
+			case "23": 
+				fontfamily = 'font23';
+			break;
+			case "24": 
+				fontfamily = 'font24';
+			break;
+			case "25": 
+				fontfamily = 'font25';
+			break;
+		
+			case "26": 
+				fontfamily = 'font26';
+			break;
+			case "27": 
+				fontfamily = 'font27';
+			break;
+			case "30": 
+				fontfamily = 'font30';
+			break;
+			case "31": 
+				fontfamily = 'font31';
+			break;
+			case "32": 
+				fontfamily = 'font32';
+			break;
+			case "33": 
+				fontfamily = 'font33';
+			break;
+			case "34": 
+				fontfamily = 'font34';
+			break;
+			case "35": 
+				fontfamily = 'font35';
+			break;
+			case "37": 
+				fontfamily = 'font37';
+			break;
+			case "38": 
+				fontfamily = 'font38';
+			break; 
+			case "39": 
+				fontfamily = 'font39';
+			break;
+			
+			
+			
+			
+			default:
+				fontfamily = optionLabel
+		}
+				
+				
+				
+				preview.style.fontFamily = fontfamily;
+			  	updatePreview();
+				});
+			});	
+
+	const swatchOptionsColor = document.querySelectorAll('.field.monogram.color.tdcolor .mageworx-swatch-option');
+
+   
+		swatchOptionsColor.forEach(option => {
+		option.addEventListener('click', function() {
+        
+        const optionLabel = option.getAttribute('data-option-label');
+		let colorCode;
+		
+		switch (optionLabel) {
+			case "Light Blue":
+				colorCode = "#aed8e6";
+			break;
+			case "Light Grey":
+				colorCode = "#d2d2d2";
+			break;
+			case "Taupe":
+				colorCode = "#dbd4c2";
+			break;
+			case "Navy Blue":
+				colorCode = "#01055c";
+			break;
+			case "Dark Grey":
+				colorCode = "#a9a9a9";
+			break;
+			case "Burgundy":
+				colorCode = "#80011e";
+			break;
+			case "Hot Pink":
+				colorCode = "#fc6ab3";
+			break;
+			
+			case "Lilac":
+				colorCode = "#c593c8";
+			break;
+			
+			case "Sage":
+				colorCode = "#76805d";
+			break;
+			
+			case "Parrot Green":
+				colorCode = "#62b33b";
+			break;
+			
+			case "Light Pink":
+				colorCode = "#feb4c1";
+			break;
+			default:
+				colorCode = optionLabel
+		}
+		
+		
+		
+        console.log('data-option-label value Color:', optionLabel);
+		console.log('data-option-label value colorCode:', colorCode);
+		      preview.style.color = colorCode;
+			  	updatePreview();
+      });
+    });	
+			
+		
+
+          
+			
+			
+	monogram.addEventListener('change', function() {
+	  
+	  const selectedOption = monogram.options[monogram.selectedIndex].textContent;
+	  console.log(selectedOption);
+	  // Update the content of the div based on the selected option
+	  //optionContentDiv.textContent = selectedOption.textContent;
+	  
+	  if (selectedOption == "-- Please Select --" || selectedOption == "No"){
+		  
+		  previewConatiner.style.display ="none";
+		  
+		   preview.textContent = ""; 
+		   
+	  }
+	  else {
+		  previewConatiner.style.display ="block";
+	  }
+	});
+
+            wordInput.addEventListener('input', updatePreview);
+        </script>

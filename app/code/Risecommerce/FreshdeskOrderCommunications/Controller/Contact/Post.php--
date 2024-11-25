@@ -1,0 +1,185 @@
+<?php
+/**
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+namespace Magento\Contact\Controller\Index;
+
+use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
+use Magento\Contact\Model\ConfigInterface;
+use Magento\Contact\Model\MailInterface;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Exception\LocalizedException;
+use Psr\Log\LoggerInterface;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\DataObject;
+
+class Pos extends \Magento\Contact\Controller\Index implements HttpPostActionInterface
+{
+    /**
+     * @var DataPersistorInterface
+     */
+    private $dataPersistor;
+
+    /**
+     * @var Context
+     */
+    private $context;
+
+    /**
+     * @var MailInterface
+     */
+    private $mail;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @param Context $context
+     * @param ConfigInterface $contactsConfig
+     * @param MailInterface $mail
+     * @param DataPersistorInterface $dataPersistor
+     * @param LoggerInterface $logger
+     */
+    public function __construct(
+        Context $context,
+        ConfigInterface $contactsConfig,
+        MailInterface $mail,
+        DataPersistorInterface $dataPersistor,
+		\Risecommerce\FreshdeskOrderCommunications\Helper\Data $data,
+        LoggerInterface $logger = null
+    ) {
+        parent::__construct($context, $contactsConfig);
+        $this->context = $context;
+        $this->mail = $mail;
+		$this->data = $data;
+        $this->dataPersistor = $dataPersistor;
+        $this->logger = $logger ?: ObjectManager::getInstance()->get(LoggerInterface::class);
+    }
+
+    /**
+     * Post user question
+     *
+     * @return Redirect
+     */
+    public function execute()
+    {
+        if (!$this->getRequest()->isPost()) {
+            return $this->resultRedirectFactory->create()->setPath('*/*/');
+        }
+        // try {
+            // $this->sendEmail($this->validatedParams());
+            // $this->messageManager->addSuccessMessage(
+                // __('Thanks for contacting us with your comments and questions. We\'ll respond to you very soon.')
+            // );
+            // $this->dataPersistor->clear('contact_us');
+        // } catch (LocalizedException $e) {
+            // $this->messageManager->addErrorMessage($e->getMessage());
+            // $this->dataPersistor->set('contact_us', $this->getRequest()->getParams());
+        // } catch (\Exception $e) {
+            // $this->logger->critical($e);
+            // $this->messageManager->addErrorMessage(
+                // __('An error occurred while processing your form. Please try again later.')
+            // );
+            // $this->dataPersistor->set('contact_us', $this->getRequest()->getParams());
+        // }
+		if($this->validatedParams()){
+			$this->messageManager->addSuccessMessage(
+                 __('Thanks for contacting us with your comments and questions. We\'ll respond to you very soon.')
+             );
+		}else{
+			$this->messageManager->addErrorMessage("Something went wrong");
+		}
+		
+        return $this->resultRedirectFactory->create()->setPath('contact/index');
+    }
+
+    /**
+     * Method to send email.
+     *
+     * @param array $post Post data from contact form
+     *
+     * @return void
+     */
+    private function sendEmail($post)
+    {
+        $this->mail->send(
+            $post['email'],
+            ['data' => new DataObject($post)]
+        );
+    }
+
+    /**
+     * Method to validated params.
+     *
+     * @return array
+     * @throws \Exception
+     */
+    private function validatedParams()
+    {
+        $request = $this->getRequest();
+
+		$url = 'https://pushplinen.freshdesk.com/api/v2/tickets';
+		$apiKey = '9M80qrBBIZ3l7A5xZVa7'; // Replace with your Freshdesk API key
+
+		
+			$subject = $request->getParam('subject') ?? '';
+			$description = $request->getParam('comment') ?? '';
+			$email = $request->getParam('email') ?? '';
+			$orderId =  '';
+			$productName = '';
+			$customerName = $request->getParam('name') ?? '';
+			$phoneNumber = $request->getParam('telephone') ?? '';
+
+			$custom_fields = array(
+				"cf_order_id" => $orderId,
+				"cf_product_name" => $productName,
+				"cf_customer_name" => $customerName,
+				"cf_phone_number" => $phoneNumber,
+			);
+
+			$data = array(
+				"description" => $description,
+				"subject" => $subject,
+				"email" => $email,
+				"priority" => 1,
+				"status" => 2,
+				"custom_fields" => $custom_fields
+			);
+
+			$ch = curl_init($url);
+
+			$headers = [
+				'Content-Type: application/json',
+				'Authorization: Basic ' . base64_encode($apiKey . ':x')
+			];
+
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+			$response = curl_exec($ch);
+
+			if ($response === false) {
+				//echo 'Error: ' . curl_error($ch);
+				return false;
+				//echo '<div class="flash-messages message error" style="text-align:center"> Something went wrong </div>';
+			} else {
+				return true;
+				
+				//echo '<div class="flash-messages message success" style="text-align:center"> Thank you for contacting us. </div>';
+			}
+
+			curl_close($ch);
+		
+
+        return false;
+    }
+}

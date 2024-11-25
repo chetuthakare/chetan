@@ -1,0 +1,193 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Blank theme variables
+//  _____________________________________________
+
+//
+//  Typography
+//  ---------------------------------------------
+
+//  Fonts
+@font-family-name__base2: 'Open Sans';
+@font-family-name__base: 'Roboto';
+//@font-family__base: @font-family-name__base, @font-family-name__base2, @font-family__sans-serif;
+@font-family__base: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+@layout__max-width: 1536px;
+
+@theme-blue: #000d3a;
+@theme-purple: #9f337f;
+@theme-purple-fade: fade(@theme-purple, 90%);
+@color-black: #000000;
+@button__color: @color-white;
+@theme-ivory: #f0ece3;
+@theme-black: #111827;
+@theme-green: #32cfb0;
+@theme-green2: #166534;
+@theme-gray: #f3f4f6;
+@theme-white-fade:fade(@color-white, 85%);
+@theme-gray2:#f6f6f6;
+@theme-gray3: #6b7280;
+@theme-gray4: #a1a1aa; 
+@link__hover__color: @theme-green;
+@color-white: #ffffff;
+@color2: #cfcdcd;
+@colorgold: #ffd700;
+@color3: #b81c89;
+@color4: #a3a3a3;
+
+
+@form-element-input__border-color: @theme-blue;
+@account-nav-background: @theme-gray;
+@account-nav-item-hover:false;
+
+@header-icons-size:25px;
+@header-icons-line-height: 28px;
+@color-gray91: @theme-gray;
+@color-gray20: @theme-black;
+@active__color: @theme-black;
+@h1__font-weight:@font-weight__semibold;
+@h3__font-weight:@h1__font-weight;
+@h2__font-weight:@h1__font-weight;
+
+//
+//  Buttons
+//  ---------------------------------------------
+
+@button__font-weight: @font-weight__semibold;
+
+//  Default = secondary button
+@button__background: @theme-black;
+@button__border: 1px solid @theme-black;
+@button__hover__color: @button__color;
+@button__hover__background: @theme-purple-fade;
+@button__active__background: @theme-purple-fade;
+
+//  Primary button
+@button-primary__hover__color: @color-white;
+@button-primary__active__background: @theme-black;
+@button-primary__active__border: 1px solid @theme-black;
+@button-primary__active__color: @color-white;
+
+
+
+@button-primary__color:  @color-white;
+
+@button-primary__background: @button__background;
+@button-primary__hover__background: @button__hover__background;
+
+@button-primary__border: 1px solid @button__background;
+@button-primary__hover__border: 1px solid button__hover__background;
+
+//  Button with icon
+@button-icon__line-height: @icon-font__line-height;
+
+
+
+//
+//  Icons
+//  ---------------------------------------------
+
+@icon-wishlist-empty: false;
+@icon-comment-reflected: false;
+@icon-compare-empty: false;
+@icon-arrow-up-thin: false;
+@icon-arrow-right-thin: false;
+@icon-arrow-left-thin: false;
+@icon-arrow-down-thin: false;
+@icon-wishlist-empty: '\e901';
+@icon-user: '\e902';
+@icon-cart: '\e900';
+@icon-search: '\e908';
+@icon-compare: '\e907';
+@icon-chevron-left: '\e909';
+@icon-chevron-right: '\e90b';
+@icon-chevron-top: '\e906';
+@icon-chevron-bottom: '\e90a';
+@icon-headings: '\e905';
+@icon-delete: '\e904';
+@icon-edit: '\e903';
+@icon-close: '\e90d';
+@icon-compare: '\e907';
+@icon-heart: '\e901';
+@icon-compare-empty:@icon-compare;
+
+@icon-arrow-up: '\e916';
+@icon-grid: '\e915';
+@icon-list: '\e917';
+@icon-menu: '\e90c';
+@icon-fb: '\e912';
+@icon-instagram: '\e914';
+@icon-twiter: '\e910';
+@icon-twiter-x: '\e918';
+@icon-pintrest: '\e90e';
+@icon-question: '\e90f';
+@icon-home: '\e913';
+@icon-remove: @icon-close;
+@icon-trash: @icon-delete;
+@icon-arrow-down:'\e626';
+@icon-settings: @icon-edit;
+@icon-help: @icon-question;
+@icon-left: '\e608';
+//  Layered navigation
+@filter-title-background-color: @theme-gray;
+@filter-link: @theme-black;
+@filter-link-hover: darken(@filter-link, 30%);
+@filter-quantity: @theme-black;
+@toolbar-background: @filter-title-background-color;
+//
+//  Sections variables
+//  _____________________________________________
+
+//
+//  Tabs
+//  ---------------------------------------------
+@tab-content__border-top-status: true;
+
+
+//
+//  Sidebar
+//  ---------------------------------------------
+
+@sidebar__background-color: @color-white-smoke; // Used in cart sidebar, Checkout sidebar, Tier Prices, My account navigation, Rating block background
+
+
+
+
+//
+//  Form elements inputs default variables
+//  ---------------------------------------------
+
+
+@form-element-input__background: @color-white;
+
+@form-element-input__border: 2px solid @form-element-input__border-color;
+@form-element-input__border-radius: .25rem;
+@form-element-input__height: 45px;
+@form-element-input__padding: .5rem .75rem;
+
+@select__border: @form-element-input__border;
+@select__border-radius: @form-element-input__border-radius;
+@select__height: @form-element-input__height;
+@select__padding: @form-element-input__padding;
+
+
+//Dropdown
+
+
+@dropdown-list__border: false;
+@dropdown-list__shadow: 0 4px 15px -2px rgba(0,0,0,.1),0 1px 6px rgba(0,0,0,.05);
+@dropdown-list-item__padding: 8px;
+@dropdown-list-pointer__position:false;
+
+@default-padding: .25rem .5rem;
+@default-border-radius: .25rem;
+@font-size-ratio__base: 1.5;
+
+
+@margin: 10px;
+@padding-left: 10px; 

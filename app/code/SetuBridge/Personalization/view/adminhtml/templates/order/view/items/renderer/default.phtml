@@ -1,0 +1,59 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+
+?>
+<style type="text/css">
+    #sales_order_view .admin__table-wrapper .item-options.personalization-options{
+        margin: 0px;
+    }
+    #sales_order_view .admin__table-wrapper .col-preview{
+        padding: 0.5rem 1.5rem;
+    }
+    #sales_order_view .admin__table-wrapper .item-options.personalization-options dd{
+        padding: 7px;
+    }
+</style>
+<?php $_item = $block->getItem() ?>
+<?php $block->setPriceDataObject($_item) ?>
+<?php
+if($_item->getData('quote_item_id')){
+    $_itemId=$_item->getData('quote_item_id');
+} 
+$helper = $this->helper('SetuBridge\Personalization\Helper\Data');
+if(isset($_itemId) && $_itemId){
+    $previewImages = $helper->getItemOptionImages($_itemId);
+}
+else{
+    $previewImages = '';   
+}
+//$previewImages = $_itemId? $helper->getItemOptionImages($_itemId):''; 
+$params = $helper->getParams();
+?>
+<tr>
+    <?php $i = 0;
+    $columns = $block->getColumns();
+    $lastItemNumber = count($columns) ?>
+    <?php foreach ($columns as $columnName => $columnClass):?>
+        <?php $i++; ?>
+        <td class="<?=  $columnClass ?><?=  ($i === $lastItemNumber ? ' last' : '') ?>"><?=  $block->getColumnHtml($_item, $columnName) ?>
+            <?php if($columnClass == "col-preview" && !empty($previewImages)){  ?> 
+                <dl class="item-options personalization-options">
+                    <dt></dt>
+                    <?php foreach($previewImages as $img) : ?>
+                        <?php list($alt,$ext)=explode('.',basename($img)) ?>
+                        <dd><img class="personalization-preview-img" width="35px"  alt="<?=  __('Preview %1',$alt) ?>" src="<?= $img ?>" ></dd>
+                        <?php endforeach; ?>
+                </dl>
+
+                <?php  } ?>
+
+            <?php if($columnClass == "col-output_files" && !empty($previewImages)){  ?> 
+                <a href="<?php echo $block->getBaseUrl()  ?>personalization/index/DownloadZip?itemId=<?php echo $_itemId  ?>&orderId=<?php echo $params['order_id']; ?>" class='download-zip' id="<?php echo $_itemId; ?>"><?= __('Download') ?></a>
+                <?php  } ?>
+        </td>
+        <?php endforeach; ?>
+</tr>

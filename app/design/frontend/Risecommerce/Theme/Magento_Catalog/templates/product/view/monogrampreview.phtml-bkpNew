@@ -1,0 +1,374 @@
+<?php
+/**
+ * Copyright © Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ 
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View
+ */
+
+
+$_product = $block->getProduct();
+
+//echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(38, 38);
+ $image = 'product_page_image_medium';
+
+//echo "<pre>"; print_r($_product->debug());die("dead");
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+ $image_width = 700;
+    $image_height = 700;
+
+
+?>
+
+ <?php
+                           
+                                $productImage = $_imagehelper->init($_product, $image)->resize($image_width, $image_height);
+                            $productImageUrl = $productImage->getUrl();
+                        ?>
+  
+       
+ <script>
+	// Select the element with the specified class
+	var targetElement1 = document.querySelector('.field.required.monogram.name');
+
+	if (targetElement1) {
+		// Create a new div element
+		var newElement = document.createElement('div');
+		newElement.id = 'preview-container';
+		newElement.style.display = 'none';
+
+		// Create the inner HTML content
+		newElement.innerHTML = `
+			<h3>See monogram preview here</h3>
+			<div id="preview-font"></div>
+		`;
+
+		// Insert the new element after the target element
+		targetElement1.parentNode.insertBefore(newElement, targetElement1.nextSibling);
+	}
+  
+   </script>
+<style>
+@font-face { 
+  font-family: 'lavender_script-webfont';
+  src: url(/cfont/lavender_script-webfont.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'bodoniflfbold';
+  src: url(/cfont/bodoniflf-bold-webfont.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'ballantines-regularregular';
+  src: url(/cfont/ballantines-regular-8039-webfont.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'american_typewriter-webfont';
+  src: url(/cfont/american_typewriter-webfont.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'free-monogram';
+  src: url(/cfont/free-monogram.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'monogram-kk-sc';
+  src: url(/cfont/monogram-kk-sc.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'SwirlyLetters';
+  src: url(/cfont/SwirlyLetters.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'MONOGRAMOS';
+  src: url(/cfont/MONOGRAMOS.woff) format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+
+
+
+div#preview-container {
+    position: relative;
+}
+div#preview-container h3 {
+    text-align: center;
+    border-bottom: 1px dashed;
+    border-top: 1px dashed;
+    padding: 10px 0px;
+    text-transform: uppercase;
+    color: #000; 
+	font-size: 1.5rem;
+}
+#preview-font {
+    font-size: 40px;
+    text-shadow: -1px 1px 2px #30302f;
+	text-align:center;
+	text-align: center;
+    
+    left: 0;
+    right: 0;
+ 
+    font-size: -webkit-xxx-large;
+}
+
+@media only screen and (min-width:769px) {
+	
+		.product.monogram-preview {
+			
+			position: relative;
+			float: left;
+        }
+		.product.monogram-preview {
+			position: sticky;
+			float: left;
+			top: 0;
+			margin-bottom: 179px;
+		}
+}
+</style>
+
+     
+ <script>
+
+ 
+ 
+            const wordInput = document.querySelector('.field.monogram.name input');
+            const fontSelect = document.querySelector('.field.monogram.font select');
+			const monogram = document.querySelector('.field.monogramoption select');
+            const colorSelect = document.querySelector('.field.monogram.color.tdcolor select');
+			const colorSelectDiv = document.querySelector('.field.monogram.color.tdcolor .mageworx-swatch-option.image');
+			
+			
+			const swatchOptionsFont = document.querySelectorAll('.field.monogram.font .mageworx-swatch-option');
+			const preview = document.getElementById('preview-font');
+			const previewConatiner = document.getElementById('preview-container');
+
+				function updatePreview() {
+                const word = wordInput.value;
+				//preview.style.background = "#ededed"; 
+				preview.style.padding = "20px 0px"; 
+				
+			
+                preview.textContent = word;
+             
+            }
+    
+			swatchOptionsFont.forEach(option => {
+				option.addEventListener('click', function() {
+        
+				const optionLabel = option.getAttribute('data-option-label');
+				console.log('data-option-label value:', optionLabel);
+					let fontfamily;
+				switch (optionLabel) {
+			case "Emily":
+				fontfamily = "lavender_script-webfont";
+			break;
+			case "William":
+				fontfamily = "bodoniflfbold";
+			break;
+			case "Lily":
+				fontfamily = 'ballantines-regularregular';
+			break;
+			case "Jack":
+				fontfamily = 'american_typewriter-webfont';
+			break;
+			case "DFA":
+				fontfamily = 'free-monogram';
+			break;
+			case "MMS":
+				fontfamily = 'monogram-kk-sc';
+			break;
+			case "SFD":
+				fontfamily = 'SwirlyLetters';
+			break;
+			case "4":
+				fontfamily = 'MONOGRAMOS';
+			break;
+			/*case "MMS":
+				fontfamily = "#80011e";
+			break;
+			case "SFD":
+				fontfamily = "#fc6ab3";
+			break;*/
+			
+			
+			default:
+				fontfamily = optionLabel
+		}
+				
+				
+				
+				preview.style.fontFamily = fontfamily;
+			  	updatePreview();
+				});
+			});	
+
+	const swatchOptionsColor = document.querySelectorAll('.field.monogram.color.tdcolor .mageworx-swatch-option');
+
+   
+		swatchOptionsColor.forEach(option => {
+		option.addEventListener('click', function() {
+        
+        const optionLabel = option.getAttribute('data-option-label');
+		let colorCode;
+		
+		switch (optionLabel) {
+			case "Light Blue":
+				colorCode = "#aed8e6";
+			break;
+			case "Light Grey":
+				colorCode = "#d2d2d2";
+			break;
+			case "Taupe":
+				colorCode = "#dbd4c2";
+			break;
+			case "Navy Blue":
+				colorCode = "#01055c";
+			break;
+			case "Dark Grey":
+				colorCode = "#a9a9a9";
+			break;
+			case "Burgundy":
+				colorCode = "#80011e";
+			break;
+			case "Hot Pink":
+				colorCode = "#fc6ab3";
+			break;
+			
+			case "Lilac":
+				colorCode = "#c593c8";
+			break;
+			
+			case "Sage":
+				colorCode = "#76805d";
+			break;
+			
+			case "Parrot Green":
+				colorCode = "#62b33b";
+			break;
+			
+			case "Light Pink":
+				colorCode = "#feb4c1";
+			break;
+			default:
+				colorCode = optionLabel
+		}
+		
+		
+		
+        console.log('data-option-label value Color:', optionLabel);
+		console.log('data-option-label value colorCode:', colorCode);
+		      preview.style.color = colorCode;
+			  	updatePreview();
+      });
+    });	
+			
+		
+
+          
+			
+			
+	monogram.addEventListener('change', function() {
+	  
+	  const selectedOption = monogram.options[monogram.selectedIndex].textContent;
+	  console.log(selectedOption);
+	  // Update the content of the div based on the selected option
+	  //optionContentDiv.textContent = selectedOption.textContent;
+	  
+	  if (selectedOption == "-- Please Select --" || selectedOption == "No"){
+		  
+		  previewConatiner.style.display ="none";
+		  
+		   preview.textContent = ""; 
+		   
+	  }
+	  else {
+		  previewConatiner.style.display ="block";
+	  }
+	});
+
+            wordInput.addEventListener('input', updatePreview);
+          //  fontSelect.addEventListener('change', updatePreview);
+			//colorSelect.addEventListener('change', updatePreview);
+			//monogram.addEventListener('change', updatePreview);
+			
+			
+			/*dragElement(document.getElementById("preview-font"));
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+ 
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+  
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    
+    let parentElement = elmnt.parentElement;
+    if(elmnt.offsetTop < 0){elmnt.style.top = "0px"; return;}
+    if(elmnt.offsetTop > (parentElement.offsetHeight - elmnt.offsetHeight))     {
+        elmnt.style.top = (parentElement.offsetHeight - elmnt.offsetHeight) + "px"; 
+        return;
+      }
+    if(elmnt.offsetLeft < 0){elmnt.style.left = "0px";return}
+    if(elmnt.offsetLeft > (parentElement.offsetWidth - elmnt.offsetWidth)){
+        elmnt.style.left = (parentElement.offsetWidth - elmnt.offsetWidth) + "px";
+        return;
+    }
+    
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+  
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}*/		
+		  
+
+
+
+        </script>

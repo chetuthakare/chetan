@@ -1,0 +1,38 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+
+?>
+<div id="personalization-item-popup" class="no-display personalization-item-popup">
+    <img id='personalization-preview-modal' src="" alt="<?= __("Preview Image") ?>">
+</div>
+<script  type="lazy"> 
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                buttons: [],
+                modalClass:'personalization-preview-img-modal'
+            };
+            $(document).ready(function() {
+                var popup = modal(options, $('#personalization-item-popup'));
+                $(".personalization-preview-img").on('click',function(){
+                    $('#personalization-preview-modal').attr('src',$(this).attr('src'));
+                    popup.openModal();
+                });
+            });
+        }
+    );
+</script>

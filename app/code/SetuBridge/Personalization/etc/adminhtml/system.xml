@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="setubridge" translate="label" sortOrder="20">
+            <label>Setubridge</label>
+        </tab>
+        <section id="personalization" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Product Designer</label>
+            <tab>setubridge</tab>
+            <resource>SetuBridge_Personalization::SetuBridge_Personalization</resource>
+            <group id="licence" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0" translate="label">
+                <label>Licence</label>
+                <field id="activation_key" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Activation key</label>
+                </field>
+                <field id="version" translate="label" type="link" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Version</label>
+                    <frontend_model>SetuBridge\Personalization\Block\Adminhtml\Form\Field\Version</frontend_model>
+                </field>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                 <field id="plainText_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Text</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="font_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Fonts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="clipart_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cliparts</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="templatedesign_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Template Design</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="uploadImage_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Upload Images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="color_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Background Colors</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="pattern_active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Patterns</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="price_text" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Price Per Text</label>
+                </field>
+                <field id="price_art" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Price Per ClipArt</label>
+                </field>
+                <field id="price_templatedesign" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Price Per Template Design</label>
+                </field>
+                <field id="price_uploadImage" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Price Per Uploaded Image</label>
+                </field>
+                <field id="price_pattern" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Price Per Pattern</label>
+                </field>
+            </group>
+            <group id="button" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Button Customization</label>
+                <field id="popup_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Designer In Popup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="button_listing" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Listing Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="button_text" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Button Text For frontend</label>
+                </field>
+            </group>
+            <group id="theme" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Designer Studio Theme</label>
+                <field id="theme_logo" translate="label comment" type="image" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Theme Logo</label>
+                    <comment>Upload Allowed file types: jpg, jpeg, png</comment>
+                    <backend_model>SetuBridge\Personalization\Model\Config\Backend\Image</backend_model>
+                    <base_url type="media" scope_info="1">Personalization/Logo</base_url>
+                </field>
+                <field id="canvas_objects_center_alignment_color" translate="label comment" canRestore="1" sortOrder="116" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Ruler's Grid Lines Color</label>
+                    <frontend_model>SetuBridge\Personalization\Block\System\Config\ColorPicker</frontend_model>
+                </field>
+            </group>
+             <group id="studio_feature" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Designer Studio Feature Settings</label>
+                <field id="status_config_child_template" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Configuration Children Product Template Load</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="status_display_alert_outofarea_object" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Out Of Area Object Alert</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="status_display_help_tab" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable Help Tab</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="status_display_help_option" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Display Help Option</label>
+                    <source_model>SetuBridge\Personalization\Model\Config\Source\HelpTabOptions</source_model>
+                    <depends>
+                        <field id="personalization/studio_feature/status_display_help_tab">1</field>
+                    </depends>
+                </field>
+                <field id="help_tab_link_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Help Link Url</label>
+                    <depends>
+                        <field id="personalization/studio_feature/status_display_help_tab">1</field>
+                        <field id="personalization/studio_feature/status_display_help_option">link</field>
+                    </depends>
+                </field>
+                <field id="help_tab_video_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Help Video Url</label>
+                    <depends>
+                        <field id="personalization/studio_feature/status_display_help_tab">1</field>
+                        <field id="personalization/studio_feature/status_display_help_option">video</field>
+                    </depends>
+                </field>
+                <field id="support_multi_addtocart" translate="label comment" type="multiselect" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Multiples Add To Cart Products</label>
+                    <source_model>SetuBridge\Personalization\Model\Config\Source\MultiAddToCart</source_model>
+                </field>
+            </group>
+            <group id="lock_customization" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Lock Feature Settings</label>
+                <field id="lock_customization_text" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Lock Mode</label>
+                    <comment>Keeping Yes will allow customer to update text layer on frontend. No will completely lock text layer </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="lock_customization_clipart" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Lock Mode</label>
+                    <comment>Yes, will allow customer to replace image with any other image. No will completely lock image layer </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="output_files_setings" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Outout Files Settings</label>
+                <field id="enabled_output_files" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled Output Files</label>
+                    <comment>Admin will receive the final output file of the order - personalized products in the selected format. .png file will be received as a default.</comment>
+                    <source_model>SetuBridge\Personalization\Model\Config\Source\OutputFiles</source_model>
+                </field>
+            </group>
+            <group id="sample_data" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sample Data Installation</label>
+                <field id="clipart_button" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Clipart</label>
+                    <frontend_model>SetuBridge\Personalization\Block\System\Config\Button</frontend_model>
+                </field>
+                <field id="templatedesign_button" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>TemplateDesigns</label>
+                    <frontend_model>SetuBridge\Personalization\Block\System\Config\TemplateDesignButton</frontend_model>
+                </field>
+                <field id="colors_button" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Colors</label>
+                    <frontend_model>SetuBridge\Personalization\Block\System\Config\ColorsButton</frontend_model>
+                </field>
+                <field id="patterns_button" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Patterns</label>
+                    <frontend_model>SetuBridge\Personalization\Block\System\Config\PatternsButton</frontend_model>
+                </field>
+                <field id="font_button" translate="label" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fonts</label>
+                    <frontend_model>SetuBridge\Personalization\Block\System\Config\FontButton</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

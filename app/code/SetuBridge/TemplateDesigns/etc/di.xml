@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+   
+    <virtualType name="SetuBridge\TemplateDesigns\Model\ResourceModel\TemplateDesigns\TemplateDesigns\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_templatedesigns</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\TemplateDesigns\Model\ResourceModel\TemplateDesigns</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_templatedesigns_data_source" xsi:type="string">SetuBridge\TemplateDesigns\Model\ResourceModel\TemplateDesigns\TemplateDesigns\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

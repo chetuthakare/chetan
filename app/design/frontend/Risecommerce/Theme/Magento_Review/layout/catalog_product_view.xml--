@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Remove the reviews tab from the product info details -->
+        <referenceBlock name="product.info.details">
+            <action method="unsetChild">
+                <argument name="alias" xsi:type="string">reviews.tab</argument>
+            </action>
+        </referenceBlock>
+    </body> 
+</page>

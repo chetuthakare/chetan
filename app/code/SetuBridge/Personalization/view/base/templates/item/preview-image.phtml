@@ -1,0 +1,49 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+?>
+<?php
+if($block->getQuoteItemId()){
+    $_itemId=$block->getQuoteItemId();  
+}elseif($block->getItem()){
+    $_itemId=$block->getItem()->getId();
+}elseif($block->getItemId()){
+    $_itemId=$block->getItemId();
+}else{
+    $_itemId=''; 
+}  
+
+$previewImages = $_itemId? $this->helper('SetuBridge\Personalization\Helper\Data')->getItemOptionImages($_itemId):''; 
+?>
+<?php if(!empty($previewImages)) : ?>
+    <dl class="item-options personalization-options">
+        <dt><?= __('Preview Image') ?></dt>
+        <?php foreach($previewImages as $img) : ?>
+            <?php list($alt,$ext)=explode('.',basename($img)) ?>
+            <dd><img class="personalization-preview-img" width="100px"  alt="<?=  __('Preview %1',$alt) ?>" src="<?= $img ?>" ></dd>
+            <?php endforeach; ?>
+    </dl>
+    <?php endif; ?>
+<style type="text/css">
+    .abs-order-tables .item-options.personalization-options dt,
+    .order-creditmemo-tables .item-options.personalization-options dt,
+    .order-tables .item-options dt,
+    .order-invoice-tables .item-options.personalization-options dt,
+    .edit-order-table .item-options.personalization-options dt,
+    .order-shipment-table .item-options.personalization-options dt,
+    .order-case-table .item-options.personalization-options dt,
+    .cart.table-wrapper .item-options.personalization-options dt
+    {
+        clear: none;
+        float: none;
+    }
+    .cart.table-wrapper .item-options.personalization-options dd{
+        float: none;
+    }
+    .order-details-items .item-options.personalization-options dd{
+        float: left;  
+    }
+</style>

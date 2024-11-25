@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+   
+    <virtualType name="SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationTemplate\PersonalizationTemplate\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_data</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationTemplate</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_template_data_source" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationTemplate\PersonalizationTemplate\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <virtualType name="SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationFrame\PersonalizationFrame\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_frame</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationFrame</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_frame_data_source" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationFrame\PersonalizationFrame\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <virtualType name="SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationShape\PersonalizationShape\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_shape</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationShape</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_shape_data_source" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationShape\PersonalizationShape\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <virtualType name="SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationFont\PersonalizationFont\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_font</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationFont</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_font_data_source" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationFont\PersonalizationFont\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <virtualType name="SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationQuote\PersonalizationQuote\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_quote</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationQuote</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_quote_data_source" xsi:type="string">SetuBridge\PersonalizationTemplate\Model\ResourceModel\PersonalizationQuote\PersonalizationQuote\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

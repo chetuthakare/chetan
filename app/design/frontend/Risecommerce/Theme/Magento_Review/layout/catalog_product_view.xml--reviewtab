@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="review_product_form_component"/>
+    <body>
+        <!-- Add Reviews and Review Form Outside Tabs -->
+        <referenceContainer name="content">  
+            <!-- Display list of product reviews -->
+            
+            <!-- Display the review form -->
+            <block class="Magento\Review\Block\Form" name="product.review.form" as="review_form" template="Magento_Review::form.phtml" ifconfig="catalog/review/active"  />
+			<!-- <block class="Magento\Review\Block\Product\View\ListView" name="product.info.review.list" as="product_review_list" template="Magento_Review::product/view/list.phtml" ifconfig="catalog/review/active" before="review_form" />
+   -->
+ <!--  <block class="Amasty\AdvancedReview\Block\Review\Product\View\ListView" name="product.info.review.list" as="product_review_list" template="Amasty_AdvancedReview::review/review-js.phtml" ifconfig="catalog/review/active" before="review_form" />
+     -->  
+		 <block class="Amasty\AdvancedReview\Block\Review\Product\View\ListView"
+			   name="amasty.product.info.product_additional_data"
+			   template="Amasty_AdvancedReview::product/view/list.phtml"
+			   before="review_form">
+			<arguments>
+				<argument name="advanced-review-helper" xsi:type="object">Amasty\AdvancedReview\Helper\BlockHelper</argument>
+			</arguments>
+		</block>  
+	   </referenceContainer>
+	   
+		<!-- <referenceBlock name="product.info.review">
+            <block class="Magento\Review\Block\Product\View\Review" name="product.info.review.duplicate" as="product.info.review" template="Magento_Review::product/view/reviews.phtml" before="product.review.form"/>
+        </referenceBlock> -->
+        <!--   <move element="product.info.review.list" destination="content" after="product.info.details"/>
+        <move element="product.review.form" destination="content" after="product.info.review.list"/> -->    
+
+		<move element="amasty.product.info.product_additional_data" destination="content" after="product.info.details"/>
+        <move element="product.review.form" destination="content" after="amasty.product.info.product_additional_data"/>
+    </body> 
+</page>

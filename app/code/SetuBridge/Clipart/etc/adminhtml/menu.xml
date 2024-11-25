@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        
+       <!-- <add id="SetuBridge_Clipart::system_clipart" title="Clip Arts" translate="title" module="SetuBridge_Clipart" sortOrder="2" parent="SetuBridge_PersonalizationTemplate::personalization" resource="SetuBridge_PersonalizationTemplate::personalization" />
+        
+        <add id="SetuBridge_Clipart::clipart_categories" title="Manage Catagories" translate="title" module="SetuBridge_Clipart" sortOrder="12" parent="SetuBridge_Clipart::system_clipart" action="clipart/clipartcategories" resource="SetuBridge_Clipart::clipart_categories"/>-->
+        
+        <add id="SetuBridge_Clipart::clipart" title="Cliparts" translate="title" module="SetuBridge_Clipart" sortOrder="1" parent="SetuBridge_PersonalizationTemplate::system_pattern" action="clipart/clipart" resource="SetuBridge_Clipart::clipart"/>
+    </menu>
+</config>

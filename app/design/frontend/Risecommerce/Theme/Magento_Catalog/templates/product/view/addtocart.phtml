@@ -1,0 +1,183 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<!--
+<div class="monogram-container" style="display: none;">
+	<div class="preview-image"><img src="/cfont/snow.png" width="100%">
+		<div class="monogram-box">
+			<div class="monogram-text lavender pair-name sunshine"></div>
+		</div>
+	</div>
+	<div class="monogram-info-bottom">
+		<div class="option-description-text"> <p>Please Note :- The pillow is the only item that can be customized within the bundles. <br>Please allow an additional 5-7 business days to complete the shipment.<br>Monogram product orders cannot be CANCELED.<br>After the order has been placed, your order cannot be returned unless there is a defect.</p>
+		</div>
+	</div>
+</div> -->
+
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()) :?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()) :?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       min="0"
+                       value="<?= $block->getProductDefaultQty() * 1 ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                       class="input-text qty"
+                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit"
+                    title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button" disabled>
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
+            </button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div><div id="afterpay-clearpay-message"></div>
+<?php endif; 
+$price = $_product->getFinalPrice()*100;
+?>
+<?php
+
+//Custom function define in Magento\Catalog\Block\Product\View
+// use Magento\Store\Model\StoreManagerInterface;
+// class Custom
+// {
+     // protected $storeConfig;
+
+     // public function __construct(
+        // StoreManagerInterface $storeConfig
+
+    // ) {
+        // $this->storeConfig = $storeConfig;
+
+    // }
+
+    // public function getCurrentCurrency()
+    // {
+        // $currentCurrency = $this->storeConfig->getStore()->getCurrentCurrencyCode();
+        // return currentCurrency;
+    // }
+// }
+?>
+<?php
+//$code = $block->getCurrentCurrency(); 
+?> 
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+<script> 
+
+require(["jquery"],function($){
+	let temp =0;
+	$(".product-options-wrapper select, .product-options-wrapper checkbox, .product-options-wrapper input").on("click, change",function(){
+		setTimeout(function(){
+			var a = $('.product-info-price .normal-price .price-final_price .price-wrapper span.price').text();
+			var b = $('.switcher-currency .switcher-options .switcher-trigger span').text();
+			if(temp!=a && a!=0){
+				console
+				temp = a;
+				getStripe(a);
+			}
+		}, 300) 
+		
+	});	   
+	
+	//console.log("new " + "<?= $price ?>");
+	function getStripe(value){
+		//console.log("price "+ currency);
+		let price = Number(value.substr(1).replace(".",""));
+		
+		const stripe = Stripe('pk_test_51BTUDGJAJfZb9HEBwDg86TN1KNprHjkfipXmEDMb0gSCassK5T3ZfxsAbcgKVmAIXF7oZ6ItlZZbXO6idTHE67IM007EwQ4uN3');
+
+		const elements = stripe.elements();
+
+		const options = {
+		  amount: price, // $10.00 USD
+		  currency: 'USD'
+		};
+
+		const afterpayClearpayMessageElement =
+		  elements.create('afterpayClearpayMessage', options);
+
+		afterpayClearpayMessageElement.mount('#afterpay-clearpay-message');
+		
+	}	
+});
+
+ 
+
+</script>
+ 
+<?php if (!$block->isRedirectToCartEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "catalogAddToCart": {
+                "bindSubmit": false
+            }
+        }
+    } 
+</script>  
+<?php endif; ?> 
+
+<?php if ($block->shouldRenderQuantity()): ?>
+	<script type="text/javascript">
+function setLocation(_urlSet)  
+{
+	window.location.href = _urlSet;
+	
+}
+		function plusQty(qtyInput){
+			require([
+			'jquery'
+			], function($){
+				if($('#'+qtyInput).attr('disabled')!='disabled'){
+					qty = $('#'+qtyInput).attr('value');
+					qty = parseInt(qty);
+					qty++;
+					$('#'+qtyInput).val(qty);
+					$('#sticky_qty').val(qty);
+				}
+			});
+			
+		}
+		function minusQty(qtyInput){
+			require([
+			'jquery'
+			], function($){
+				if($('#'+qtyInput).attr('disabled')!='disabled'){
+					qty = $('#'+qtyInput).attr('value');
+					qty = parseInt(qty);
+					
+					if(qty>1){
+						qty--;
+						$('#'+qtyInput).val(qty);
+						$('#sticky_qty').val(qty);
+					}
+				}
+			});
+		}
+	</script>
+<?php endif; ?>

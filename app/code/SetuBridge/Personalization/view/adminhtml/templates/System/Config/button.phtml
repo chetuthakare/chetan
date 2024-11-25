@@ -1,0 +1,64 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+?>
+<style type="text/css">
+    .sample-data-button{
+        cursor: pointer;
+    }
+    .accordion .form-inline #personalization_sample_data.config td {
+
+        padding: 4.2rem 1.5rem 0 0;
+
+    }
+    .sample-data-button-comment{
+        display: block;
+        margin-top: 15px;
+        color: red;
+    }
+</style>
+<?php 
+$controller = $block->getControllerUrl();
+?>
+<a data-href="<?php echo $controller; ?>" class="action-default sample-data-button <?php if($block->csvIsExist() && $block->imgDirectoryExist()) echo "valid" ?>" target="_blank"><?php echo __("Synchronize"); ?></a>
+
+<?php          
+if(!$block->csvIsExist()){
+    ?>
+    <span class="sample-data-button-comment"><?php echo $block->csvNotExistMessage(); ?></span>
+    <?php
+}
+
+if(!$block->imgDirectoryExist()){
+    ?>
+    <span class="sample-data-button-comment"><?php echo $block->imgDirectoryNotExistMessage(); ?></span>
+    <?php
+}
+?>
+
+<script  type="lazy">  
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/confirm'
+        ], function($,confirmation) { // Variable that represents the `confirm` widget
+
+            jQuery('.sample-data-button.valid').off("click").on('click',function(){
+                var url = $(this).data('href');
+                confirmation({
+                    title: 'Synchronize',
+                    content: 'Are you sure you want to syncronize new data ?',
+                    actions: {
+                        confirm: function(){
+                            window.open(url, '_blank');
+                        },
+                        cancel: function(){},
+                        always: function(){}
+                    }
+                });
+            });
+
+    });
+</script>

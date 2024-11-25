@@ -1,0 +1,201 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+	a.categary-innerpage {
+		color: black;
+		font-weight: 600;
+		font-size: 21px;
+	}
+	.pagebuilder-column-line {
+		gap: 20px;
+	}
+	.cms-refund-and-returns {
+		.shipping-delivery-page.row {
+			span.heading-3 {
+				font-weight: 700;
+				font-size: 2rem;
+			}
+			ul {
+				p {
+					margin-top: 1rem;
+				}
+			}
+		}
+	}
+	.cms-shipping-delivery {
+		.shipping-delivery-page.row {
+			span.heading-3 {
+				font-weight: 700;
+				font-size: 2rem;
+			} 
+			.col-md-8.col-md-preffix-2  ul {
+				margin-top: 1rem;
+			}
+			ol.shipping-delivery-page__list {
+				li p {
+					margin-top: 1rem;
+				}
+			}
+		}
+	}
+	.sales-guest-form {
+		.page-title-wrapper {
+			text-align: center;
+		} 
+		form#oar-widget-orders-and-returns-form {
+			.actions-toolbar {
+				margin-left: 0px;
+			}
+		}
+		
+	}
+	.contact-index-index {
+			form#contact-form {
+			position: relative;
+			z-index: 2;
+			width: auto;
+			margin: 0 auto;
+			padding: 2.5rem 3rem;
+			box-shadow: 0 44px 50px -2px rgba(0, 0, 0, .1), 0 1px 6px rgba(0, 0, 0, .05);
+			background: rgba(255,255,255, 1);
+			border: 3px solid #000; 
+			border-width: 3px 0 0;
+			border-radius: .25rem;
+		}
+	}
+	.page-layout-1column.page-with-filter.categorypath-why-pushplinen .column.main {
+		padding-top: 0px;
+	}
+	.categorypath-why-pushplinen {
+		main#maincontent {
+			padding: 0 20px;
+		}
+	}
+	.page-wrapper {
+		.btn-explore {
+			button {
+				background: @theme-purple;
+				border: unset;
+			}
+		}
+	}  
+	
+    .category-monogramming-duvet-covers, .category-personalised-sheet-sets, .category-monogrammed-pillow-covers {
+		b, strong {
+			font-weight: 500;
+		}   
+		.Youtube-video {
+			position: relative;
+			width: 100%;
+			height: 0;
+			padding-bottom: 56.25%;
+			iframe {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: -5%;
+			}
+		}
+		.btn-explore {
+			text-align: center;
+			button.button-exp { 
+				margin-top: 10px;
+			} 
+			button.btn1 { 
+				margin-bottom: 50px;
+				margin-top: 15px;
+			}
+			button{ 
+				padding: 13px 25px;
+			}  
+		}
+		.collapsible.faqs h4 {
+			position: relative;
+			padding: 15px 35px 10px 10px;
+			border-bottom: 1px solid @color2;
+			font-size: 2rem;
+			font-weight: 600;
+			line-height: 1.75rem;
+			margin-bottom: .25rem;
+			&:after {
+				content: '\e617';
+				position: absolute;
+				font-size: 45px;
+				font-weight: 500;
+				font-family: 'Pushplenin-icon';
+				right: 10px;	
+			} 
+		} 
+		.page-title-wrapper {
+			text-align: center;
+		} 
+		.pagebuilder-column-line {
+			gap: 0px;
+		}  
+	}
+		.btn-explore {
+			
+			button{ 
+				&:hover {
+					background: @theme-black !important;
+				}
+			}  
+		} 
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+	.contact-index-index {
+		.page-title-wrapper {
+			text-align: center;
+		}
+		form#contact-form {
+			min-width: 600px;
+			width: 50%;
+			margin: 0 auto; 
+			fieldset.fieldset {
+				.field.note.no-label {
+					&:before {
+						float: unset;
+						padding-left: 0px;
+					}
+				}
+			}
+			.actions-toolbar{
+				margin-left: 0px; 
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 530px) and (min-width: 500px) {
+	.cms-customizedesignadvice {
+		.responsive {
+			div.desc {
+				min-height: 300px;
+			}
+		}
+	}
+
+}
+
+@media only screen and (max-width: 702px) and (min-width: 542px) {
+	.cms-customizedesignadvice {
+		.responsive {
+			div.desc {
+				min-height: 277px;
+			}
+		}
+	}
+
+}
+
+

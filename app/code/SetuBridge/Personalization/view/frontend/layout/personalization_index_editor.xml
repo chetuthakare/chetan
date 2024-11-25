@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+*/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  layout="product-designer-layout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="SetuBridge_Personalization::css/personalization_design.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+
+            <block class="SetuBridge\Personalization\Block\Editor" name="personalization.editor"
+                template="SetuBridge_Personalization::customize_page.phtml">
+            </block>
+
+            <block class="SetuBridge\Personalization\Block\Editor" name="personalization.editor.product.customoptions"
+                template="SetuBridge_Personalization::product/options.phtml">
+            </block>
+            
+        </referenceContainer>
+
+        <referenceContainer name="before.body.end">
+            <block class="SetuBridge\Personalization\Block\Form\Login" name="customer-popup-login" template="SetuBridge_Personalization::form/login.phtml"/>
+            <block class="SetuBridge\Personalization\Block\Form\Register" name="customer-popup-register" template="SetuBridge_Personalization::form/register.phtml" />
+        </referenceContainer>
+        <referenceBlock name="copyright" remove="true"/>
+    </body>
+</page>

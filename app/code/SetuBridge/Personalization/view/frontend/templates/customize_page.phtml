@@ -1,0 +1,54 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+?>
+<script  type="lazy">
+    window.getCurrentProducts = <?php print_r(json_encode($block->getProductData($block->getRequest()->getParam('product'),$block->getRequest()->getParam('designId')))) ?>;
+    window.generalConfiguration = <?php print_r(json_encode($block->generalConfiguration())) ?>;
+    <?php $data = $block->getMediaCollection(); ?>
+    window.getMediaCollection = <?php print_r(json_encode($data)); ?>;
+</script>
+<div id="customize-product-container">
+    <input type="hidden" name="addtocarturl" value="<?php echo $block->getUrl('personalization/cart/add') ?>">
+    <div id="customize-product-content">
+    </div>
+</div>
+<script  type="lazy"> 
+    require(
+        [
+            'jquery', 'Magento_Customer/js/customer-data', 'jquery/ui'
+        ],
+        function($, customerData) {
+
+            var isCartEmpty = '<?php echo $block->isCartEmpty() ?>';
+
+            var iframeUrl="<?php echo $block->getBaseUrl() ?>personlisation/index.php?productID=<?php echo $block->getRequest()->getParam('product') ?>&display=productFront&itemId=<?php echo $block->getRequest()->getParam('itemId') ?>";
+
+            var self = $(this), _link = self.attr('data-href');
+            var ifr=$('<iframe/>', {
+                id:'customize-iframe',
+                src:iframeUrl,
+                scrolling: 'yes',
+                frameborder:0,
+                width:'100%',
+                height:'100%',
+                style:'overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;top:0px;right:0;left:0;width:100%;bottom:0px;position:absolute;',
+                on:function(){
+
+                }
+            });
+            $('#customize-product-content').html(ifr);
+
+            window.closeProductDesignerPopup = function() {
+                $(".close-product-designer-modal", window.parent.document ).click();
+            };
+
+            window.customerDataReload = function() {
+                customerData.reload(['customer']);
+            };
+    });
+</script>
+

@@ -1,0 +1,50 @@
+<?php
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+$_product=$this->getProduct();
+$helperData = $this->helper('SetuBridge\Personalization\Helper\Data');
+?>
+<?php if ($_product->isSaleable())
+{ ?>
+
+    <?php if($helperData->getButtonListing() && $helperData->getStatus() && $_product->getPersonalization() && $helperData->checkedCustomization($_product)){ ?>
+        <?php if($helperData->getPopupEnable()){    ?>
+            <button type="button" 
+                id="quickViewButton<?php /* @noEscape */ echo $_product->getId() ?>" 
+                class="button-productdesigner-quickview" 
+                data-mage-init='{ "SetuBridge_Personalization/js/listingPagePopup": { } }' 
+                data-id="<?php /* @noEscape */ echo $_product->getId() ?>" 
+                title="<?= $block->escapeHtml(__($helperData->getButtonText())) ?>"
+                data-url="<?php echo $block->getUrl('personalization/index/editor',['product'=>$_product->getId()]) ?>" 
+                > 
+
+                <span><?= __($helperData->getButtonText()) ?></span>
+
+            </button> 
+
+            <div id="quickViewContainer<?php /* @noEscape */ echo $_product->getId() ?>">
+
+            </div> 
+
+            <?php } else{ ?>
+            <a href="<?php echo $block->getUrl('personalization/index/editor',['product'=>$_product->getId()]) ?>" data-href="<?php echo $block->getUrl('personalization/index/page',['product'=>$_product->getId()]) ?>" 
+                title="<?= $block->escapeHtml(__($helperData->getButtonText())) ?>"
+                class="action tocart primary button-productdesigner-listing">
+                <?= __($helperData->getButtonText()) ?>
+            </a>
+            <?php } ?>
+        <script  type="lazy" > 
+            require([
+                'jquery','jquery/ui'
+                ], function ($) {
+                    var sku = '<?php echo $_product->getSku(); ?>';
+                    $('[data-product-sku="'+sku+'"]').parent().hide();
+            });
+
+        </script>
+        <?php }
+}
+?>

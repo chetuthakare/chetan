@@ -1,0 +1,9 @@
+.wk-note-list{
+    list-style: none;
+}
+.wk-note-list-item{
+    border-bottom: 1px solid #cccccc;
+}
+.wk-note-list-time,.wk-note-list-date{
+    font-weight: bold;
+}

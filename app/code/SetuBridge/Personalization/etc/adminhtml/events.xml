@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/Event/etc/events.xsd">
+    <event name="backend_auth_user_login_success">
+        <observer name="sb_licence_check" instance="SetuBridge\Personalization\Observer\Licence" />
+    </event>	
+    <event name="admin_system_config_changed_section_personalization">
+        <observer name="sb_licence_check_for_settings" instance="SetuBridge\Personalization\Observer\Licence" />
+    </event>       
+</config>

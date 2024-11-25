@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Webkul Software.
+*
+* @category  Webkul
+* @package   Webkul_OrderHistoryCommunication
+* @author    Webkul
+* @license   https://store.webkul.com/license.html
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="orderhistorycommunication" frontName="orderhistorycommunication">
+            <module name="Webkul_OrderHistoryCommunication" />
+        </route>
+    </router>
+</config>

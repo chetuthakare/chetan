@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="review_product_form_component"/>
+    <body>
+        <referenceContainer name="content">
+            <!-- Display reviews outside the tabs -->
+            <block class="Magento\Review\Block\Product\Review" name="product.info.review" as="product_review" template="Magento_Review::review.phtml" ifconfig="catalog/review/active">
+                <block class="Magento\Review\Block\Form" name="product.review.form" as="review_form" ifconfig="catalog/review/active">
+                    <container name="product.review.form.fields.before" as="form_fields_before" label="Review Form Fields Before"/>
+                </block>
+            </block>
+        </referenceContainer>
+
+        <!-- Optional: Move any existing reviews to a different position if needed -->
+        <move element="product.info.review" destination="content" after="product.info.main"/>
+    </body>
+</page> 

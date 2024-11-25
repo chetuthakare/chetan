@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="SetuBridge_PersonalizationTemplate::personalization" title="Product Designer" module="SetuBridge_PersonalizationTemplate" sortOrder="10" resource="SetuBridge_PersonalizationTemplate::personalization"/>
+
+        <add id="SetuBridge_PersonalizationTemplate::system_template" title="Manage Templates" translate="title" module="SetuBridge_PersonalizationTemplate" sortOrder="1" parent="SetuBridge_PersonalizationTemplate::personalization" resource="SetuBridge_PersonalizationTemplate::personalization" />
+
+        <add id="SetuBridge_PersonalizationTemplate::add_row" title="Templates" module="SetuBridge_PersonalizationTemplate" sortOrder="11" action="personalization/grid" resource="SetuBridge_PersonalizationTemplate::add_row" parent="SetuBridge_PersonalizationTemplate::system_template"/>
+
+        
+        <add id="SetuBridge_PersonalizationTemplate::system_pattern" title="Manage Images" translate="title" module="SetuBridge_PersonalizationTemplate" sortOrder="30" parent="SetuBridge_PersonalizationTemplate::personalization" resource="SetuBridge_PersonalizationTemplate::personalization" />
+
+        <add id="SetuBridge_PersonalizationTemplate::shape" title="Patterns" module="SetuBridge_PersonalizationTemplate" sortOrder="2" action="personalization/shape" resource="SetuBridge_PersonalizationTemplate::shape" parent="SetuBridge_PersonalizationTemplate::system_pattern"/>
+
+        <add id="SetuBridge_PersonalizationTemplate::system_font" title="Manage Text" translate="title" module="SetuBridge_PersonalizationTemplate" sortOrder="30" parent="SetuBridge_PersonalizationTemplate::personalization" resource="SetuBridge_PersonalizationTemplate::personalization" />
+
+        <add id="SetuBridge_PersonalizationTemplate::font" title="Fonts" module="SetuBridge_PersonalizationTemplate" sortOrder="4" action="personalization/font" resource="SetuBridge_PersonalizationTemplate::font" parent="SetuBridge_PersonalizationTemplate::system_font"/>    
+
+        <add id="SetuBridge_PersonalizationTemplate::system_configuration" title="Manage Configuration" translate="title" module="SetuBridge_PersonalizationTemplate" sortOrder="500" parent="SetuBridge_PersonalizationTemplate::personalization" resource="SetuBridge_PersonalizationTemplate::personalization" />
+        
+        <add id="SetuBridge_PersonalizationTemplate::configuration" title="Settings" module="SetuBridge_PersonalizationTemplate" sortOrder="50" action="admin/system_config/edit/section/personalization" resource="SetuBridge_PersonalizationTemplate::configuration" parent="SetuBridge_PersonalizationTemplate::system_configuration"/>    
+        
+    </menu>
+</config>

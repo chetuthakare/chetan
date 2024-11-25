@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="SetuBridge\Clipart\Model\ResourceModel\Clipart\Clipart\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_clipart</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\Clipart\Model\ResourceModel\Clipart</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_clipart_data_source" xsi:type="string">SetuBridge\Clipart\Model\ResourceModel\Clipart\Clipart\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <virtualType name="SetuBridge\Clipart\Model\ResourceModel\ClipartCategories\ClipartCategories\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">personalization_clipartcategories</argument>
+            <argument name="resourceModel" xsi:type="string">SetuBridge\Clipart\Model\ResourceModel\ClipartCategories</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="personalization_clipartcategories_data_source" xsi:type="string">SetuBridge\Clipart\Model\ResourceModel\ClipartCategories\ClipartCategories\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

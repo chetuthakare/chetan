@@ -1,0 +1,210 @@
+<?php 
+$sku = $this->helper('Magento\Catalog\Helper\Output')->productAttribute($block->getSku(), $block->getProduct()->getSku(), 'sku');
+
+$color = "";
+if($block->getProduct()->getAttributeText('color_fs')){
+	$color = $block->getProduct()->getAttributeText('color_fs');
+}
+
+echo $this->helper('Magento\Catalog\Helper\Output')->productAttribute($block->getProductFeature(), $block->getProduct()->getProductFeature(), 'product_feature');	
+	
+?>
+ 
+<?php 
+$rty = explode("-",$sku);
+$getDefaultColor= (!empty($color)) ? $color : "";
+if($getDefaultColor){
+?>
+<script>     
+require(['jquery'], function($) {  
+	  
+	/* console.log("<?=trim($getDefaultColor);?>"); */
+    var tyx = setInterval(function () {  
+        if ($(".swatch-attribute .swatch-attribute-options").length) {
+            $(".swatch-attribute .swatch-attribute-options .swatch-option.color").each(function () {
+                if ("<?=trim($getDefaultColor);?>".toLowerCase() == $(this).attr("data-option-label").toLowerCase()) {
+                    $(this).trigger("click");					
+                }    
+            });
+            clearInterval(tyx); 
+        }
+    }, 2000); 
+	
+	/* console.log("<?=trim($getDefaultColor);?>");
+    var tyx = setInterval(function () {
+        if ($(".swatch-attribute .swatch-attribute-options").length) {
+			 if ("<?=trim($getDefaultColor);?>" == "nothing") {
+				$(".catalog-product-view .swatch-attribute .swatch-attribute-options .swatch-option.color").each(function () {
+					if ($(this).attr("index") === "0") {
+						$(this).trigger("click");          
+						console.log("First color click");							
+					}
+				}); 
+			 }  
+            $(".swatch-attribute .swatch-attribute-options .swatch-option.color").each(function () {
+                if ("<?=trim($getDefaultColor);?>".toLowerCase() == $(this).attr("data-option-label").toLowerCase()) {
+                    $(this).trigger("click");
+					console.log("default click");
+                }    
+            });
+            clearInterval(tyx); 
+        }
+    }, 2000); 
+        */
+	 
+	
+    /* $(document).ready(function () {
+
+		var defaultcolor = "<?= trim($getDefaultColor); ?>"; 
+		let shouldClickFirstOption = true;
+
+		var attemptCount = 0; 
+		var maxAttempts = 1000; 
+		var tyx = setInterval(function () {
+
+			if ($(".catalog-product-view .swatch-attribute .swatch-attribute-options").length && $(".swatch-option.color").is(":visible")) {
+
+				if (defaultcolor) {
+					$(".catalog-product-view .swatch-attribute .swatch-attribute-options .swatch-option.color").each(function () {
+						var optionLabel = $(this).attr("data-option-label");
+
+						if (defaultcolor.toLowerCase() === optionLabel.toLowerCase()) {
+							$(this).trigger("click");
+							shouldClickFirstOption = false;                     
+						}
+					});
+				}
+	   
+				if (shouldClickFirstOption) {             
+					$(".catalog-product-view .swatch-attribute .swatch-attribute-options .swatch-option.color").each(function () {
+						if ($(this).attr("index") === "0") {
+							$(this).trigger("click");                   
+							shouldClickFirstOption = false;
+						}
+					});
+				}    
+
+				if (!shouldClickFirstOption || attemptCount >= maxAttempts) {
+					clearInterval(tyx);          
+				}  
+			}
+		   
+		}, 100); 
+	});    */   
+          
+/* 	var tyx = setInterval(function(){
+		$("#afterpay-clearpay-message").find("span.AfterpayMessage-logo").css('display','inline');
+		if($(".catalog-product-view .swatch-attribute .swatch-attribute-options").length)
+		{
+			$(".catalog-product-view .swatch-attribute .swatch-attribute-options .swatch-option").each(function(){
+				if(("<?=trim($getDefaultColor);?>").toLowerCase()== ($(this).attr("data-option-label")).toLowerCase())
+				{
+					$(this).trigger("click");
+				}	 
+			});
+			clearTimeout(tyx);
+		} 
+	},100);   */
+	
+	
+	// var abc = setInterval(function(){
+		// if($(".swatch-attribute-options .mageworx-swatch-container").length)
+		// {
+			// $(".swatch-attribute-options .mageworx-swatch-container .mageworx-swatch-option").each(function(){
+				// if($(this).hasClass('selected')
+				// {
+					// console.log("ffffff");
+				// }	 
+			// });
+			// clearTimeout(abc);
+		// }
+	// },2000);
+	
+	
+	/*  $(document).on('change','.monogramoption select', function(){
+		 if($(".monogramoption select option:checked").length){
+			 if($(".monogramoption select option:checked").text()!="No"){
+				 $('.field.monogram.font .swatch-attribute-options > .mageworx-swatch-container .mageworx-swatch-option').eq(0).trigger("click");
+			 }
+		 }
+	 }); */
+	
+});	  
+</script>	  
+
+<?php 
+  
+}   
+?> 
+
+
+<script>	
+require(['jquery'], function($) {  
+	var xyz = setInterval(function(){
+		var current_product = $('.product-info-main .price-box').attr('data-product-id');
+		if (current_product != '' && ($(".recent .product-items").length > 0)) {			
+			$(".recent .product-items .product-item").each(function(){
+				   if(current_product == ($(this).attr("data-product-id"))){
+					   $(this).remove();
+				   }
+			});
+			clearInterval(xyz);    
+		}  
+	},100);  
+	
+	// var abc = setInterval(function(){
+		// if($(".swatch-attribute-options .mageworx-swatch-container").length)
+		// {
+			// $(".swatch-attribute-options .mageworx-swatch-container .mageworx-swatch-option").each(function(){
+				// if($(this).hasClass('selected')
+				// {
+					// console.log("ffffff");
+				// }	 
+			// });
+			// clearTimeout(abc);
+		// }
+	// },2000);
+	
+	
+	$('#product-addtocart-button').click(function(e){
+		var sval = $('.swatch-input.super-attribute-select').val();
+		var mname = $('.monogram.name input').val();
+		var msval = $(".field.monogram.font select").val();
+		
+		if(sval == ""){
+			$('html, body').scrollTop( $(".product-info-main").offset().top);
+		}
+		if($(".monogramoption select option:checked").length){
+			if($(".monogramoption select option:checked").text()!="No"){
+				
+				$('.field.monogram.font .swatch-attribute-options select').addClass('required');
+				
+				 if(msval == ""){
+					$('.field.monogram.font').addClass('required');
+					$(".field.monogram.font label").css({"color":"red"});
+					$('html, body').scrollTop( $(".field.monogram.font").offset().top);
+					e.preventDefault();
+				 }else{
+					$('.field.monogram.font').removeClass('required');
+					$(".field.monogram.font label").css({"color":""});
+				 }
+				 
+				if(mname == ""){
+					$('.field.monogram.name').addClass('required');
+					$('.field.monogram.name input').addClass('required');
+				
+				}
+				
+			} 
+		}
+		
+	});
+	/*  $(document).on('change','.monogramoption select', function(){
+		 if($(".monogramoption select option:checked").length){
+			 if($(".monogramoption select option:checked").text()!="No"){
+				 $('.field.monogram.font .swatch-attribute-options > .mageworx-swatch-container .mageworx-swatch-option').eq(0).trigger("click");
+			 }
+		 }
+	 }); */  
+});	   
+</script>	 

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- 
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>    
+      <!--  <add id="SetuBridge_TemplateDesigns::system_templatedesigns" title="Template Designs" translate="title" module="SetuBridge_TemplateDesigns" sortOrder="30" parent="SetuBridge_PersonalizationTemplate::personalization" resource="SetuBridge_PersonalizationTemplate::personalization" />
+-->
+        <add id="SetuBridge_TemplateDesigns::templatedesigns" title="Images" module="SetuBridge_TemplateDesigns" sortOrder="3" action="templatedesigns/templatedesigns" resource="SetuBridge_TemplateDesigns::templatedesigns" parent="SetuBridge_PersonalizationTemplate::system_pattern"/>
+
+    </menu>
+</config>

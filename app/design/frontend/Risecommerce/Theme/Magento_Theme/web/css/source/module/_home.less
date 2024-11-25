@@ -1,0 +1,432 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+	
+	.home-banner {			 
+			img {
+				width: 100%;
+			}
+			.banner-content {				
+				text-align: center;
+			}
+		}
+		.offers-limit {  
+			color: @color-black;
+			text-shadow: 2px 7px 5px rgba(0, 0, 0, .3), 0px -4px 10px rgba(255, 255, 255, .3);
+		    padding: 0.5rem 1rem;
+			font-weight: 500; 
+			text-shadow: unset; 
+	}
+	.home-cat-section {  
+		position: relative;
+			.shop-by-category-section a {
+			content: "";
+			height: 100%; 
+			left: 0; 
+			position: absolute;
+			top: 0;  
+			width: 100%;
+			font-size: 0px;
+			color: transparent;
+		}
+	}  
+	
+	.copyright-section.white ,  
+	a.white {
+			color: @color-white;
+	}
+	a, a:visited {
+		color: @color-black;
+	}
+	a.pagebuilder-button-primary {
+		background: @theme-purple;
+		border-color: unset;
+	}
+	a.home-page-shopatagbtn {
+		color: @theme-purple;
+		font-size: 18px;
+		font-weight: 600;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+	.homepage-contenth3tags {
+		font-size: 36px ;
+		font-weight: 600 ;
+	}
+	.homepage-contents {
+		line-height: 1.5em ;
+		font-weight: 400;
+		font-size: 18px ;
+	}
+	.cms-index-index {
+		.banner-renewed {   	
+			.renewed-img {
+				img {
+					width: 100px;
+				}
+			}
+		}
+		
+		.shop-section-2.section-2 { 
+			.homepage-allatagbtn {
+				padding: 10px 15px;
+				margin-top: -7px;
+			}
+		}
+		.home-banner {
+			.adobe-video {
+				position: relative;
+				width: 100%;
+				height: 0;
+				padding-bottom: 56.25%;
+				video {
+					position: absolute;
+					width: 100%;
+					height: 100%; 
+					left: 0;
+					top: 0;
+				}
+			}
+		}
+		
+		a.pagebuilder-button-primary  {
+			border: 2px solid @theme-purple; 
+			color: #ffffff;	 
+		} 
+		h4.homepage-headdingcss, h4.shop-by-category-section  {
+			font-size: 19px;
+			letter-spacing: 1px;
+			font-family: 'Tiempos Headline';
+			font-weight: 600;
+			text-align: center;
+			&:hover {
+				color:#000000;
+			} 
+		}
+		.homepage-allatagbtn {
+			text-align: center;
+		} 
+	}   
+	.homepage-allatagbtn {
+		background: @theme-ivory;
+		padding: 0 15px;
+	}
+	
+	.pillowcovers-section {
+		background: @theme-ivory;
+		a {
+			text-decoration: none;
+		}
+	}
+	 .banner-renewed { 
+	 
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    
+		 /* .renewed-content {
+			display: flex;
+			width: 83.33%;
+			flex-direction: column;
+			text-align: center;
+		      align-items: center;
+		} */
+		.renewed-img {
+	
+
+			margin: 0 auto;
+			display: inline-flex;
+			justify-content: center;
+
+			img {
+				width: 100px;
+				height: auto;
+			}
+		}
+	}
+	.NDbanner-homepage {
+		color: @color-white;
+   
+	}
+	.NDbanner-homepage-ptag {
+		color: @color-white;
+		font-size: 16px;
+		
+	}
+	    .social-post {
+        display: flex;
+		gap: 10px;
+		.post {
+			 margin-bottom: 6px;
+		}
+    }
+	 
+	.follow-section-homepage {
+	
+		
+		font-size: 40px;
+		line-height: 40px;
+		letter-spacing: 3px;
+		a {
+			color: @theme-purple;
+			text-decoration: none !important;
+		}
+	}
+	.cms-index-index {
+		.column.main{
+			img {
+				width:100%;
+			}
+			.pagebuilder-column-line {
+				gap: 15px;
+			}
+		}
+		.pillowcovers-section {
+			margin-top: -6px;
+		}
+	}
+		.shop-section-2 {
+			margin: 40px 0;
+		}
+}
+//
+// Mobile
+// _______________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) { 
+
+	.order-1 {
+		order: 1;
+	}  
+	.order-2 {  
+		order: 2;
+	} 
+	.cms-index-index {
+		.pagebuilder-column {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+		.offers-h {
+			font-size: 1.5rem;
+			color: #fff;
+			font-weight: 500;  
+		}
+		.offers-heading, .offers-msg, .offers-limit {
+			font-size: 1rem;
+			color: #fff;
+			font-weight: 500;    
+		}  
+		.pagebuilder-button-primary.shop-btn {
+			font-size: 1.5rem;
+			padding: 5px 10px; 
+			margin: 0;
+		}
+		.home-banner {	  
+			.banner-img {
+			    min-height: 180px;
+			} 
+		} 
+		.duvet-cover-image {
+			min-height: 321px;
+		}
+		.shop-by-columns {
+			.home-cat-section { 
+			    padding: 15px 0 0;
+				max-width: 49%;  
+			}
+			.pagebuilder-column-line {
+				gap: 2%	 !important;
+			}
+		}
+		.page-header {  
+			border: none;
+			margin-bottom: 0px; 
+		}
+		.mage-section-right, 
+		.mage-section-left {  
+			text-align: center;  
+		}
+	}
+	
+	
+}
+
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+	.offers-heading, .offers-msg, .offers-limit {
+        color: @color-white;
+		font-size: 2.5rem;
+        font-weight: 700;   
+    }  
+	.cms-index-index { 
+		.offers-h {
+			color: @color-white;
+			font-size: 7rem
+		} 
+		.home-banner {	  
+			position: relative; 
+			.banner-content {
+				position: absolute; 
+			    top: 55%;  
+				left: 0;  
+				right: 0;
+				text-align: center;
+			}  
+			.banner-img { 
+			    min-height: 444px;
+			}
+		} 
+		.pillowcovers-section:hover h4 {
+			color: #32cfb0;
+		}
+	} 
+	
+}
+
+//
+// Desktop 1024px
+// _________________________________________________
+
+
+@media only screen and (min-width: 1024px) {
+
+	.banner-renewed {
+	 
+		.renewed-content {
+			flex-direction: row;
+			text-align: left;
+		}
+		.renewed-img {
+			width: 7%;
+			margin: 0 auto;
+			display: inline-flex;
+			justify-content: center; 
+			
+		}
+		.renewed-content {
+			display: flex;
+			width: 90%;
+			flex-direction: row;
+			text-align: left;
+		    align-items: center;
+			
+			.content1 {
+				width: 40%;
+				h3.NDbanner-homepage {
+					font-size: 2.5rem;
+					margin-bottom: 3rem;
+				}	
+			}
+			.content2 {
+				width: 56%; 
+				margin-top: 1%;
+				p.NDbanner-homepage-ptag.mt-sm {
+					margin-top: 4%;
+				}
+				h3.NDbanner-homepage {
+					font-size: 2.5rem;
+				}
+			}
+		}
+	} 
+
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 640px) {
+
+	 .cms-index-index {
+		.banner-renewed {
+		   padding: 0 20px;			
+			.renewed-img {
+				width: 15%;
+				img {
+					width: 100px;
+				}
+			}
+			.renewed-content {	
+				width: 77%;	
+				
+				.content1 {					
+					h3.NDbanner-homepage {
+						font-size: 3rem;
+						margin-bottom: 4rem;
+					}	
+					h1 {
+						font-size: 3.5rem;
+					    margin-bottom: 1rem;
+					}
+				}
+				.content2 {
+				
+					p.NDbanner-homepage-ptag.mt-sm {					
+						    font-size: 16px;
+					}
+					h3.NDbanner-homepage {
+						font-size: 2.5rem;
+					}
+				}
+			}
+			
+		} 
+	
+	}
+
+}
+
+
+@media only screen and (max-width: 639px)  {
+
+	 .cms-index-index {
+		.banner-renewed {   
+			display: block;
+			text-align: center;
+			padding-left: 6%;
+			padding-right: 6%;
+			.renewed-img {
+				
+				img {
+					width: 100px;
+				}
+			}
+			.renewed-content {					
+				
+				.content1 {					
+					h3.NDbanner-homepage {
+						font-size: 2.3rem;
+						margin-bottom: 2.8rem;
+					}	
+					h1 {
+						font-size: 3.5rem;
+						margin-bottom: 1rem;
+					}
+				}
+				.content2 {
+				
+					p.NDbanner-homepage-ptag.mt-sm {					
+						    font-size: 16px;
+					}
+					h3.NDbanner-homepage {
+						font-size: 2.5rem;
+					}
+				}
+			}
+			
+		} 
+	
+	}
+
+}
+
+@media only screen and (max-width: 376px) {
+   
+}  
+  
+  

@@ -1,0 +1,126 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "laminas/laminas-dependency-plugin": true,
+            "magento/*": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "version": "2.4.5-p1",
+    "require": {
+        "amasty/module-advanced-review-subscription-package-pro": "^1.2",
+        "geoip2/geoip2": "^3.0",
+        "hybridauth/hybridauth": "^3.9",
+        "magefan/module-blog": "2.10.13.2",
+        "magefan/module-webp": "^2.2.4",
+        "magento/composer-dependency-version-audit-plugin": "~0.1",
+        "magento/composer-root-update-plugin": "^2.0",
+        "magento/product-community-edition": "2.4.6-p6",
+        "mageplaza/module-smtp": "^4.7",
+        "mageworx/module-advancedproductoptions": "^2.35",
+        "mirasvit/module-gtm": "*",
+        "redchamps/module-email-otp-login": "^1.0",
+        "rltsquare/best-seller": "^1.0",
+        "stripe/module-payments": "3.4.4",
+        "stripe/stripe-payments": "^3.4"
+    },
+    "autoload": {
+        "exclude-from-classmap": [
+            "**/dev/**",
+            "**/update/**",
+            "**/Test/**"
+        ],
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ],
+        "psr-0": {
+            "": [
+                "app/code/",
+                "generated/code/"
+            ]
+        },
+        "psr-4": {
+            "Magento\\": "app/code/Magento/",
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/"
+        }
+    },
+    "require-dev": {
+        "allure-framework/allure-phpunit": "^2",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+        "dg/bypass-finals": "^1.4",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "lusitanian/oauth": "^0.8",
+        "magento/magento-coding-standard": "*",
+        "magento/magento2-functional-testing-framework": "^4.3.1",
+        "pdepend/pdepend": "^2.10",
+        "phpmd/phpmd": "^2.12.0",
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^9.5",
+        "sebastian/comparator": "<=4.0.6",
+        "sebastian/phpcpd": "^6.0",
+        "symfony/finder": "^5.4",
+        "symfony/process": "<=v5.4.23"
+    },
+    "conflict": {
+        "gene/bluefoot": "*"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\PhpStan\\": "dev/tests/static/framework/Magento/PhpStan/",
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": {
+        "redchamps": {
+            "type": "composer",
+            "url": "https://RkIXo16HMUDYAKLXxu4WASILzmPS:OMRKsT5QD9uNJ1Y2T5nHqPtzmeu@repo.redchamps.com/repositories/neel@pushplinen.com-V048rl2cCK34SslKLyXj8XKvdfF34LOx"
+        },
+        "amasty": {
+            "type": "composer",
+            "url": "https://composer.amasty.com/community/"
+        },
+        "mirasvit-gtm2": {
+            "type": "composer",
+            "url": "https://62076:B3EJOUT1IM@packages.mirasvit.com/62076:B3EJOUT1IM/"
+        },
+        "swissuplabs": {
+            "type": "composer",
+            "url": "https://ci.swissuplabs.com/api/packages.json"
+        },
+        "webkul_repo": {
+            "type": "composer",
+            "url": "https://magerepo.webkul.com/"
+        },
+        "magefan-wpoi-m2": {
+            "type": "composer",
+            "url": "https://CtNUvxQNfN624hj5k9ZjlheCxVNrCCYD:g09FzsyRmzUOUwnO3r11n5UTlIrmb7Ax@magefan.com/repo/"
+        },
+        "mageworx_packages": {
+            "type": "composer",
+            "url": "https://packages.mageworx.com/"
+        },
+        "0": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	
+	<head>
+        <css src="Risecommerce_FreshdeskOrderCommunications::css/style.css" />
+    </head>
+	<body>  
+		<referenceBlock name="sales.order.info.links">
+			<block class="Magento\Sales\Block\Order\Link" name="sales.order.info.links.new.tab" ifconfig="ordercommunication/general_options/enable">
+				<arguments>
+					<argument name="key" xsi:type="string">
+						tab_new
+					</argument>
+					<argument name="path" xsi:type="string">
+						ordercommunications/ordercommunications/index
+					</argument>
+					<argument name="label" xsi:type="string" translate="true">
+						Contact Seller
+					</argument>
+				</arguments>
+			</block>
+		</referenceBlock>
+	</body>
+</page>

@@ -1,0 +1,244 @@
+/** Setubridge Technolabs
+* http://www.setubridge.com/
+* @author SetuBridge
+* @license http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+**/
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .page-main .page-title-wrapper h1.page-title{
+    display: none;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .form-login .fieldset .field .control>input:focus{
+    box-shadow: none;   
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .form-login .fieldset .field .control>input{
+    width: 100%;
+    position: relative;
+
+    z-index: 3;
+    height: 35px;
+    background: none;
+    border: none;
+    padding: 5px 0;
+
+    border: 1px solid #eee;
+    color: #555;
+    outline:none;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform  .actions-toolbar{
+    display : block;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform  .actions-toolbar .button-div button.designerbutton{
+    padding: 5px;
+    background: #4c5e7f;
+    width: 100%;
+    height: 40px;
+    border: none;
+    margin: 10px auto;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #fff;
+    position: relative;
+    border-radius: 3px;
+    text-transform : capitalize;
+    font-size : 15px;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform  .actions-toolbar  button.designerbutton:hover{
+    color: #4c5e7f;
+    background: #e6e6e6;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .form-heading{
+    color: #4c5e7f;
+    font-family: auto;
+    font-weight: 300;
+    line-height: 1.1;
+    font-size: 25px;
+    text-transform : capitalize;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content label.label::before{
+    color : #000;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content label.label{
+    text-align: center;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .wrapper.product-designer-customer-form-content,.customer-popup-register.product-designer-customer-form-content {
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    /* height: 22px; */
+    position: absolute;
+    padding: 0px;
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+    /*left: 0;        */
+    right: 0; 
+    /* top: 20%; */
+    margin: 0 auto;
+    display: none;
+    height: 100%;
+    overflow: auto;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .field {
+    margin: 0 0 15px; /*left*/
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .fieldset.create.info{
+    margin: 0px;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform {
+    background: #fff;
+    padding: 30px;
+    /*box-shadow: 0 0 40px #e3e3e3;*/
+    border-radius: 5px;
+
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .form-heading,
+.checkbox {
+    margin: 0 0 20px;
+}    
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .checkbox {
+    font-weight: normal;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .input-text {
+    position: relative;
+    font-size: 16px;
+    height: 35px;
+    padding: 10px;
+    @include box-sizing(border-box);
+    width : 100%,
+    &:focus {
+    z-index: 2;
+}
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content input[type="password"] {
+    margin-bottom: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .wrapper.product-designer-customer-form-content .action.close::before, .personalization-index-editor.page-layout-product-designer-layout .page-wrapper .customer-popup-register.product-designer-customer-form-content .action.close::before{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 26px;
+    line-height: 16px;
+    content: '\e616';
+    font-family: 'icons-blank-theme';
+    margin: 0;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+    background: #4c5e7f;
+    color: #fff;
+    padding: 3px;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .wrapper.product-designer-customer-form-content .signup-form-close-span{
+    line-height: inherit;
+    text-shadow: none;
+    font-weight: 400;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    content: '\e616';
+    font-family: 'icons-blank-theme';
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content button.action.close{
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 40px;
+    background-image: none;
+    background: none;
+    -moz-box-sizing: content-box;
+    border: 0;
+    box-shadow: none;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+    text-shadow: none;
+    font-weight: 400;
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .actions-toolbar .button-div{
+    float: none;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 10px 10px 10px 10px !important;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .actions-toolbar   {
+    text-align: center;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .field > div {
+    text-align: left;
+    color: #888;
+    width : 100%;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .fieldset.create.account{
+    margin: 0px;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .customer-popup-register.product-designer-customer-form-content .form-create-account.designerform .fieldset.create.info .newsletter::before {
+    padding : 0px;
+    width : 100%;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .customer-popup-register.product-designer-customer-form-content .form-create-account.designerform .fieldset.create.info .newsletter{
+    float: left;
+    margin: 0px 0 10px 0;
+    font-size: 15px;
+    text-align : left;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .fieldset.create.account::after {
+    margin-top: 0px;
+    display: none;
+}
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .customer-popup-register.product-designer-customer-form-content #customer-popup-form-register .message.error{
+    padding-left: 20px;
+}
+
+@media (max-width:768px){
+    .personalization-index-editor.page-layout-product-designer-layout .page-wrapper .customer-popup-register.product-designer-customer-form-content .designerform .field {
+        margin: 0 0 5px;
+    }
+    .personalization-index-editor.page-layout-product-designer-layout .page-wrapper .product-designer-customer-form-content .designerform .form-heading {
+        margin: 0 0 10px;
+        font-size: 22px;
+    }
+}
+
+.product-designer-page-custom-options, .configuration-product-price-section{
+    display: none !important;
+}
+
+.personalization-index-editor.page-layout-product-designer-layout .page-wrapper .customer-popup-register.product-designer-customer-form-content .fieldset.create.account .field.password.required .control .password-strength-meter{
+    padding : 10px !important;
+}

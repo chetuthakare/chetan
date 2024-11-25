@@ -1,0 +1,15 @@
+<div class="additional-description-images">
+<?php
+$_product = $block->getProduct();
+if ($_product) {
+    $additionalDescription = $_product->getData('additional_description');
+    if ($additionalDescription) {
+        echo html_entity_decode($additionalDescription);
+    } 
+}    
+?>  
+</div>    
+  
+
+  
+ 
